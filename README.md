@@ -3,7 +3,7 @@
 ## Contingut del paquet
 
   1. Fitxer `catalan.ins` -> fitxer d'instal·lació
-  2. fitxer `catalan.dtx` -> Combinació de codi LaTeX + documentació
+  2. Fitxer `catalan.dtx` -> Combinació de codi LaTeX + documentació
 
      Una explicació més detallada dels continguts i funcions d'aquests dos fitxers es pot trobar a [https://www.tug.org/TUGboat/tb29-2/tb92pakin.pdf](https://www.tug.org/TUGboat/tb29-2/tb92pakin.pdf). A continuació en resumim els punts més importants:
 
