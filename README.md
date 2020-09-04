@@ -26,6 +26,6 @@
      ```$ pdflatex catalan.dtx```
 
 
-  3. El codi que personalitza `babel` per a la llengua catalana s'ha de posar en un fitxer .LDF (Language Description File). en el nostre cas, el fitxer `catalan.ldf` es genera aplicant la macro `generate` continguda al fitxer `docstrip.tex` sobre el mateix fitxer `catalan.dtx` anterior. ixò és bpasicament el que fa el fitxer d'instal·lació `catalan.ins`:
+  3. El codi que personalitza `babel` per a la llengua catalana s'ha de posar en un fitxer .LDF (Language Description File). en el nostre cas, el fitxer `catalan.ldf` es genera aplicant la macro `\generate{\file{catalan.ldf}\from{catalan.dtx}}` continguda al fitxer `docstrip.tex` sobre el mateix fitxer `catalan.dtx` anterior. Això és bàsicament el que fa el fitxer d'instal·lació `catalan.ins` quan fem:
 
      ```$ latex catalan.ins```
