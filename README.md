@@ -1,4 +1,5 @@
- 
+# babel-cat
+
 ## Contingut del paquet
 
   1. Fitxer `catalan.ins` -> fitxer d'instal·lació
