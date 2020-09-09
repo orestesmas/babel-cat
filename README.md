@@ -1,31 +1,33 @@
 # babel-cat
 
-## Contingut del paquet
+This repository contains the necessary files to provide support for Catalan in
+the babel multilingual system.
 
-  1. Fitxer `catalan.ins` -> fitxer d'instal·lació
-  2. Fitxer `catalan.dtx` -> Combinació de codi LaTeX + documentació
+## Contents
 
-     Una explicació més detallada dels continguts i funcions d'aquests dos fitxers es pot trobar a [https://www.tug.org/TUGboat/tb29-2/tb92pakin.pdf](https://www.tug.org/TUGboat/tb29-2/tb92pakin.pdf). A continuació en resumim els punts més importants:
+  1. File `catalan.ins` contains an installation script. Run `$latex
+     catalan.ins` to generate the language definition file `catalan.ldf` which
+     is the one actually used by babel.
+  2. File `catalan.dtx` contains both the code and the documentation regarding
+     support for the Catalan language. Run `$pdflatex catalan.dtx` (or your
+     preferred LaTeX build system) to generate the documenation.
 
+## License
 
-## Funcions del fitxer `catalan.dtx`
+    Released under the LPPL v1.3 or later. See http://www.latex-project.org/lppl.txt.
 
-  1. El codi LaTeX del paquet i la documentació associada són totes dins el fitxer `catalan.dtx`, mesclades de la següent forma:
-    * Les parts comentades acabaran formant part del text del document PDF. Tanmateix, **dins d'aquests comentaris** poden apareixer macros que controlen l'aparença del text.
-    * Les parts descomentades acabaran essent el codi del paquet
+## TODO
 
-  2. El fixer `catalan.dtx` és essencialment un document LaTeX que té com a base la classe `ltxdoc`, que és la que s'encarrega d'interpretar les macros ocultes en els comentaris i afectar conseqüentment el PDF resultant.
+    - [ ] Add accents to math operators such as `\lim` . See babel-spanish.
+    - [ ] Remove space after comma when writing numbers in math mode. See
+        babel-french or spanish.
+    - [ ] Improve documentation.
 
-     Per tant per generar la documentació en PDF només cal compilar aquest fitxer de la forma usual:
+## Suggestions
 
-     ```$ latex catalan.dtx```
-     ```$ dvipdfmx catalan.dvi```
-
-     o bé directament:
-
-     ```$ pdflatex catalan.dtx```
-
-
-  3. El codi que personalitza `babel` per a la llengua catalana s'ha de posar en un fitxer .LDF (Language Description File). en el nostre cas, el fitxer `catalan.ldf` es genera aplicant la macro `\generate{\file{catalan.ldf}\from{catalan.dtx}}` continguda al fitxer `docstrip.tex` sobre el mateix fitxer `catalan.dtx` anterior. Això és bàsicament el que fa el fitxer d'instal·lació `catalan.ins` quan fem:
-
-     ```$ latex catalan.ins```
+    - Improve hypenation.
+    - Add automated tests to verify changes are reasonable. See, for example
+        [babel](https://github.com/latex3/babel).
+    - Add script to build package for CTAN (this need only be done at a point
+        where we actually want to push to CTAN).
+    - Add changelog to README in CTAN.
