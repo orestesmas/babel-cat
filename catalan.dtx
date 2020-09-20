@@ -26,7 +26,7 @@
 % and covered by LPPL is defined by the unpacking scripts (with
 % extension .ins) which are part of the distribution.
 % \fi
-% \CheckSum{517}
+% ^^A\CheckSum{517} TODO: update checksum when distributing
 %
 % \iffalse
 %    Tell the \LaTeX\ system who we are and write an entry on the
@@ -62,14 +62,30 @@
 %    removed and now is in this file.
 %<*filedriver>
 \documentclass{ltxdoc}
-\newcommand*\TeXhax{\TeX hax}
-\newcommand*\babel{\textsf{babel}}
-\newcommand*\langvar{$\langle \it lang \rangle$}
-\newcommand*\note[1]{}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks,
+  linkcolor=blue
+}
+
+^^A TODO: erase the following lines?
+% \newcommand*\TeXhax{\TeX hax}
+% \newcommand*\langvar{$\langle \it lang \rangle$}
+% \newcommand*\note[1]{}
+\newcommand*\babel{\texttt{Babel}}
+\newcommand*\babelcat{\texttt{babel-catalan}}
 \newcommand*\Lopt[1]{\textsf{#1}}
 \newcommand*\file[1]{\texttt{#1}}
 \begin{document}
- \DocInput{catalan.dtx}
+  \title{A Babel language definition file for Catalan}
+  \author{Gonçal Badenes}
+  \date{March 29, 2005}
+  \maketitle
+  \tableofcontents
+  \clearpage
+  \DocInput{catalan.dtx}
 \end{document}
 %</filedriver>
 %\fi
@@ -97,34 +113,87 @@
 %
 %    The file \file{\filename}\footnote{The file described in this
 %    section has version number \fileversion\ and was last revised on
-%    \filedate.}  defines all the language-specific macro's for the
+%    \filedate.}  defines all language-specific macros for the
 %    Catalan language.
 %
-%    For this language only the double quote character (|"|) is made
-%    active by default. In table~\ref{tab:catalan-quote-def} an
-%    overview is given of the new macros defined and the new meanings
-%    of |"|. Additionally to that, the user can explicitly activate
-%    the acute accent or apostrophe (|'|) and/or the grave accent
-%    (|`|) characters by using the \Lopt{activeacute} and
-%    \Lopt{activegrave} options. In that case, the definitions shown
-%    in table~\ref{tab:catalan-quote-opt} also become
-%    available\footnote{Please note that if the acute accent character
-%    is active, it is necessary to take special care of coding
-%    apostrophes in a way which cannot be confounded with
-%    accents. Therefore, it is necessary to type \texttt{l'\{\}estri}
-%    instead of \texttt{l'estri}.}.
+%  \subsection{Translations}
+%
+%  \subsubsection{Caption names}
+%    Catalan caption names as defined in \babelcat{} can be seen in
+%    table~\ref{tab:catalan-caption-names}. They can be customised using classic
+%    \babel{} syntax. For example, to customise |\proofname| one would use
+%    |\addto\captionscatalan{\def\proofname{Prova}}|.
 %
 %    \begin{table}[htb]
-%     \centering
-%     \begin{tabular}{lp{8cm}}
+%      \centering
+%      \begin{tabular}{ll}%
+%        |\prefacename|    & Pr\`oleg\\%
+%        |\refname|        & Refer\`encies\\%
+%        |\abstractname|   & Resum\\%
+%        |\bibname|        & Bibliografia\\%
+%        |\chaptername|    & Cap\'{\i}tol\\%
+%        |\appendixname|   & Ap\`endix\\%
+%        |\contentsname|   & \'Index\\%
+%        |\listfigurename| & \'Index de figures\\%
+%        |\listtablename|  & \'Index de taules\\%
+%        |\indexname|      & \'Index alfab\`etic\\%
+%        |\figurename|     & Figura\\%
+%        |\tablename|      & Taula\\%
+%        |\partname|       & Part\\%
+%        |\enclname|       & Adjunt\\%
+%        |\ccname|         & C\`opies a\\%
+%        |\headtoname|     & A\\%
+%        |\pagename|       & P\`agina\\%
+%        |\seename|        & Vegeu\\%
+%        |\alsoname|       & Vegeu tamb\'e\\%
+%        |\proofname|      & Demostraci\'o\\%
+%        |\glossaryname|   & Glossari\\%
+%      \end{tabular}
+%      \caption{Caption names as defined in \babelcat{}}%
+%      \label{tab:catalan-caption-names}
+%    \end{table}
+%  \subsection{Commands}
+%    The commands specified in table \ref{tab:catalan-macros} are provided by
+%    \babelcat{} to ease typesetting.
+%    \begin{table}[htb]
+%      \centering
+%      \begin{tabular}{lp{8cm}}%
+%      |\-| & like the usual |\-|, but allowing hyphenation
+%               in the rest of the word. \\
 %      |\l.l|   & geminated-l digraph (similar to
 %               l$\cdot$l). |\L.L| produces the uppercase version.\\
 %      |\lgem|  & geminated-l digraph (similar to
 %               l$\cdot$l). |\Lgem| produces the uppercase version.\\
 %      |\up| & Macro to help typing raised ordinals, like {1\raise
 %               1ex\hbox{\small er}}. Takes one argument.\\
-%      |\-| & like the old |\-|, but allowing hyphenation
-%               in the rest of the word. \\
+%      \end{tabular}
+%      \caption{Commands provided by \babelcat{}}%
+%      \label{tab:catalan-macros}
+%    \end{table}
+%
+%  \subsection{Shorthands}
+%
+%    \babelcat{} also provides a set of shorthands to ease typing accents and
+%    other special characters. Note that using \emph{utf8} input encoding one can type
+%    the characters directly, and that this is enabled by default since
+%    \texttt{TexLive 2018}.
+%
+%    Only the double quote character (|"|) is made active by default. In
+%    table~\ref{tab:catalan-quote-def} an overview is given of the new meanings
+%    of |"|. Additionally to that, the user can explicitly activate the acute
+%    accent or apostrophe (|'|) and/or the grave accent (|`|) characters by
+%    using the \Lopt{activeacute} and \Lopt{activegrave} options. In that case,
+%    the definitions shown in table~\ref{tab:catalan-quote-opt} also become
+%    available\footnote{Please note that if the acute accent character is
+%    active, it is necessary to take special care of coding apostrophes in a way
+%    which cannot be confounded with accents. Therefore, it is necessary to type
+%    \texttt{l'\{\}estri} instead of \texttt{l'estri}.}. These active accent
+%    characters behave according to their original definitions if not followed
+%    by one of the characters indicated in the aforementioned table.
+%
+%    \begin{table}[htb]
+%     \centering
+%     \begin{tabular}{lp{8cm}}
 %      |"i| & i with diaeresis, allowing hyphenation
 %             in the rest of the word. Valid for the following vowels:
 %               i, u (both lowercase and uppercase).\\
@@ -138,8 +207,7 @@
 %               in the rest of the word.\\
 %      \verb="|= & disable ligature at this position.
 %     \end{tabular}
-%     \caption{Extra definitions made by file \file{catalan.ldf}
-%       (activated by default)}
+%     \caption{Shorthands provided by \babelcat{}}
 %     \label{tab:catalan-quote-def}
 %    \end{table}
 %
@@ -153,20 +221,17 @@
 %             in the rest of the word. Valid for the following
 %             vowels: a, e, o (both lowercase and uppercase).
 %     \end{tabular}
-%     \caption{Extra definitions made by file \file{catalan.ldf}
+%     \caption{Extra shorthands provided by \babelcat{}
 %       (activated only when using the options \Lopt{activeacute} and
 %       \Lopt{activegrave})}
 %     \label{tab:catalan-quote-opt}
 %    \end{table}
-%    These active accents characters behave according to their original
-%    definitions if not followed by one of the characters indicated in
-%    that table.
 %
 % \StopEventually{}
-%
 % \changes{catalan-2.0}{1993/07/11}{Removed code to load
 %    \file{latexhax.com}}
 %
+%  \section{The code}
 %    The macro |\LdfInit| takes care of preventing that this file is
 %    loaded more than once, checking the category code of the
 %    \texttt{@} sign, etc.
@@ -646,9 +711,9 @@
 % \changes{catalan-2.2e}{1996/06/26}{Added redefinition of \cs{l} and
 %    \cs{L}}
 %    It seems to be the most natural way of entering the ``ela
-%    geminda'' to use the sequences |\l.l| and |\L.L|. These are not
+%    geminada'' to use the sequences |\l.l| and |\L.L|. These are not
 %    really macro's by themselves but the macros |\l| and |\L| with
-%    delimited arguments. Therefor we define two macros that check if
+%    delimited arguments. Therefore we define two macros that check if
 %    the next character is a period. If not the ``polish l'' will be
 %    typeset, otherwise a ``ela geminada'' will be typeset and the
 %    next two tokens will be `eaten'.
