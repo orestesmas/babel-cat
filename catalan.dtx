@@ -120,9 +120,10 @@
 %
 %  \subsubsection{Caption names}
 %    Catalan caption names as defined in \babelcat{} can be seen in
-%    table~\ref{tab:catalan-caption-names}. They can be customised using classic
-%    \babel{} syntax. For example, to customise |\proofname| one would use
-%    |\addto\captionscatalan{\def\proofname{Prova}}|.
+%    table~\ref{tab:catalan-caption-names}. They
+%    can be easily customised using Babel 3.9 syntax
+%    |\renewcommand\catalanproofname{Prova}|. The older syntax
+%    |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still works.
 %
 %    \begin{table}[htb]
 %      \centering
@@ -269,9 +270,11 @@
 %    \end{macrocode}
 %  \end{macro}
 %
-% \begin{macro}{\captionscatalan}
-%    The macro |\captionscatalan| defines all strings used
-%    in the four standard documentclasses provided with \LaTeX.
+%  \begin{macro}{\captionscatalan}
+%    The macro |\captionscatalan| defines all strings used in the four standard
+%    documentclasses provided with \LaTeX. We set it using Babel 3.9 syntax,
+%    which allows different definitions according to the encoding in use.
+
 % \changes{catalan-1.1}{1993/07/11}{\cs{headpagename} should be
 %    \cs{pagename}}
 % \changes{catalan-2.0}{1993/07/11}{Added some names}
@@ -283,34 +286,60 @@
 % \changes{catalan-2.2m}{2000/09/19}{Added \cs{glossaryname}}
 % \changes{catalan-2.2p}{2003/11/17}{Inserted translation for
 %    Glossary}
+% \changes{catalan-2.2q}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} %TODO:
+% %quit if Babel is < 3.9
 %    \begin{macrocode}
-\addto\captionscatalan{%
-  \def\prefacename{Pr\`oleg}%
-  \def\refname{Refer\`encies}%
-  \def\abstractname{Resum}%
-  \def\bibname{Bibliografia}%
-  \def\chaptername{Cap\'{\i}tol}%
-  \def\appendixname{Ap\`endix}%
-  \def\contentsname{\'Index}%
-  \def\listfigurename{\'Index de figures}%
-  \def\listtablename{\'Index de taules}%
-  \def\indexname{\'Index alfab\`etic}%
-  \def\figurename{Figura}%
-  \def\tablename{Taula}%
-  \def\partname{Part}%
-  \def\enclname{Adjunt}%
-  \def\ccname{C\`opies a}%
-  \def\headtoname{A}%
-  \def\pagename{P\`agina}%
-  \def\seename{Vegeu}%
-  \def\alsoname{Vegeu tamb\'e}%
-  \def\proofname{Demostraci\'o}%
-  \def\glossaryname{Glossari}%
-}
+\StartBabelCommands*{catalan}{captions}
+      [unicode, fontenc=TU EU1 EU2, charset=utf8]
+  \SetString{\prefacename}{Pròleg}%
+  \SetString{\refname}{Referències}%
+  \SetString{\abstractname}{Resum}%
+  \SetString{\bibname}{Bibliografia}%
+  \SetString{\chaptername}{Capítol}%
+  \SetString{\appendixname}{Apèndix}%
+  \SetString{\contentsname}{Índex}%
+  \SetString{\listfigurename}{Índex de figures}%
+  \SetString{\listtablename}{Índex de taules}%
+  \SetString{\indexname}{Índex alfabètic}%
+  \SetString{\figurename}{Figura}%
+  \SetString{\tablename}{Taula}%
+  \SetString{\partname}{Part}%
+  \SetString{\enclname}{Adjunt}%
+  \SetString{\ccname}{Còpies a}%
+  \SetString{\headtoname}{A}%
+  \SetString{\pagename}{Pàgina}%
+  \SetString{\seename}{Vegeu}%
+  \SetString{\alsoname}{Vegeu també}%
+  \SetString{\proofname}{Demostració}%
+  \SetString{\glossaryname}{Glossari}%
+
+\StartBabelCommands*{catalan}{captions}
+  \SetString{\prefacename}{Pr\`oleg}%
+  \SetString{\refname}{Refer\`encies}%
+  \SetString{\abstractname}{Resum}%
+  \SetString{\bibname}{Bibliografia}%
+  \SetString{\chaptername}{Cap\'{\i}tol}%
+  \SetString{\appendixname}{Ap\`endix}%
+  \SetString{\contentsname}{\'Index}%
+  \SetString{\listfigurename}{\'Index de figures}%
+  \SetString{\listtablename}{\'Index de taules}%
+  \SetString{\indexname}{\'Index alfab\`etic}%
+  \SetString{\figurename}{Figura}%
+  \SetString{\tablename}{Taula}%
+  \SetString{\partname}{Part}%
+  \SetString{\enclname}{Adjunt}%
+  \SetString{\ccname}{C\`opies a}%
+  \SetString{\headtoname}{A}%
+  \SetString{\pagename}{P\`agina}%
+  \SetString{\seename}{Vegeu}%
+  \SetString{\alsoname}{Vegeu tamb\'e}%
+  \SetString{\proofname}{Demostraci\'o}%
+  \SetString{\glossaryname}{Glossari}%
+\EndBabelCommands
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\datecatalan}
+%  \begin{macro}{\datecatalan}
 %    The macro |\datecatalan| redefines the command |\today| to
 %    produce Catalan dates. Months are written in
 %    lowercase\footnote{This seems to be the common practice. See for
@@ -320,15 +349,21 @@
 % \changes{catalan-2.2i}{1997/10/01}{Use \cs{edef} to define \cs{today}
 %    to save memory}
 % \changes{catalan-2.2i}{1998/03/28}{use \cs{def} instead of \cs{edef}}
+% \changes{catalan-2.2q}{2020/09/23}{Use Babel 3.9 syntax for captions and dates}
 %    \begin{macrocode}
-\def\datecatalan{%
-  \def\today{\number\day~\ifcase\month\or
-    de gener\or de febrer\or de mar\c{c}\or d'abril\or de maig\or
-    de juny\or de juliol\or d'agost\or de setembre\or d'octubre\or
-    de novembre\or de desembre\fi
-    \space de~\number\year}}
+\StartBabelCommands*{catalan}{date}
+      [unicode, fontenc=TU EU1 EU2, charset=utf8]
+  \SetStringLoop{month#1name}{gener,febrer,març,abril,maig,juny,%
+    juliol,agost,setembre,octubre,novembre,desembre}
+
+\StartBabelCommands*{catalan}{date}
+  \SetStringLoop{month#1name}{gener,febrer,mar\c{c},abril,maig,juny,%
+    juliol,agost,setembre,octubre,novembre,desembre}
+  \SetString\today{\number\day~de \csname month\romannumeral\month name\endcsname
+  \space de~\number\year}
+\EndBabelCommands
 %    \end{macrocode}
-% \end{macro}
+%  \end{macro}
 %
 % \begin{macro}{\extrascatalan}
 % \changes{catalan-2.0}{1993/07/11}{Macro completely rewritten}
