@@ -255,6 +255,46 @@
   \@nopatterns{Catalan}
   \adddialect\l@catalan0
 \fi
+
+\def\cat@sdef#1{\babel@save#1\def#1}
+\def\cat@sDRC#1{\babel@save#1\DeclareRobustCommand*#1}
+
+\@ifundefined{documentclass}
+  {\let\ifcat@latex\iffalse}
+  {\let\ifcat@latex\iftrue}
+%    \end{macrocode}
+%
+%    Package options for catalan. To avoid error messages dummy
+%    options are created on the fly when neccessary.
+%
+%    \begin{macrocode}
+\ifcat@latex
+
+\@ifundefined{catalanoptions}{}
+{\PassOptionsToPackage{\catalanoptions}{babel}}
+
+\def\cat@genoption#1#2#3{%
+  \DeclareOption{#1}{}%
+  \@ifpackagewith{babel}{#1}%
+    {\def\cat@a{#1}%
+     \expandafter\let\expandafter\cat@b\csname opt@babel.sty\endcsname
+     \addto\cat@b{,#2}%
+     \expandafter\let\csname opt@babel.sty\endcsname\cat@b
+     \AtEndOfPackage{#3}}%
+    {}}
+%    \end{macrocode}
+%
+%    Instead of joining all the extras directly in |\extrascatalan|,
+%    we subdivide them in three further groups: text, math and shorthands.
+%
+%    \begin{macrocode}
+\def\extrascatalan{%
+  \mathcatalan
+  }
+\def\noextrascatalan{%
+  \ifx\mathcatalan\@empty\else
+    \nomathcatalan
+  \fi}
 %    \end{macrocode}
 %
 %    The next step consists of defining commands to switch to (and
@@ -790,6 +830,180 @@
 %    \begin{macrocode}
 \ldf@finish{catalan}
 %</code>
+%    \end{macrocode}
+%    
+%    Now, the math group.  It's not easy to add an accent to an
+%    operator, because we must avoid using text (that is, |\mbox|)
+%    where we have no control on font and size, and at the same time
+%    we need |\i|, which is forbidden in math mode.  |\dotlessi| must
+%    be converted to uppercase if necessary in \LaTeXe.  There are two
+%    versions, depending on the format.
+% \changes{catalan~5.0o}{2016/01/10}{Fixed EUx: deal with them
+%    separately, to be improved}
+% \changes{catalan~5.0p}{2016/03/02}{Added TU. Now with uni encs use the
+%    actual composite char}
+%
+%    \begin{macrocode}
+\addto\mathcatalan{\cat@sDRC\dotlessi{\cat@dotlessi}}
+\let\nomathcatalan\relax
+
+\ifcat@latex
+  \def\cat@texti{\i}
+  \addto\@uclclist{\dotlessi\cat@texti}
+\fi
+
+\def\cat@fetchenc{%
+  \count@\escapechar \escapechar=\m@ne
+    \edef\cat@a{\expandafter\string\the\textfont\mathgroup}%
+    \expandafter\split@name\cat@a////\@nil
+  \escapechar=\count@
+  \@expandtwoargs\in@{////}{\f@size}%
+  \ifin@\else
+    \PackageError{catalan}{%
+      Non-NFSS font name. The current math font (\cat@a)\MessageBreak
+      doesn't follow the NFSS conventions. I'll use the\MessageBreak
+      default \string\i\space for \string\dotlessi,
+      but expect a wrong output.}%
+    {Find where this font has been (re)defined, and fix it.}%
+    \def\f@encoding{OT1}%
+  \fi}
+
+\ifcat@latex
+  \ifx\Umathchardef\@undefined\else
+    \expandafter\Umathchardef\csname cat@EU1@dotlessi\endcsname"7"1"0131\relax
+    \expandafter\Umathchardef\csname cat@EU2@dotlessi\endcsname"7"1"0131\relax
+    \expandafter\Umathchardef\csname cat@TU@dotlessi\endcsname"7"1"0131\relax
+  \fi
+  \def\cat@dotlessi{%
+    \ifmmode
+      {\ifnum\mathgroup=\m@ne
+         \imath
+       \else
+         \cat@fetchenc
+         \@ifundefined{cat@\f@encoding @dotlessi}%
+           {\@ifundefined{\f@encoding\string\i}%
+             {\edef\f@encoding{\string?}}{}%
+            \expandafter\count@\the\csname\f@encoding\string\i\endcsname
+            \advance\count@"7000
+            \mathchar\count@}%
+           {\csname cat@\f@encoding @dotlessi\endcsname}%
+       \fi}%
+    \else
+      \i
+    \fi}
+\else
+  \def\cat@dotlessi{\textormath{\i}{\mathchar"7010}}
+\fi
+
+\def\cat@op@ac@base#1{\acute{\if i#1\dotlessi\else#1\fi}}
+\def\cat@op@gr@base#1{\grave{\if i#1\dotlessi\else#1\fi}}
+\ifx\Umathchar\@undefined\else
+  \def\cat@ac@TU@a{"00E1}\def\cat@ac@TU@A{"00C1}%
+  \def\cat@ac@TU@e{"00E9}\def\cat@ac@TU@E{"00C9}%
+  \def\cat@ac@TU@i{"00ED}\def\cat@ac@TU@I{"00CD}%
+  \def\cat@ac@TU@o{"00F3}\def\cat@ac@TU@O{"00D3}%
+  \def\cat@ac@TU@u{"00FA}\def\cat@ac@TU@U{"00DA}%
+  \def\cat@ac@TU@a{"00E0}\def\cat@ac@TU@A{"00C0}%
+  \def\cat@ac@TU@e{"00E8}\def\cat@ac@TU@E{"00C8}%
+  \def\cat@ac@TU@o{"00F2}\def\cat@ac@TU@O{"00D2}%
+  \def\cat@op@ac@TU#1{%
+    \ifnum\mathgroup=\m@ne
+      \cat@op@ac@base{#1}%
+    \else
+      \cat@fetchenc       
+      \@ifundefined{cat@op@ac@\f@encoding}%
+        {\cat@op@ac@base{#1}}%
+        {\@ifundefined{cat@ac@TU@#1}%
+           {\cat@op@ac@base{#1}}%
+           {\Umathchar"7"1\csname cat@ac@TU@#1\endcsname}}%
+    \fi}%
+  \def\cat@op@gr@TU#1{%
+    \ifnum\mathgroup=\m@ne
+      \cat@op@gr@base{#1}%
+    \else
+      \cat@fetchenc       
+      \@ifundefined{cat@op@gr@\f@encoding}%
+        {\cat@op@gr@base{#1}}%
+        {\@ifundefined{cat@gr@TU@#1}%
+           {\cat@op@gr@base{#1}}%
+           {\Umathchar"7"1\csname cat@gr@TU@#1\endcsname}}%
+    \fi}%
+  \expandafter\let\csname cat@op@ac@EU1\endcsname\cat@op@ac@TU
+  \expandafter\let\csname cat@op@ac@EU2\endcsname\cat@op@ac@TU
+  \expandafter\let\csname cat@op@gr@EU1\endcsname\cat@op@gr@TU
+  \expandafter\let\csname cat@op@gr@EU2\endcsname\cat@op@gr@TU
+\fi
+\def\accentedoperators{%
+  \@ifundefined{cat@op@ac@TU}%
+    {\let\cat@op@ac\cat@op@ac@base}%
+    {\let\cat@op@ac\cat@op@ac@TU}
+  \@ifundefined{cat@op@gr@TU}%
+    {\let\cat@op@gr\cat@op@gr@base}%
+    {\let\cat@op@gr\cat@op@gr@TU}}
+\def\unaccentedoperators{%
+  \def\cat@op@ac##1{##1}
+  \def\cat@op@gr##1{##1}}
+\accentedoperators
+\def\spacedoperators{\let\cat@op@sp\,}
+\def\unspacedoperators{\let\cat@op@sp\@empty}
+\spacedoperators
+\addto\mathcatalan{\cat@operators}
+
+\ifcat@latex\else
+  \let\operator@font\rm
+\fi
+%    \end{macrocode}
+%
+%    Operators are stored in |\cat@operators|, which is
+%    included in the math group. Since |\operator@font| is
+%    defined in \LaTeXe{} only, we define it in the plain variant.
+% \changes{catalan~5.0n}{2014-03-28}{tabular didn't like the
+%   ampersand used in tests. Replaced by double backslash.}
+%
+%    \begin{macrocode}
+\def\cat@operators{%
+  \cat@sdef\bmod{\nonscript\mskip-\medmuskip\mkern5mu
+    \mathbin{\operator@font m\cat@op@gr od}\penalty900\mkern5mu
+    \nonscript\mskip-\medmuskip}%
+  \@ifundefined{@amsmath@err}%
+    {\cat@sdef\pmod##11{\allowbreak\mkern18mu
+        ({\operator@font m\cat@op@gr od}\,\,##11)}}%
+    {\cat@sdef\mod##1{\allowbreak\if@display\mkern18mu
+        \else\mkern12mu\fi{\operator@font m\cat@op@gr od}\,\,##1}%
+      \cat@sdef\pmod##1{\pod{{\operator@font m\cat@op@gr od}%
+        \mkern6mu##1}}}%
+  \def\cat@a##1 {%
+    \ifx\relax##1\relax % empty? continue
+      \bbl@afterelse
+      \cat@a
+    \else
+      \bbl@afterfi
+      {\ifx\\##1% \@emtpy? finish
+       \else
+         \bbl@afterfi
+         \begingroup
+           \let\,\@empty % ignore when def'ing name
+           \let\acute\@firstofone % id
+           \let\grave\@firstofone % id
+           \edef\cat@b{\expandafter\noexpand\csname##1\endcsname}%
+           \def\,{\noexpand\cat@op@sp}%
+           \def\acute{\noexpand\cat@op@ac}%
+           \def\grave{\noexpand\cat@op@gr}%
+         \edef\cat@a{\endgroup
+           \noexpand\cat@sdef\expandafter\noexpand\cat@b{%
+               \mathop{\noexpand\operator@font##1}\cat@c}}%
+         \cat@a % restores itself
+         \cat@a
+       \fi}%
+    \fi}%
+  \let\cat@b\catalanoperators
+  \addto\cat@b{ }%
+  \let\cat@c\@empty
+  \expandafter\cat@a\cat@b l\acute{i}m l\acute{i}m\,sup
+    l\acute{i}m\,inf m\grave{a}x \acute{i}nf m\acute{i}n \\ %
+  \def\cat@c{\nolimits}%
+  \expandafter\cat@a\cat@b tg arc\,sin arc\,cos arc\,tg \\ }
+\def\catalanoperators{cotg cosec sinh tgh }
 %    \end{macrocode}
 %
 % \Finale
