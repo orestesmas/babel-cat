@@ -264,6 +264,18 @@
   {\let\ifcat@latex\iftrue}
 %    \end{macrocode}
 %
+%  \begin{macro}{\ifcat@unicode}
+%    We define a new if that is set to true if we are working with a
+%    unicode capable engine.
+% \changes{catalan-2.2q}{2020/10/4}{Added a new `if’ \cs{cat@unicode} to detect
+%    unicode engines}
+%    \begin{macrocode}
+\@ifundefined{Umathcode}
+  {\let\ifcat@unicode\iffalse}
+  {\let\ifcat@unicode\iftrue}
+%    \end{macrocode}
+%  \end{macro}
+%
 %    Package options for catalan. To avoid error messages dummy
 %    options are created on the fly when neccessary.
 %
@@ -282,6 +294,7 @@
      \expandafter\let\csname opt@babel.sty\endcsname\cat@b
      \AtEndOfPackage{#3}}%
     {}}
+\fi
 %    \end{macrocode}
 %
 %    Instead of joining all the extras directly in |\extrascatalan|,
@@ -423,11 +436,19 @@
 %    non-zero lower case code; when we do that \TeX\ will find more
 %    breakpoints in words that contain this character in its r\^ole as
 %    apostrophe. 
+% \changes{catalan-2.2q}{2020/10/4}{Use bbl@save notation to store the
+%    lowercase code of the apostrophe, and set the unicode apostrophe
+%    to have a non-zero lower case code too. Code taken essentially
+%    from babel-french}
 %    \begin{macrocode}
 \addto\extrascatalan{%
-  \lccode`'=`'}
-\addto\noextrascatalan{%
-  \lccode`'=0}
+     \babel@savevariable{\lccode`\'}%
+     \lccode`\'=`\'
+     \ifcat@unicode
+       \babel@savevariable{\lccode"2019}%
+       \lccode"2019="2019
+     \fi
+}
 %    \end{macrocode}
 %
 %    For Catalan, some characters are made active or are redefined. In
@@ -910,7 +931,7 @@
     \ifnum\mathgroup=\m@ne
       \cat@op@ac@base{#1}%
     \else
-      \cat@fetchenc       
+      \cat@fetchenc
       \@ifundefined{cat@op@ac@\f@encoding}%
         {\cat@op@ac@base{#1}}%
         {\@ifundefined{cat@ac@TU@#1}%
