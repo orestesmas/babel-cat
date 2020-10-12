@@ -819,17 +819,6 @@
 %    \end{macrocode}
 %  \end{macro}
 %
-%    The macro |\ldf@finish| takes care of looking for a
-%    configuration file, setting the main language to be switched on
-%    at |\begin{document}| and resetting the category code of
-%    \texttt{@} to its original value.
-% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{ldf@finish} to wrap
-%    up} 
-%    \begin{macrocode}
-\ldf@finish{catalan}
-%</code>
-%    \end{macrocode}
-%    
 %    Now, the math group.  It's not easy to add an accent to an
 %    operator, because we must avoid using text (that is, |\mbox|)
 %    where we have no control on font and size, and at the same time
@@ -1004,6 +993,17 @@
 \def\catalanoperators{cotg cosec sinh tgh }
 %    \end{macrocode}
 %
+%    The macro |\ldf@finish| takes care of looking for a
+%    configuration file, setting the main language to be switched on
+%    at |\begin{document}| and resetting the category code of
+%    \texttt{@} to its original value.
+% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{ldf@finish} to wrap
+%    up} 
+%    \begin{macrocode}
+\ldf@finish{catalan}
+%</code>
+%    \end{macrocode}
+%    
 % \Finale
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
