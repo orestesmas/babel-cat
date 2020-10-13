@@ -1,0 +1,18 @@
+\input{regression-test}
+\documentclass{book}
+
+\START
+\showboxbreadth=50
+\showboxdepth=50
+\def\testit#1{%
+  \setbox0=\hbox{#1}\showbox0}
+\OMIT
+
+\usepackage[activeacute,catalan]{babel}
+
+\begin{document}
+\TIMO
+
+\testit{A cite \cite[cap'itol 5]{huh}}
+
+\end{document}

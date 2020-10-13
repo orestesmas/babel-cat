@@ -1,0 +1,91 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(35.16437+0.0)x345.0
+.\penalty -300
+.\glue 15.08499 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\hbox(9.99359+0.17279)x345.0, glue set 260.84644fil
+..\hbox(9.4464+0.17279)x35.12158
+...\glue 0.0
+...\TU/lmr/bx/n/14.4 0.1
+...\glue 14.4
+..\TU/lmr/bx/n/14.4 “Hola”
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\mark{{}{\protect \foreignlanguage {catalan}{\protect \bbl@restore@actives \ETC.}
+.\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline \ETC.}
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+! OK.
+l. ...\showbox0
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line ....
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line ....
+> \box...=
+\hbox(7.51782+0.0)x10.397
+.\mathon
+.\OML/cmm/m/it/10 a
+.\hbox(3.8889+0.0)x5.11111, shifted -3.62892
+..\OMS/cmsy/m/n/7 0
+..\OMS/cmsy/m/n/7 0
+.\mathoff
+! OK.
+l. ...\testit{$a''$}
+> \box...=
+\hbox(7.51782+0.0)x8.09145
+.\mathon
+.\OML/cmm/m/it/10 a
+.\hbox(3.8889+0.0)x2.80556, shifted -3.62892
+..\OMS/cmsy/m/n/7 0
+.\mathoff
+! OK.
+l. ...\testit{$a'$}
+> \box...=
+\hbox(9.4245+0.0)x12.82841
+.\mathon
+.\OML/cmm/m/it/10 a
+.\hbox(5.79558+0.0)x7.54253, shifted -3.62892
+..\OML/cmm/m/it/7 a
+..\hbox(2.77779+0.0)x2.70488, shifted -3.01779
+...\OMS/cmsy/m/n/5 0
+.\mathoff
+! OK.
+l. ...\testit{$a^{a'{}}$}
+> \box...=
+\hbox(7.51782+0.21999)x69.20145
+.\TU/lmr/m/n/10 Catalan:
+.\glue 4.44 plus 3.32999 minus 0.555
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^e1
+.\penalty 10000
+.\glue 0.0
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a’
+.\glue 3.33 plus 1.665 minus 1.11
+.\mathon
+.\OML/cmm/m/it/10 a
+.\hbox(3.8889+0.0)x2.80556, shifted -3.62892
+..\OMS/cmsy/m/n/7 0
+.\mathoff
+! OK.
+l. ...\testit{Catalan: 'a {a'{}} $a'$}
+> \box...=
+\hbox(7.51782+2.05998)x69.96146
+.\TU/lmr/m/n/10 English:
+.\glue 4.44 plus 3.32999 minus 0.555
+.\TU/lmr/m/n/10 ’a
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a’
+.\glue 3.33 plus 1.665 minus 1.11
+.\mathon
+.\OML/cmm/m/it/10 a
+.\hbox(3.8889+0.0)x2.80556, shifted -3.62892
+..\OMS/cmsy/m/n/7 0
+.\mathoff
+! OK.
+l. ...\testit{English: 'a {a'} $a'$}
+(tlb-catalan.aux)

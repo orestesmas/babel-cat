@@ -1,0 +1,3 @@
+Tests taken from the main babel package. For proper attribution, see their repo
+https://github.com/latex3/babel. To run the automated tests, execute `l3build
+check` from the main directory.

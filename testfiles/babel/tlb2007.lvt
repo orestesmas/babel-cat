@@ -1,0 +1,13 @@
+% Test file for LaTeX2e/Babel bug report 2007
+% loading catalan as the first language resulted in an error.
+% The .tlg file should be empty.
+\input{regression-test}
+\documentclass{article}
+\START
+\OMIT
+\usepackage[catalan]{babel}
+\usepackage{t1enc}
+\begin{document}
+\TIMO
+Aquesta \'es una prova
+\end{document}

@@ -1,0 +1,11 @@
+This directory contains a collection of tests for automated regression testing
+using l3build and some manual tests.
+
+    -`babel` contains babel's l3build tests related with catalan.
+    -`latex` contains our own l3build tests for use with pdflatex, luatex and
+    xetex.
+    -`plain` contains our own l3build tests for use with plain TeX.
+    -`manual` contains manual tests, as of now they can only be compiled and
+    inspected visually.
+
+To run the automated tests, execute `l3build check` from the main directory.

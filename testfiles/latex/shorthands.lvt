@@ -1,0 +1,24 @@
+\input{regression-test}
+\documentclass{book}
+\usepackage[activeacute,activegrave,english,catalan]{babel}
+\usepackage{iftex}
+
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+\fi
+
+
+\START
+\OMIT
+\begin{document}
+\TIMO
+
+% Test different shorthands
+\TESTEXP{Shorthands}{xil`ofon, i\lgem{}usi'o, esp`ecie, m`anega, endev'i,
+cal'es, l'`anima, "horari", m'usica, co"ca. 
+XIL`OFON, I\Lgem{}USI'O, ESP`ECIE, M`ANEGA, ENDEV'I,
+CAL'ES, L'`ANIMA, "HORARI", M'USICA, CO"CA. 
+}
+e\l.la
+e\L.La
+\end{document}

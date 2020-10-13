@@ -1,0 +1,28 @@
+\input{regression-test}
+\documentclass{book}
+\usepackage[activeacute,activegrave,english,catalan]{babel}
+\usepackage{iftex}
+
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+\fi
+
+\START
+\OMIT
+\begin{document}
+\TIMO
+
+% Test that the date works for all months
+\OMIT
+\year=2016
+\day=11
+\month = 1
+\loop
+\TIMO
+\TESTEXP{Date}{\today}
+\OMIT
+\ifnum\month < 12
+\advance\month by 1
+\repeat
+\TIMO
+\end{document}

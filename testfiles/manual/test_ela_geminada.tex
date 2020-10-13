@@ -1,0 +1,119 @@
+\documentclass[]{article}
+
+\usepackage[catalan]{babel}
+\usepackage{parskip}
+\usepackage{iftex}
+
+% Set-up of the document according to the engine
+\ifPDFTeX
+      \usepackage[T1]{fontenc}
+      \newcommand*{\lmrm}{lmr}
+    %% LF=Lining Figures (-OsF, -TLF, -Sup, -TOsF are also possible)
+	\newcommand*{\lusf}{LibertinusSerif-LF}
+	\newcommand*{\gyreb}{qbk}
+	\newcommand*{\gyrec}{qzc}
+	\newcommand*{\gyrep}{qpl}
+	\newcommand*{\gyres}{qcs}
+	\newcommand*{\gyret}{qtm}
+	\newcommand*{\noto}{NotoSerif-LF}
+
+	\newcommand*{\lmsans}{lmss}
+    %% LF=Lining Figures (-OsF, -TLF, -Sup, -TOsF are also possible)
+	\newcommand*{\luss}{LibertinusSans-LF}
+	\newcommand*{\gyrea}{qag}
+	\newcommand*{\gyreh}{qhv}
+	\newcommand*{\mont}{Montserrat-LF}
+\else
+        \usepackage{fontspec}
+	\newcommand*{\lmrm}{Latin Modern Roman}
+	\newcommand*{\lusf}{Libertinus Serif}
+	\newcommand*{\gyreb}{TeX Gyre Bonum}
+	\newcommand*{\gyrec}{TeX Gyre Chorus}
+	\newcommand*{\gyrep}{TeX Gyre Pagella}
+	\newcommand*{\gyres}{TeX Gyre Schola}
+	\newcommand*{\gyret}{TeX Gyre Termes}
+	\newcommand*{\noto}{Noto Serif}
+
+	\newcommand*{\lmsans}{Latin Modern Sans}
+	\newcommand*{\luss}{Libertinus Sans}
+	\newcommand*{\gyrea}{TeX Gyre Adventor}
+	\newcommand*{\gyreh}{TeX Gyre Heros}
+	\newcommand*{\mont}{Montserrat}
+\fi
+
+
+\newcommand{\basictest}[1]{
+    #1, \emph{#1}, \textbf{#1}, \textbf{\emph{#1}}, \texttt{#1}, \textsl{#1},
+    \textup{#1}, \textrm{#1}, \textsf{#1}
+}
+
+\newcommand{\testword}[1]{
+     \basictest{#1}
+}
+
+\ifPDFTeX
+  \newcommand{\changefont}[2]{{\fontfamily{#1}\selectfont #2}}
+\else
+  \newcommand{\changefont}[2]{{\newfontfamily{\mynewfont}{#1}\mynewfont #2}}
+\fi
+
+\newcommand{\engine}{%
+    \ifPDFTeX
+	   pdf\TeX
+	\fi
+    \ifLuaTeX
+       Lua\TeX
+    \fi
+    \ifXeTeX
+       Xe\TeX
+    \fi
+}
+
+
+\begin{document}
+This document is built using \engine. We try out the current definition of
+\verb|\lgem| with different fonts.
+
+\section{By default}
+\testword{xitxare\lgem{}o}
+
+\section{Serif}
+
+\subsection{Latin Modern Roman}
+\changefont{\lmrm}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Bonum}
+\changefont{\gyreb}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Chorus}
+\changefont{\gyrec}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Pagella}
+\changefont{\gyrep}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Schola}
+\changefont{\gyres}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Termes}
+\changefont{\gyret}{\testword{xitxare\lgem{}o}}
+
+\subsection{Noto Serif}
+\changefont{\noto}{\testword{xitxare\lgem{}o}}
+
+\section{Sans}
+\subsection{Latin Modern Sans}
+\changefont{\lmsans}{\testword{xitxare\lgem{}o}}
+
+\subsection{Libertinus Sans}
+\changefont{\luss}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Adventor}
+\changefont{\gyrea}{\testword{xitxare\lgem{}o}}
+
+\subsection{Tex Gyre Heros}
+\changefont{\gyreh}{\testword{xitxare\lgem{}o}}
+
+\subsection{Montserrat}
+\changefont{\mont}{\testword{xitxare\lgem{}o}}
+
+\end{document}

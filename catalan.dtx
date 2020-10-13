@@ -409,9 +409,10 @@
 \StartBabelCommands*{catalan}{date}
   \SetStringLoop{month#1name}{gener,febrer,mar\c{c},abril,maig,juny,%
     juliol,agost,setembre,octubre,novembre,desembre}
-  \SetStringLoop{month#1prep}{de,de,de,d',de,de,%
-    de,d',de,d',de,de}
-  \SetString\today{\number\day~\csname month\romannumeral\month prep\endcsname \csname month\romannumeral\month name\endcsname
+  \SetStringLoop{month#1prep}{de ,de ,de ,d',de ,de ,%
+    de ,d',de ,d',de ,de }
+  \SetString\today{\number\day~\csname month\romannumeral\month
+      prep\endcsname \csname month\romannumeral\month name\endcsname
   \space de~\number\year}
 \EndBabelCommands
 %    \end{macrocode}

@@ -1,0 +1,37 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+LaTeX Warning: Citation `huh' on page 1 undefined on input line ....
+> \box...=
+\hbox(7.5+2.5)x84.59, direction TLT
+.\TU/lmr/m/n/10 A
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\hbox(7.0+0.0)x5.43, direction TLT
+..\TU/lmr/bx/n/10 ?
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 p
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^ed
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 l
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 5
+.\TU/lmr/m/n/10 ]
+! OK.
+l. ...\testit{A cite \cite[cap'itol 5]{huh}}
+(tlb3262.aux)
+LaTeX Warning: There were undefined references.

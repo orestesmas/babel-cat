@@ -1,0 +1,23 @@
+\input{regression-test}
+\documentclass{book}
+\START
+\OMIT
+\usepackage[activeacute,english,catalan]{babel}
+
+\showboxbreadth=50
+\showboxdepth=50
+\def\testit#1{%
+  \setbox0=\hbox{#1}\showbox0}
+\nofiles
+
+\begin{document}
+\TIMO
+\testit{$a''$}
+
+\begin{otherlanguage}{english}
+
+\testit{$a''$}
+
+\end{otherlanguage}
+
+\end{document}

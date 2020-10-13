@@ -1,0 +1,9 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Shorthands
+============================================================
+xil^^f2fon, i\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {l}\setbox 1\hbox {l\/}\setbox 2\hbox {.}\advance \raiselldim by 4.3045pt\advance \raiselldim by -\ht 2\leftllkern =-.25\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-.25\wd 0\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\discretionary {l-}{l}{\hbox {l}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {l}}{}usi^^f3, esp^^e8cie, m^^e0nega, endev^^ed{}, cal^^e9s, l'^^e0nima, "horari", m^^fasica, co^^e7a. XIL^^d2FON, I\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {L}\setbox 1\hbox {L\/}\setbox 2\hbox {.}\advance \raiselldim by .5\ht 0\advance \raiselldim by -.5\ht 2\leftllkern =-.125\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-\wd 0\divide \rightllkern by 6\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\discretionary {L-}{L}{\hbox {L}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {L}}{}USI^^d3, ESP^^c8CIE, M^^c0NEGA, ENDEV^^cd, CAL^^c9S, L'^^c0NIMA, "HORARI", M^^daSICA, CO^^c7A. 
+============================================================
+[1
+] (shorthands.aux)
