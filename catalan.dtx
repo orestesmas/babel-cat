@@ -719,22 +719,28 @@
 %    catalan ``ela geminada'' with the macros \cs{lgem} and \cs{Lgem}}
 % \changes{catalan-2.2f}{1996/09/20}{Added a check for math mode as
 %    the use of \cs{lgem} and \cs{Lgem} in math mode is not sensible.}
+% \changes{catalan-3.0}{2020/10/??}{Use \textperiodcentered when available to
+%    produce the middle dot. This allows both searching and copy and paste, and
+%    gives somewhat better results than the plain macro.}
 %
 %    Here we define a macro for typing the catalan ``ela geminada''
 %    (geminated l). The macros |\lgem| and |\Lgem| have been chosen
 %    for its lowercase and uppercase representation,
 %    respectively\footnote{The macro names \cs{ll} and \cs{LL} were
 %    not taken because of the fact that \cs{ll} is already used in
-%    mathematical mode.}.
+%    mathematical mode.}. If available we use the command
+%    \verb|\textperiodcentered| to output the middle dot, but we still adjust
+%    its horizontal kerning, since most fonts get it wrong. If this command is
+%    unavailable, we use a plain \TeX definition.
 %
-%    The code used in the actual macro used is a combination of the
-%    one proposed by Feruglio and Fuster\footnote{G.~Valiente and
-%    R.~Fuster, Typesetting Catalan Texts with \TeX, \emph{TUGboat}
-%    \textbf{14}(3), 1993.} and the proposal\footnote{G. Valiente,
-%    Modern Catalan Typographical Conventions, \emph{TUGboat}
-%    \textbf{16}(3), 1995.} from Valiente presented at the \TeX\ Users
-%    Group Annual Meeting in 1995. This last proposal has not been
+%    The code used in the plain \TeX definition is a combination of the one
+%    proposed by Feruglio and Fuster\footnote{G.~Valiente and R.~Fuster,
+%    Typesetting Catalan Texts with \TeX, \emph{TUGboat} \textbf{14}(3), 1993.}
+%    and the proposal\footnote{G. Valiente, Modern Catalan Typographical
+%    Conventions, \emph{TUGboat} \textbf{16}(3), 1995.} from Valiente presented
+%    at the \TeX\ Users Group Annual Meeting in 1995. This last proposal was not
 %    fully implemented due to its limitation to CM fonts.
+%
 %    \begin{macrocode}
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
 \def\lgem{%
@@ -742,17 +748,26 @@
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{l}\setbox1\hbox{l\/}\setbox2\hbox{.}%
-    \advance\raiselldim by \the\fontdimen5\the\font
-    \advance\raiselldim by -\ht2%
-    \leftllkern=-.25\wd0%
-    \advance\leftllkern by \wd1%
-    \advance\leftllkern by -\wd0%
-    \rightllkern=-.25\wd0%
-    \advance\rightllkern by -\wd1%
-    \advance\rightllkern by \wd0%
+    \@ifundefined{textperiodcentered}{
+      \setbox0\hbox{l}\setbox1\hbox{l\/}\setbox2\hbox{.}%
+      \advance\raiselldim by \the\fontdimen5\the\font%
+      \advance\raiselldim by -\ht2%
+      \leftllkern=-.25\wd0%
+      \advance\leftllkern by \wd1%
+      \advance\leftllkern by -\wd0%
+      \rightllkern=-.25\wd0%
+      \advance\rightllkern by -\wd1%
+      \advance\rightllkern by \wd0%
+    }
+    {
+      \setbox0\hbox{l}\setbox1\hbox{l}\setbox2\hbox{\textperiodcentered}%
+      \advance\leftllkern by -0.5\wd2%
+      \advance\rightllkern by -0.5\wd2%
+      \advance\leftllkern by 0.2\wd0%
+      \advance\rightllkern by 0.2\wd0%
+    }
     \allowhyphens\discretionary{l-}{l}%
-    {\hbox{l}\kern\leftllkern\raise\raiselldim\hbox{.}%
+    {\hbox{l}\kern\leftllkern\raise\raiselldim\box2%
       \kern\rightllkern\hbox{l}}\allowhyphens
   \fi
   }
@@ -761,18 +776,28 @@
     \csname normal@char\string"\endcsname L%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{L}\setbox1\hbox{L\/}\setbox2\hbox{.}%
-    \advance\raiselldim by .5\ht0%
-    \advance\raiselldim by -.5\ht2%
-    \leftllkern=-.125\wd0%
-    \advance\leftllkern by \wd1%
-    \advance\leftllkern by -\wd0%
-    \rightllkern=-\wd0%
-    \divide\rightllkern by 6%
-    \advance\rightllkern by -\wd1%
-    \advance\rightllkern by \wd0%
+    \@ifundefined{textperiodcentered}{
+      \setbox0\hbox{L}\setbox1\hbox{L\/}\setbox2\hbox{.}%
+      \advance\raiselldim by .5\ht0%
+      \advance\raiselldim by -.5\ht2%
+      \leftllkern=-.125\wd0%
+      \advance\leftllkern by \wd1%
+      \advance\leftllkern by -\wd0%
+      \rightllkern=-\wd0%
+      \divide\rightllkern by 6%
+      \advance\rightllkern by -\wd1%
+      \advance\rightllkern by \wd0%
+    }
+    {
+      \setbox0\hbox{L}\setbox1\hbox{L}\setbox2\hbox{\textperiodcentered}%
+      \advance\leftllkern by -0.5\wd2%
+      \advance\rightllkern by -0.5\wd2%
+      \advance\leftllkern by -0.25\wd0%
+      \advance\rightllkern by 0.2\wd0%
+      \advance\raiselldim by 0.125\ht0%
+    }
     \allowhyphens\discretionary{L-}{L}%
-    {\hbox{L}\kern\leftllkern\raise\raiselldim\hbox{.}%
+    {\hbox{L}\kern\leftllkern\raise\raiselldim\box2%
       \kern\rightllkern\hbox{L}}\allowhyphens
   \fi
   }

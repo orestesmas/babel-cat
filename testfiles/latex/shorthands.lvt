@@ -7,6 +7,8 @@
     \usepackage[T1]{fontenc}
 \fi
 
+\def\testit#1{%
+  \setbox0=\hbox{#1}\showbox0}
 
 \START
 \OMIT
@@ -14,11 +16,24 @@
 \TIMO
 
 % Test different shorthands
-\TESTEXP{Shorthands}{xil`ofon, i\lgem{}usi'o, esp`ecie, m`anega, endev'i,
-cal'es, l'`anima, "horari", m'usica, co"ca. 
-XIL`OFON, I\Lgem{}USI'O, ESP`ECIE, M`ANEGA, ENDEV'I,
-CAL'ES, L'`ANIMA, "HORARI", M'USICA, CO"CA. 
-}
-e\l.la
-e\L.La
+\testit{xil`ofon}
+\testit{i\l.lusi'o}
+\testit{esp`ecie}
+\testit{m`anega}
+\testit{endev'i}
+\testit{cal'es}
+\testit{l'`anima}
+\testit{"horari".}
+\testit{m'usica}
+\testit{co"ca}
+\testit{XIL`OFON}
+\testit{I\L.LUSI'O}
+\testit{ESP`ECIE}
+\testit{M`ANEGA}
+\testit{ENDEV'I}
+\testit{CAL'ES}
+\testit{L'`ANIMA}
+\testit{"HORARI".}
+\testit{M'USICA}
+\testit{CO"CA}
 \end{document}

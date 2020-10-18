@@ -1,0 +1,39 @@
+\input{regression-test}
+\documentclass{book}
+\usepackage[activeacute,activegrave,english,catalan]{babel}
+\usepackage{iftex}
+
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+\fi
+
+\START
+\OMIT
+\begin{document}
+\TIMO
+
+% Test all caption names
+\TESTEXP{Captions}{
+    \prefacename
+    \refname
+    \abstractname
+    \bibname
+    \chaptername
+    \appendixname
+    \contentsname
+    \listfigurename
+    \listtablename
+    \indexname
+    \figurename
+    \tablename
+    \partname
+    \enclname
+    \ccname
+    \headtoname
+    \pagename
+    \seename
+    \alsoname
+    \proofname
+    \glossaryname
+}
+\end{document}

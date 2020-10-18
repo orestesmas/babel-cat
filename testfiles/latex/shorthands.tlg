@@ -1,9 +1,235 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-============================================================
-TEST 1: Shorthands
-============================================================
-xil^^f2fon, i\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {l}\setbox 1\hbox {l\/}\setbox 2\hbox {.}\advance \raiselldim by 4.3045pt\advance \raiselldim by -\ht 2\leftllkern =-.25\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-.25\wd 0\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\discretionary {l-}{l}{\hbox {l}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {l}}{}usi^^f3, esp^^e8cie, m^^e0nega, endev^^ed{}, cal^^e9s, l'^^e0nima, "horari", m^^fasica, co^^e7a. XIL^^d2FON, I\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {L}\setbox 1\hbox {L\/}\setbox 2\hbox {.}\advance \raiselldim by .5\ht 0\advance \raiselldim by -.5\ht 2\leftllkern =-.125\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-\wd 0\divide \rightllkern by 6\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\discretionary {L-}{L}{\hbox {L}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {L}}{}USI^^d3, ESP^^c8CIE, M^^c0NEGA, ENDEV^^cd, CAL^^c9S, L'^^c0NIMA, "HORARI", M^^daSICA, CO^^c7A. 
-============================================================
-[1
-] (shorthands.aux)
+> \box...=
+\hbox(6.8872+0.0)x29.43726
+.\T1/cmr/m/n/10 x
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 l
+.\T1/cmr/m/n/10 ^^f2
+.\T1/cmr/m/n/10 f
+.\T1/cmr/m/n/10 o
+.\T1/cmr/m/n/10 n
+! OK.
+l. ...\testit{xil`ofon}
+> \box...=
+\hbox(6.8872+0.0)x26.71567
+.\T1/cmr/m/n/10 i
+.\discretionary replacing 5
+..\T1/cmr/m/n/10 l
+..\T1/cmr/m/n/10 -
+.|\T1/cmr/m/n/10 l
+.\hbox(6.8872+0.0)x2.7771
+..\T1/cmr/m/n/10 l
+.\kern -0.83315
+.\hbox(4.37393+0.0)x2.7771
+..\TS1/cmr/m/n/10 ^^b7
+.\kern -0.83315
+.\hbox(6.8872+0.0)x2.7771
+..\T1/cmr/m/n/10 l
+.\T1/cmr/m/n/10 u
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 ^^f3
+! OK.
+l. ...\testit{i\l.lusi'o}
+> \box...=
+\hbox(6.63332+1.94397)x30.32593
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 p
+.\kern0.27771
+.\T1/cmr/m/n/10 ^^e8
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 e
+! OK.
+l. ...\testit{esp`ecie}
+> \box...=
+\hbox(6.4151+1.94397)x33.3252
+.\T1/cmr/m/n/10 m
+.\T1/cmr/m/n/10 ^^e0
+.\T1/cmr/m/n/10 n
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 g
+.\T1/cmr/m/n/10 a
+! OK.
+l. ...\testit{m`anega}
+> \box...=
+\hbox(6.8872+0.0)x28.0487
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 n
+.\T1/cmr/m/n/10 d
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 v
+.\T1/cmr/m/n/10 ^^ed
+! OK.
+l. ...\testit{endev'i}
+> \box...=
+\hbox(6.8872+0.0)x20.60608
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 a
+.\T1/cmr/m/n/10 l
+.\T1/cmr/m/n/10 ^^e9
+.\T1/cmr/m/n/10 s
+! OK.
+l. ...\testit{cal'es}
+> \box...=
+\hbox(6.8872+0.0)x32.21436
+.\T1/cmr/m/n/10 l
+.\T1/cmr/m/n/10 '
+.\T1/cmr/m/n/10 ^^e0
+.\T1/cmr/m/n/10 n
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 m
+.\T1/cmr/m/n/10 a
+! OK.
+l. ...\testit{l'`anima}
+> \box...=
+\hbox(6.8872+0.0)x38.93494
+.\T1/cmr/m/n/10 "
+.\T1/cmr/m/n/10 h
+.\T1/cmr/m/n/10 o
+.\T1/cmr/m/n/10 r
+.\T1/cmr/m/n/10 a
+.\T1/cmr/m/n/10 r
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 "
+.\T1/cmr/m/n/10 .
+! OK.
+l. ...\testit{"horari".}
+> \box...=
+\hbox(6.63332+0.0)x29.77051
+.\T1/cmr/m/n/10 m
+.\kern-0.27771
+.\T1/cmr/m/n/10 ^^fa
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 a
+! OK.
+l. ...\testit{m'usica}
+> \box...=
+\hbox(4.3045+1.70097)x19.16199
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 o
+.\kern0.27771
+.\T1/cmr/m/n/10 ^^e7
+.\T1/cmr/m/n/10 a
+! OK.
+l. ...\testit{co"ca}
+> \box...=
+\hbox(8.56377+0.0)x46.65527
+.\T1/cmr/m/n/10 X
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 L
+.\T1/cmr/m/n/10 ^^d2
+.\T1/cmr/m/n/10 F
+.\kern-0.27771
+.\T1/cmr/m/n/10 O
+.\T1/cmr/m/n/10 N
+! OK.
+l. ...\testit{XIL`OFON}
+> \box...=
+\hbox(8.56377+0.0)x40.2332
+.\T1/cmr/m/n/10 I
+.\discretionary replacing 5
+..\T1/cmr/m/n/10 L
+..\T1/cmr/m/n/10 -
+.|\T1/cmr/m/n/10 L
+.\hbox(6.8872+0.0)x6.24847
+..\T1/cmr/m/n/10 L
+.\kern -2.95067
+.\hbox(4.37393+0.0)x2.7771, shifted -0.8609
+..\TS1/cmr/m/n/10 ^^b7
+.\kern -0.13889
+.\hbox(6.8872+0.0)x6.24847
+..\T1/cmr/m/n/10 L
+.\T1/cmr/m/n/10 U
+.\T1/cmr/m/n/10 S
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 ^^d3
+! OK.
+l. ...\testit{I\L.LUSI'O}
+> \box...=
+\hbox(8.56377+0.0)x43.60046
+.\T1/cmr/m/n/10 E
+.\T1/cmr/m/n/10 S
+.\T1/cmr/m/n/10 P
+.\T1/cmr/m/n/10 ^^c8
+.\T1/cmr/m/n/10 C
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 E
+! OK.
+l. ...\testit{ESP`ECIE}
+> \box...=
+\hbox(8.56377+0.0)x46.30814
+.\T1/cmr/m/n/10 M
+.\T1/cmr/m/n/10 ^^c0
+.\T1/cmr/m/n/10 N
+.\T1/cmr/m/n/10 E
+.\T1/cmr/m/n/10 G
+.\T1/cmr/m/n/10 A
+! OK.
+l. ...\testit{M`ANEGA}
+> \box...=
+\hbox(8.56377+0.0)x39.85138
+.\T1/cmr/m/n/10 E
+.\T1/cmr/m/n/10 N
+.\T1/cmr/m/n/10 D
+.\T1/cmr/m/n/10 E
+.\T1/cmr/m/n/10 V
+.\T1/cmr/m/n/10 ^^cd
+! OK.
+l. ...\testit{ENDEV'I}
+> \box...=
+\hbox(8.56377+0.0)x33.3252
+.\T1/cmr/m/n/10 C
+.\T1/cmr/m/n/10 A
+.\T1/cmr/m/n/10 L
+.\T1/cmr/m/n/10 ^^c9
+.\T1/cmr/m/n/10 S
+! OK.
+l. ...\testit{CAL'ES}
+> \box...=
+\hbox(8.56377+0.0)x44.29474
+.\T1/cmr/m/n/10 L
+.\T1/cmr/m/n/10 '
+.\T1/cmr/m/n/10 ^^c0
+.\T1/cmr/m/n/10 N
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 M
+.\T1/cmr/m/n/10 A
+! OK.
+l. ...\testit{L'`ANIMA}
+> \box...=
+\hbox(6.8872+0.0)x53.87573
+.\T1/cmr/m/n/10 "
+.\T1/cmr/m/n/10 H
+.\T1/cmr/m/n/10 O
+.\T1/cmr/m/n/10 R
+.\T1/cmr/m/n/10 A
+.\T1/cmr/m/n/10 R
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 "
+.\T1/cmr/m/n/10 .
+! OK.
+l. ...\testit{"HORARI".}
+> \box...=
+\hbox(8.56377+0.0)x40.54565
+.\T1/cmr/m/n/10 M
+.\T1/cmr/m/n/10 ^^da
+.\T1/cmr/m/n/10 S
+.\T1/cmr/m/n/10 I
+.\T1/cmr/m/n/10 C
+.\T1/cmr/m/n/10 A
+! OK.
+l. ...\testit{M'USICA}
+> \box...=
+\hbox(6.8872+1.70097)x29.71497
+.\T1/cmr/m/n/10 C
+.\T1/cmr/m/n/10 O
+.\T1/cmr/m/n/10 ^^c7
+.\T1/cmr/m/n/10 A
+! OK.
+l. ...\testit{CO"CA}
+(shorthands.aux)

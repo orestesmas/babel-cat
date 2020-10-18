@@ -1,10 +1,335 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-============================================================
-TEST 1: Shorthands
-============================================================
-xil\protect \penalty \@M \hskip \z@skip ^^f2\protect \penalty \@M \hskip \z@skip fon, i\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {l}\setbox 1\hbox {l\/}\setbox 2\hbox {.}\advance \raiselldim by 4.31pt\advance \raiselldim by -\ht 2\leftllkern =-.25\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-.25\wd 0\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\protect \penalty \@M \hskip \z@skip \discretionary {l-}{l}{\hbox {l}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {l}}\protect \penalty \@M \hskip \z@skip {}usi\protect \penalty \@M \hskip \z@skip 
-^^f3\protect \penalty \@M \hskip \z@skip , esp\protect \penalty \@M \hskip \z@skip ^^e8\protect \penalty \@M \hskip \z@skip cie, m\protect \penalty \@M \hskip \z@skip ^^e0\protect \penalty \@M \hskip \z@skip nega, endev\protect \penalty \@M \hskip \z@skip ^^ed\protect \penalty \@M \hskip \z@skip {}, cal\protect \penalty \@M \hskip \z@skip ^^e9\protect \penalty \@M \hskip \z@skip s, l'\protect \penalty \@M \hskip \z@skip ^^e0\protect \penalty \@M \hskip \z@skip nima, "horari", m\protect \penalty \@M \hskip \z@skip ^^fa\protect \penalty \@M \hskip \z@skip sica, co^^e7a. XIL\protect \penalty \@M \hskip \z@skip ^^d2\protect \penalty \@M \hskip \z@skip FON, I\leftllkern =0pt\rightllkern =0pt\raiselldim =0pt\setbox 0\hbox {L}\setbox 1\hbox {L\/}\setbox 2\hbox {.}\advance \raiselldim by .5\ht 0\advance \raiselldim by -.5\ht 2\leftllkern =-.125\wd 0\advance \leftllkern by \wd 1\advance \leftllkern by -\wd 0\rightllkern =-\wd 0\divide \rightllkern by 6\advance \rightllkern by -\wd 1\advance \rightllkern by \wd 0\protect \penalty \@M \hskip \z@skip \discretionary {L-}{L}{\hbox {L}\kern \leftllkern \raise \raiselldim \hbox {.}\kern \rightllkern \hbox {L}}\protect \penalty \@M \hskip \z@skip {}USI\protect \penalty \@M \hskip \z@skip ^^d3\protect \penalty \@M \hskip \z@skip , ESP\protect \penalty \@M \hskip \z@skip ^^c8\protect \penalty \@M \hskip \z@skip CIE, M\protect \penalty \@M \hskip \z@skip ^^c0\protect \penalty \@M \hskip \z@skip NEGA, ENDEV\protect \penalty \@M \hskip \z@skip ^^cd\protect \penalty \@M \hskip \z@skip , CAL\protect \penalty \@M \hskip \z@skip ^^c9\protect \penalty \@M \hskip \z@skip S, L'\protect \penalty \@M \hskip \z@skip ^^c0\protect \penalty \@M \hskip \z@skip NIMA, "HORARI", M\protect \penalty \@M \hskip \z@skip ^^da\protect \penalty \@M \hskip \z@skip SICA, CO^^c7A. 
-============================================================
-[1
-] (shorthands.aux)
+> \box...=
+\hbox(7.05+0.11)x29.45999, direction TLT
+.\TU/lmr/m/n/10 x
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 l
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^f2
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 f
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+! OK.
+l. ...\testit{xil`ofon}
+> \box...=
+\hbox(6.98+0.11)x26.73196, direction TLT
+.\TU/lmr/m/n/10 i
+.\penalty 10000
+.\glue 0.0
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 l
+..< \TU/lmr/m/n/10 -
+..> \TU/lmr/m/n/10 l
+..= \hbox(6.94+0.0)x2.78, direction TLT
+..= .\TU/lmr/m/n/10 l
+..= \kern-3.33401
+..= \hbox(3.95+0.0)x7.78, direction TLT
+..= .\TU/lmr/m/n/10 ^^b7
+..= \kern-3.33401
+..= \hbox(6.94+0.0)x2.78, direction TLT
+..= .\TU/lmr/m/n/10 l
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 i
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^f3
+.\penalty 10000
+.\glue 0.0
+! OK.
+l. ...\testit{i\l.lusi'o}
+> \box...=
+\hbox(6.98+1.94)x30.04001, direction TLT
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 p
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^e8
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 e
+! OK.
+l. ...\testit{esp`ecie}
+> \box...=
+\hbox(6.98+2.06)x33.33, direction TLT
+.\TU/lmr/m/n/10 m
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^e0
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 e
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 a
+! OK.
+l. ...\testit{m`anega}
+> \box...=
+\hbox(6.98+0.11)x28.06, direction TLT
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 v
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^ed
+.\penalty 10000
+.\glue 0.0
+! OK.
+l. ...\testit{endev'i}
+> \box...=
+\hbox(6.98+0.11)x20.6, direction TLT
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 l
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^e9
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 s
+! OK.
+l. ...\testit{cal'es}
+> \box...=
+\hbox(6.98+0.11)x32.23, direction TLT
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 ’
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^e0
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 a
+! OK.
+l. ...\testit{l'`anima}
+> \box...=
+\hbox(6.94+0.11)x37.01, direction TLT
+.\TU/lmr/m/n/10 ”
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 o
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 ”
+.\kern-1.39 (font)
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\testit{"horari".}
+> \box...=
+\hbox(6.98+0.11)x30.05, direction TLT
+.\TU/lmr/m/n/10 m
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^fa
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 a
+! OK.
+l. ...\testit{m'usica}
+> \box...=
+\hbox(4.48+2.0)x19.16, direction TLT
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 o
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+..= \kern0.28 (font)
+.\TU/lmr/m/n/10 ^^e7
+.\TU/lmr/m/n/10 a
+! OK.
+l. ...\testit{co"ca}
+> \box...=
+\hbox(9.09+0.22)x46.67, direction TLT
+.\TU/lmr/m/n/10 X
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 L
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^d2
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 F
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 O
+.\TU/lmr/m/n/10 N
+! OK.
+l. ...\testit{XIL`OFON}
+> \box...=
+\hbox(9.09+0.22)x40.24747, direction TLT
+.\TU/lmr/m/n/10 I
+.\penalty 10000
+.\glue 0.0
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 L
+..< \TU/lmr/m/n/10 -
+..> \TU/lmr/m/n/10 L
+..= \hbox(6.83+0.0)x6.25, direction TLT
+..= .\TU/lmr/m/n/10 L
+..= \kern-5.4525
+..= \hbox(3.95+0.0)x7.78, shifted -0.85374, direction TLT
+..= .\TU/lmr/m/n/10 ^^b7
+..= \kern-2.64003
+..= \hbox(6.83+0.0)x6.25, direction TLT
+..= .\TU/lmr/m/n/10 L
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 U
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 I
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^d3
+.\penalty 10000
+.\glue 0.0
+! OK.
+l. ...\testit{I\L.LUSI'O}
+> \box...=
+\hbox(9.09+0.22)x43.62999, direction TLT
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 P
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^c8
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 E
+! OK.
+l. ...\testit{ESP`ECIE}
+> \box...=
+\hbox(9.09+0.22)x46.33, direction TLT
+.\TU/lmr/m/n/10 M
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^c0
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 N
+.\TU/lmr/m/n/10 E
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 A
+! OK.
+l. ...\testit{M`ANEGA}
+> \box...=
+\hbox(9.09+0.22)x39.87, direction TLT
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 N
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 D
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 V
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^cd
+.\penalty 10000
+.\glue 0.0
+! OK.
+l. ...\testit{ENDEV'I}
+> \box...=
+\hbox(9.09+0.22)x33.34, direction TLT
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 L
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^c9
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 S
+! OK.
+l. ...\testit{CAL'ES}
+> \box...=
+\hbox(9.09+0.0)x44.31, direction TLT
+.\TU/lmr/m/n/10 L
+.\TU/lmr/m/n/10 ’
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^c0
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 N
+.\TU/lmr/m/n/10 I
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 M
+.\TU/lmr/m/n/10 A
+! OK.
+l. ...\testit{L'`ANIMA}
+> \box...=
+\hbox(7.16+0.22)x51.94, direction TLT
+.\TU/lmr/m/n/10 ”
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 O
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 R
+.\TU/lmr/m/n/10 A
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 R
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 ”
+.\kern-1.39 (font)
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\testit{"HORARI".}
+> \box...=
+\hbox(9.09+0.22)x40.56, direction TLT
+.\TU/lmr/m/n/10 M
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 ^^da
+.\penalty 10000
+.\glue 0.0
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 I
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 A
+! OK.
+l. ...\testit{M'USICA}
+> \box...=
+\hbox(7.16+2.0)x29.72, direction TLT
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 O
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 ^^c7
+.\TU/lmr/m/n/10 A
+! OK.
+l. ...\testit{CO"CA}
+(shorthands.aux)
