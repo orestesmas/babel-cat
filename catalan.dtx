@@ -277,21 +277,6 @@
 %    options are created on the fly when neccessary.
 %
 %    \begin{macrocode}
-\ifcat@latex
-
-\@ifundefined{catalanoptions}{}
-{\PassOptionsToPackage{\catalanoptions}{babel}}
-
-\def\cat@genoption#1#2#3{%
-  \DeclareOption{#1}{}%
-  \@ifpackagewith{babel}{#1}%
-    {\def\cat@a{#1}%
-     \expandafter\let\expandafter\cat@b\csname opt@babel.sty\endcsname
-     \addto\cat@b{,#2}%
-     \expandafter\let\csname opt@babel.sty\endcsname\cat@b
-     \AtEndOfPackage{#3}}%
-    {}}
-\fi
 %    \end{macrocode}
 %
 %    Instead of joining all the extras directly in |\extrascatalan|,
@@ -1015,8 +1000,7 @@
   \expandafter\cat@a\cat@b l\acute{i}m l\acute{i}m\,sup
     l\acute{i}m\,inf m\grave{a}x \acute{i}nf m\acute{i}n \\ %
   \def\cat@c{\nolimits}%
-  \expandafter\cat@a\cat@b tg arc\,sin arc\,cos arc\,tg \\ }
-\def\catalanoperators{cotg cosec sinh tgh }
+  }
 %    \end{macrocode}
 %
 %    The macro |\ldf@finish| takes care of looking for a
