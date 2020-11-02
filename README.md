@@ -1,34 +1,47 @@
-# babel-cat
+# The babel-catalan package
+
+## Description
 
 This repository contains the necessary files to provide support for Catalan in
 the babel multilingual system.
 
+It is designed to work with the following engines: pdfTeX, XeTeX and LuaTeX.
+Plain and LaTeX formats are supported.
+
 ## Contents
 
-  1. File `catalan.ins` contains an installation script. Run `latex catalan.ins`
-     to generate the language definition file `catalan.ldf` which is the one
-     actually used by babel.
-  2. File `catalan.dtx` contains both the code and the documentation regarding
-     support for the Catalan language. Run `pdflatex catalan.dtx` (or your
-     preferred LaTeX build system) to generate the documenation.
+The bundle consists of the following files:
+
+  1. `catalan.ins`: Contains an installation script that unpacks the language definition files.
+  2. `catalan.dtx`: Contains both the code and the documentation regarding support for the Catalan language.
+  3. `catalan.pdf`: Unpacked documentation for babel-catalan.
+  4. `README.md`: This file.
 
 ## License
 
-Released under the LPPL v1.3 or later. See http://www.latex-project.org/lppl.txt.
+Released under the LaTeX Project Public License v1.3 or later.
+See http://www.latex-project.org/lppl.txt
 
-## TODO
+## Installation
 
-  - [ ] Add accents to math operators such as `\lim`. See babel-spanish.
-  - [ ] Remove space after comma when writing numbers in math mode. See
-        babel-french or spanish.
-  - [ ] Implement the relevant styling advices and ortotypographical criteria from [IEC](https://criteria.espais.iec.cat/category/noticies-2/noticies-del-2020/).
-  - [ ] Improve documentation.
+If the latest version of this package is not included in your LaTeX
+distribution, do the following:
 
-## Suggestions
+* Run «`latex catalan.ins`» to generate the language definition file «`catalan.ldf`», which is the one actually used by babel.
+* Copy the file catalan.ldf to a location where TeX can find them (default location: $TEXMF/tex/generic/babel-catalan/).
+* Rebuild the database (mktexlsr or so).
+* Run «`pdflatex catalan.dtx`» (or your preferred LaTeX build system) **twice** with `makeindex -s gglo.ist -o catalan.gls catalan.glo` in between to generate the package documentation. The first `pdflatex` run scans the document and gathers the changelog information, which is typeset by the subsequent `makeindex`. Then the second `pdflatex` run integrates the changelog into the main document.
 
-  - Improve hypenation.
-  - Add automated tests to verify changes are reasonable. See, for example
-      [babel](https://github.com/latex3/babel).
-  - Add script to build package for CTAN (this need only be done at a point
-      where we actually want to push to CTAN).
-  - Add changelog to README in CTAN.
+## Documentation
+
+See the included manual for usage instructions: catalan.pdf (in catalan, with english summary).
+
+## Changes
+
+See the included manual catalan.pdf, section "Change History".
+
+---
+Copyright 2020 Orestes Mas
+E-mail: orestes (dot) mas (at) upc (dot) edu
+
+
