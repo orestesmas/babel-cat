@@ -16,11 +16,7 @@
 % 
 % This work has the LPPL maintenance status "maintained".
 % 
-% The Current Maintainer of this work is Johannes Braams.
-% 
-% The list of all files belonging to the Babel system is
-% given in the file `manifest.bbl. See also `legal.bbl' for additional
-% information.
+% The Current Maintainers of this work are Miquel Ortega and Orestes Mas.
 % 
 % The list of derived (unpacked) files belonging to the distribution
 % and covered by LPPL is defined by the unpacking scripts (with
@@ -38,19 +34,20 @@
 %<code>\ProvidesLanguage{catalan}
 %\fi
 %\ProvidesFile{catalan.dtx}
-        [2005/03/29 v2.2p Catalan support from the babel system]
+        [2020/11/01 v3.0 Catalan support from the babel system]
 %\iffalse
 %% File `catalan.dtx'
-%% Babel package for LaTeX version 2e
-%% Copyright (C) 1989 - 2005
-%%           by Johannes Braams, TeXniek
 %
 %% Catalan Language Definition File
 %% Copyright (C) 1991 - 2005
-%%           by Goncal Badenes <badenes at imec.be>
+%%           by Goncal Badenes <badenes (at) imec.be>
+%%              Johannes Braams, TeXniek
+%% Copyright (C) 2020
+%%           by Miquel Ortega <xxx>
+%%              Orestes Mas <orestes (dot) mas (at) upc (dot) edu>
 %%              Johannes Braams, TeXniek
 %
-%% Please report errors to: J.L. Braams babel at braams.cistron.nl
+%% Please report errors to: Miquel Ortega babel at braams.cistron.nl
 %%
 %    This file is part of the babel system, it provides the source
 %    code for the Catalan language definition file.
@@ -64,24 +61,36 @@
 %<*filedriver>
 \documentclass{ltxdoc}
 \usepackage[T1]{fontenc}
+\usepackage[english,catalan]{babel}
 \usepackage{hyperref}
-
 \hypersetup{
-  colorlinks,
-  linkcolor=blue
+	colorlinks,
+	linkcolor=blue
 }
+
+% Page setup
+\setlength{\parindent}{0em}
+\setlength{\parskip}{3pt}
+\addtolength{\oddsidemargin}{-4pc}
+\addtolength{\textwidth}{7pc}
+
+\usepackage{mathpazo,xcolor}
 
 \newcommand*\babel{\texttt{Babel}}
 \newcommand*\babelcat{\texttt{babel-catalan}}
 \newcommand*\Lopt[1]{\textsf{#1}}
 \newcommand*\file[1]{\texttt{#1}}
+
+
 \begin{document}
-  \title{A Babel language definition file for Catalan}
-  \author{Gonçal Badenes}
-  \date{March 29, 2005}
+  \title{Estil \textsf{catalan} per al sistema Babel}
+  \author{Gonçal Badenes \and Miquel Ortega \and Orestes Mas}
+  \date{\today}
   \maketitle
   \tableofcontents
+
   \clearpage
+  \part*{English Summary}
   \DocInput{catalan.dtx}
 \end{document}
 %</filedriver>
@@ -105,6 +114,7 @@
 %    \cs{atcatcode} right to the beginning.}
 % \changes{catalan-2.2k}{1999/05/05}{A wrong \cs{changes} entry made
 %    typesetting impossible}
+% \changes{catalan-3.0}{2020/09/01}{New maintainers}
 %
 %  \section{The Catalan language}
 %
@@ -264,7 +274,7 @@
 %  \begin{macro}{\ifcat@unicode}
 %    We define a new if that is set to true if we are working with a
 %    unicode capable engine.
-% \changes{catalan-2.2q}{2020/10/4}{Added a new `if’ \cs{cat@unicode} to detect
+% \changes{catalan-3.0}{2020/10/4}{Added a new `if’ \cs{cat@unicode} to detect
 %    unicode engines}
 %    \begin{macrocode}
 \@ifundefined{Umathcode}
@@ -321,7 +331,7 @@
 % \changes{catalan-2.2m}{2000/09/19}{Added \cs{glossaryname}}
 % \changes{catalan-2.2p}{2003/11/17}{Inserted translation for
 %    Glossary}
-% \changes{catalan-2.2q}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} %TODO:
+% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} %TODO:
 % %quit if Babel is < 3.9?
 %    \begin{macrocode}
 \StartBabelCommands*{catalan}{captions}
@@ -384,7 +394,7 @@
 % \changes{catalan-2.2i}{1997/10/01}{Use \cs{edef} to define \cs{today}
 %    to save memory}
 % \changes{catalan-2.2i}{1998/03/28}{use \cs{def} instead of \cs{edef}}
-% \changes{catalan-2.2q}{2020/09/23}{Use Babel 3.9 syntax for captions and dates}
+% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates}
 %    \begin{macrocode}
 \StartBabelCommands*{catalan}{date}
       [unicode, fontenc=TU EU1 EU2, charset=utf8]
@@ -421,7 +431,7 @@
 %    non-zero lower case code; when we do that \TeX\ will find more
 %    breakpoints in words that contain this character in its r\^ole as
 %    apostrophe. 
-% \changes{catalan-2.2q}{2020/10/4}{Use bbl@save@variable to store the
+% \changes{catalan-3.0}{2020/10/4}{Use bbl@save@variable to store the
 %    lowercase code of the apostrophe, and set the unicode apostrophe
 %    to have a non-zero lower case code too. Code taken essentially
 %    from babel-french}
@@ -505,7 +515,7 @@
 %
 % \changes{catalan-2.2h}{1997/01/08}{Added some comment signs to
 %    prevent unwanted spaces in the output}
-% \changes{catalan-2.2q}{2020/10/04}{Remove dieresis because babel already
+% \changes{catalan-3.0}{2020/10/04}{Remove diaeresis because babel already
 %    handles it. Set accents with better hyphenation even if
 %    activeacute or activegrave are not set}
 %    \begin{macrocode}
@@ -526,7 +536,7 @@
 % \changes{catalan-2.1d}{1994/06/26}{Renamed from \cs{acute} as that
 %    is a \cs{mathaccent}}
 %  \begin{macro}{\cat@oldgrave}
-% \changes{catalan-2.2q}{2020/10/04}{Renamed from \cs{textacute},
+% \changes{catalan-3.0}{2020/10/04}{Renamed from \cs{textacute},
 %    \cs{textgrave}, to \cs{cat@oldacute}, \cs{cat@oldgrave}.}
 %
 %    The original definition of |\'| is stored as |\cat@oldacute|, because
@@ -704,7 +714,7 @@
 %    catalan ``ela geminada'' with the macros \cs{lgem} and \cs{Lgem}}
 % \changes{catalan-2.2f}{1996/09/20}{Added a check for math mode as
 %    the use of \cs{lgem} and \cs{Lgem} in math mode is not sensible.}
-% \changes{catalan-3.0}{2020/10/??}{Use \textperiodcentered when available to
+% \changes{catalan-3.0}{2020/10/31}{Use ``\textperiodcentered'' when available to
 %    produce the middle dot. This allows both searching and copy and paste, and
 %    gives somewhat better results than the plain macro.}
 %
