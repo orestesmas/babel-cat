@@ -840,16 +840,14 @@
 %    \end{macrocode}
 %  \end{macro}
 %
-%    Now, the math group.  It's not easy to add an accent to an
-%    operator, because we must avoid using text (that is, |\mbox|)
-%    where we have no control on font and size, and at the same time
-%    we need |\i|, which is forbidden in math mode.  |\dotlessi| must
-%    be converted to uppercase if necessary in \LaTeXe.  There are two
-%    versions, depending on the format.
-% \changes{catalan~5.0o}{2016/01/10}{Fixed EUx: deal with them
-%    separately, to be improved}
-% \changes{catalan~5.0p}{2016/03/02}{Added TU. Now with uni encs use the
-%    actual composite char}
+%   In catalan, some of the operators in math need to have accents. 
+%   It's not easy to add an accent to an operator, because we must 
+%   avoid using text (that is, |\mbox|) where we have no control on 
+%   font and size, and at the same time we need |\i|, which is forbidden 
+%   in math mode. We use |\dotlessi| to do so and add the accents to
+%   the corresponding operators\footnote{This implementation has been
+%   borrowed from spanish.dtx}.
+% \changes{catalan-3.0}{2020/11/10}{Added accented operatos}
 %
 %    \begin{macrocode}
 \addto\mathcatalan{\cat@sDRC\dotlessi{\cat@dotlessi}}
@@ -902,18 +900,22 @@
 \else
   \def\cat@dotlessi{\textormath{\i}{\mathchar"7010}}
 \fi
-
+%    \end{macrocode}
+%
+%    As math mode desn't have accented characters, we need to specifically
+%    define and add the accented characters using unicode.
+%
+%    \begin{macrocode}
 \def\cat@op@ac@base#1{\acute{\if i#1\dotlessi\else#1\fi}}
 \def\cat@op@gr@base#1{\grave{\if i#1\dotlessi\else#1\fi}}
 \ifx\Umathchar\@undefined\else
-  \def\cat@ac@TU@a{"00E1}\def\cat@ac@TU@A{"00C1}%
   \def\cat@ac@TU@e{"00E9}\def\cat@ac@TU@E{"00C9}%
   \def\cat@ac@TU@i{"00ED}\def\cat@ac@TU@I{"00CD}%
   \def\cat@ac@TU@o{"00F3}\def\cat@ac@TU@O{"00D3}%
   \def\cat@ac@TU@u{"00FA}\def\cat@ac@TU@U{"00DA}%
-  \def\cat@ac@TU@a{"00E0}\def\cat@ac@TU@A{"00C0}%
-  \def\cat@ac@TU@e{"00E8}\def\cat@ac@TU@E{"00C8}%
-  \def\cat@ac@TU@o{"00F2}\def\cat@ac@TU@O{"00D2}%
+  \def\cat@gr@TU@a{"00E0}\def\cat@gr@TU@A{"00C0}%
+  \def\cat@gr@TU@e{"00E8}\def\cat@gr@TU@E{"00C8}%
+  \def\cat@gr@TU@o{"00F2}\def\cat@gr@TU@O{"00D2}%
   \def\cat@op@ac@TU#1{%
     \ifnum\mathgroup=\m@ne
       \cat@op@ac@base{#1}%
@@ -941,6 +943,14 @@
   \expandafter\let\csname cat@op@gr@EU1\endcsname\cat@op@gr@TU
   \expandafter\let\csname cat@op@gr@EU2\endcsname\cat@op@gr@TU
 \fi
+%    \end{macrocode}
+% \begin{macro}{\accentedoperators}
+% \begin{macro}{\unaccentedoperators}
+%    The macro |\accentedoperators| enables the corresponding
+%    accented operators. This macro is active by default.
+%    The macro |\unaccentedoperators| is used
+%    to cancel the acctions of |\accentedoperators|.
+%    \begin{macrocode}
 \def\accentedoperators{%
   \@ifundefined{cat@op@ac@TU}%
     {\let\cat@op@ac\cat@op@ac@base}%
@@ -952,6 +962,18 @@
   \def\cat@op@ac##1{##1}
   \def\cat@op@gr##1{##1}}
 \accentedoperators
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+% \begin{macro}{\spacedoperators}
+% \begin{macro}{\unspacedoperators}
+%    The macro |\spacedoperators| creates a space in some math 
+%    operators like |\limsup| and |\liminf|. This macro is 
+%    active by default.
+%    The macro |\unspacedoperators| is used to cancel the actions
+%    of |\spacedoperators|.
+%    \begin{macrocode}
 \def\spacedoperators{\let\cat@op@sp\,}
 \def\unspacedoperators{\let\cat@op@sp\@empty}
 \spacedoperators
@@ -961,12 +983,12 @@
   \let\operator@font\rm
 \fi
 %    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
 %
 %    Operators are stored in |\cat@operators|, which is
 %    included in the math group. Since |\operator@font| is
 %    defined in \LaTeXe{} only, we define it in the plain variant.
-% \changes{catalan~5.0n}{2014-03-28}{tabular didn't like the
-%   ampersand used in tests. Replaced by double backslash.}
 %
 %    \begin{macrocode}
 \def\cat@operators{%
