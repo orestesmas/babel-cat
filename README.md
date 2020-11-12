@@ -41,7 +41,6 @@ See the included manual for usage instructions: catalan.pdf (in catalan, with en
 See the included manual catalan.pdf, section "Change History".
 
 ---
-Copyright 2020 Orestes Mas
-E-mail: orestes (dot) mas (at) upc (dot) edu
+Copyright 2020 babel-catalan maintainers
 
 
