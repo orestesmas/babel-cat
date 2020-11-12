@@ -1001,36 +1001,12 @@
         \else\mkern12mu\fi{\operator@font m\cat@op@gr od}\,\,##1}%
       \cat@sdef\pmod##1{\pod{{\operator@font m\cat@op@gr od}%
         \mkern6mu##1}}}%
-  \def\cat@a##1 {%
-    \ifx\relax##1\relax % empty? continue
-      \bbl@afterelse
-      \cat@a
-    \else
-      \bbl@afterfi
-      {\ifx\\##1% \@emtpy? finish
-       \else
-         \bbl@afterfi
-         \begingroup
-           \let\,\@empty % ignore when def'ing name
-           \let\acute\@firstofone % id
-           \let\grave\@firstofone % id
-           \edef\cat@b{\expandafter\noexpand\csname##1\endcsname}%
-           \def\,{\noexpand\cat@op@sp}%
-           \def\acute{\noexpand\cat@op@ac}%
-           \def\grave{\noexpand\cat@op@gr}%
-         \edef\cat@a{\endgroup
-           \noexpand\cat@sdef\expandafter\noexpand\cat@b{%
-               \mathop{\noexpand\operator@font##1}\cat@c}}%
-         \cat@a % restores itself
-         \cat@a
-       \fi}%
-    \fi}%
-  \let\cat@b\catalanoperators
-  \addto\cat@b{ }%
-  \let\cat@c\@empty
-  \expandafter\cat@a\cat@b l\acute{i}m l\acute{i}m\,sup
-    l\acute{i}m\,inf m\grave{a}x \acute{i}nf m\acute{i}n \\ %
-  \def\cat@c{\nolimits}%
+  \cat@sdef\lim{\mathop{\operator@font l\cat@op@ac im}}
+  \cat@sdef\liminf{\mathop{\operator@font l\cat@op@ac im\cat@op@sp inf}}
+  \cat@sdef\limsup{\mathop{\operator@font l\cat@op@ac im\cat@op@sp sup}}
+  \cat@sdef\max{\mathop{\operator@font m\cat@op@gr ax}}
+  \cat@sdef\inf{\mathop{\operator@font \cat@op@ac inf}}
+  \cat@sdef\min{\mathop{\operator@font m\cat@op@ac in}}
   }
 %    \end{macrocode}
 %
