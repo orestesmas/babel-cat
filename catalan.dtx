@@ -653,7 +653,7 @@
   \textormath{\guillemotright}{\mbox{\guillemotright}}}
 %    \end{macrocode}
 %     grave accents,
-% \changes{catalan-2.2e}{1996/03/05}{Added `{}` as an axtra shorthand}
+% \changes{catalan-2.2e}{1996/03/05}{Added `{}` as an extra shorthand}
 %    \begin{macrocode}
 \@ifpackagewith{babel}{activegrave}{%
   \declare@shorthand{catalan}{`a}{\textormath{\cat@grave a}{\grave a}}
@@ -699,7 +699,7 @@
 \declare@shorthand{catalan}{"-}{\nobreak-\bbl@allowhyphens}
 \declare@shorthand{catalan}{"|}{%
   \textormath{\nobreak\discretionary{-}{}{\kern.03em}%
-              \allowhyphens}{}}
+              \bbl@allowhyphens}{}}
 %    \end{macrocode}
 %
 %  \begin{macro}{\-}
@@ -775,9 +775,9 @@
       \advance\leftllkern by 0.2\wd0%
       \advance\rightllkern by 0.2\wd0%
     }
-    \allowhyphens\discretionary{l-}{l}%
+    \bbl@allowhyphens\discretionary{l-}{l}%
     {\hbox{l}\kern\leftllkern\raise\raiselldim\box2%
-      \kern\rightllkern\hbox{l}}\allowhyphens
+      \kern\rightllkern\hbox{l}}\bbl@allowhyphens
   \fi
   }
 \def\Lgem{%
@@ -805,9 +805,9 @@
       \advance\rightllkern by 0.2\wd0%
       \advance\raiselldim by 0.125\ht0%
     }
-    \allowhyphens\discretionary{L-}{L}%
+    \bbl@allowhyphens\discretionary{L-}{L}%
     {\hbox{L}\kern\leftllkern\raise\raiselldim\box2%
-      \kern\rightllkern\hbox{L}}\allowhyphens
+      \kern\rightllkern\hbox{L}}\bbl@allowhyphens
   \fi
   }
 %    \end{macrocode}
@@ -963,7 +963,7 @@
 %    The macro |\accentedoperators| enables the corresponding
 %    accented operators, active by default.
 %    The macro |\unaccentedoperators| is used
-%    to cancel the acctions of |\accentedoperators|.
+%    to cancel the actions of |\accentedoperators|.
 %    \begin{macrocode}
 \def\accentedoperators{%
   \@ifundefined{cat@op@ac@TU}%
