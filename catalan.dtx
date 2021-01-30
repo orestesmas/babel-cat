@@ -61,6 +61,7 @@
 \documentclass{ltxdoc}
 \usepackage[T1]{fontenc}
 \usepackage[english,catalan]{babel}
+\usepackage{amsmath}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks,
@@ -129,9 +130,8 @@
 %
 %  \subsubsection{Caption names}
 %    Catalan caption names as defined in \babelcat{} can be seen in
-%    table~\ref{tab:catalan-caption-names}. They
-%    can be easily customised using Babel 3.9 syntax
-%    |\renewcommand\catalanproofname{Prova}|. The older syntax
+%    Table~\ref{tab:catalan-caption-names}. They can be easily customised using
+%    Babel 3.9 syntax |\renewcommand\catalanproofname{Prova}|. The older syntax
 %    |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still works.
 %
 %    \begin{table}[htb]
@@ -165,7 +165,7 @@
 %      \label{tab:catalan-caption-names}
 %    \end{table}
 %  \subsection{Commands}
-%    The commands specified in table \ref{tab:catalan-macros} are provided by
+%    The commands specified in Table \ref{tab:catalan-macros} are provided by
 %    \babelcat{} to ease typesetting.
 %    \begin{table}[htb]
 %      \centering
@@ -191,11 +191,11 @@
 %    \texttt{TexLive 2018}.
 %
 %    Only the double quote character (|"|) is made active by default. In
-%    table~\ref{tab:catalan-quote-def} an overview is given of the new meanings
+%    Table~\ref{tab:catalan-quote-def} an overview is given of the new meanings
 %    of |"|. Additionally to that, the user can explicitly activate the acute
 %    accent or apostrophe (|'|) and/or the grave accent (|`|) characters by
 %    using the \Lopt{activeacute} and \Lopt{activegrave} options. In that case,
-%    the definitions shown in table~\ref{tab:catalan-quote-opt} also become
+%    the definitions shown in Table~\ref{tab:catalan-quote-opt} also become
 %    available\footnote{Please note that if the acute accent character is
 %    active, it is necessary to take special care of coding apostrophes in a way
 %    which cannot be confounded with accents. Therefore, it is necessary to type
@@ -238,6 +238,30 @@
 %       \Lopt{activegrave})}
 %     \label{tab:catalan-quote-opt}
 %    \end{table}
+%
+%  \subsection{Operators}
+%
+%    By default, \babelcat{} defines accented versions of the mathematical
+%    operators in Table \ref{tab:catalan-operators}. The behaviour can be
+%    explicitly set using either \verb.\unaccentedoperators. or
+%    \verb.\accentedoperators..
+%    \begin{table}[htb]
+%     \centering
+%     \begin{tabular}{ll}
+%      \verb.\mod. & $\mod$\\
+%      \verb.\pmod. & $\pmod$\\
+%      \verb.\bmod. & $\bmod$\\
+%      \verb.\lim. & $\lim$\\
+%      \verb.\liminf. & $\liminf$\\
+%      \verb.\limsup. & $\limsup$\\
+%      \verb.\max. & $\max$\\
+%      \verb.\min. & $\min$\\
+%      \verb.\inf. & $\inf$
+%     \end{tabular}
+%     \caption{Math operators redefined by \babelcat{}}
+%     \label{tab:catalan-operators}
+%    \end{table}
+%
 %
 % \StopEventually{}
 % \changes{catalan-2.0}{1993/07/11}{Removed code to load
@@ -537,7 +561,7 @@
 %
 %    All the code above is necessary because we need a few extra
 %    active characters. These characters are then used as indicated in
-%    tables~\ref{tab:catalan-quote-def}
+%    Tables~\ref{tab:catalan-quote-def}
 %    and~\ref{tab:catalan-quote-opt}.
 %
 %  \begin{macro}{\cat@oldacute}
