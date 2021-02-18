@@ -42,7 +42,7 @@
 %% Copyright (C) 1991 - 2005
 %%           by Goncal Badenes <badenes (at) imec.be>
 %%              Johannes Braams, TeXniek
-%% Copyright (C) 2020
+%% Copyright (C) 2020 - 2021
 %%           by Miquel Ortega <miquel (dot) ortega9 (at) gmail (dot) com>
 %%              Orestes Mas <orestes (dot) mas (at) upc (dot) edu>
 %
@@ -59,9 +59,12 @@
 %    removed and now is in this file.
 %<*filedriver>
 \documentclass{ltxdoc}
+\usepackage{iftex}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage[english,catalan]{babel}
 \usepackage{amsmath}
+\usepackage{booktabs}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks,
@@ -74,7 +77,12 @@
 \addtolength{\oddsidemargin}{-4pc}
 \addtolength{\textwidth}{7pc}
 
+% Fonts
+\usepackage{lmodern}
 \usepackage{mathpazo,xcolor}
+
+% \XeTeX logo
+\usepackage{metalogo}
 
 \newcommand*\babel{\texttt{Babel}}
 \newcommand*\babelcat{\texttt{babel-catalan}}
@@ -83,14 +91,18 @@
 
 
 \begin{document}
-  \title{Estil \textsf{catalan} per al sistema Babel\footnote{Aquest paquet és actualment a la versió 3.0 amb data del primer d'octubre de 2020. La present còpia del manual fou generada el~\today.}}
+  \title{Estil \textsf{catalan} per al sistema Babel}
   \author{Gonçal Badenes \and Miquel Ortega \and Orestes Mas}
   \date{\today}
   \maketitle
+  
+  \babelcat{} és un paquet opcional que proporciona suport a l'escriptura en llengua catalana a través del sistema \babel. Està dissenyat per funcionar correctament amb els motors pdf\TeX, \XeTeX{} i Lua\TeX. Suporta els formats \texttt{Plain} i \LaTeX.
+  
+  El present document conté la guia d'ús de \babelcat: com s'ha d'emprar, quines \textit{macros} i acceleradors posa a disposició de l'usuari, el codi font del paquet i un històric de canvis. El document ha estat generat a partir del fitxer \file{catalan.dtx}\footnote{Aquest paquet és actualment a la versió 3.0 amb data del primer d'octubre de 2020. La present còpia del manual fou generada el~\today.}.
+  
   \tableofcontents
 
   \clearpage
-  \part*{English Summary}
   \DocInput{catalan.dtx}
 \end{document}
 %</filedriver>
@@ -118,6 +130,72 @@
 % \changes{catalan-3.0}{2020/09/01}{Created git repo to host collaborative development}
 % \changes{catalan-3.0}{2020/10/13}{Add regression tests using \texttt{l3build}}
 % \changes{catalan-3.0}{2020/12/26}{Added catalan strings used by the 'appendix' package}
+% \changes{catalan-3.0}{2021/03/01}{Revamped documentation. Added section in catalan.}
+%
+%  \part{Documentació en català}
+%
+%  \section{Càrrega del paquet}
+%    Per tal d'activar el suport al català amb \babel, especifiqueu l'opció \textbf{catalan}, 
+%    ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
+%    \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
+%
+%    |      \usepackage[catalan,english]{babel}|
+%
+%    activa el suport al català en un document en anglès, mentre que
+%
+%    |      \usepackage[english,catalan]{babel}|
+%
+%    estableix el català com a llengua principal del document.
+%
+%  \subsection{Traduccions}
+%
+%  \subsubsection{Noms de capçaleres}
+%    Catalan caption names as defined in \babelcat{} can be seen a la 
+%	 taula~\ref{tab:catalan-noms-capcaleres}. They
+%    can be easily customised using Babel 3.9 syntax
+%    |\renewcommand\catalanproofname{Prova}|. The older syntax
+%    |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still works.
+%
+%    \begin{table}[htb]
+%      \centering
+%      \caption{Traduccions de capçaleres definides a \babelcat{}}%
+%      \label{tab:catalan-noms-capcaleres}
+%      \smallskip
+%      \begin{tabular}{cll}%
+%        \toprule
+%          Definit a  &  Nom de macro           & Traducció\\%
+%        \midrule
+%          babel      &  |\prefacename|         & Pròleg\\%
+%          latex      &  |\refname|             & Referències\\%
+%          latex      &  |\abstractname|        & Resum\\%
+%          latex      &  |\bibname|             & Bibliografia\\%
+%          latex      &  |\chaptername|         & Capítol\\%
+%          latex      &  |\appendixname|        & Apèndix\\%
+%          appendix   &  |\appendixpagename|    & Apèndixs\\%
+%          appendix   &  |\appendixtocname|     & Apèndixs\\%
+%          latex      &  |\contentsname|        & Índex\\%
+%          latex      &  |\listfigurename|      & Índex de figures\\%
+%          latex      &  |\listtablename|       & Índex de taules\\%
+%          latex      &  |\indexname|           & Índex alfabètic\\%
+%          latex      &  |\figurename|          & Figura\\%
+%          latex      &  |\tablename|           & Taula\\%
+%          latex      &  |\partname|            & Part\\%
+%          latex      &  |\enclname|            & Adjunt\\%
+%          latex      &  |\ccname|              & Còpies a\\%
+%          latex      &  |\headtoname|     	    & A\\%
+%          latex      &  |\pagename|            & Pàgina\\%
+%     amscls, memoir  &  |\seename|             & Vegeu\\%
+%     amscls, memoir  &  |\alsoname|            & Vegeu també\\%
+%          amscls     &  |\proofname|           & Demostració\\%
+%          latex      &  |\glossaryname|        & Glossari\\%
+%		 \bottomrule
+%      \end{tabular}
+%    \end{table}
+%
+%  \section{Macros implementades}
+%   
+%
+%  \part{English Summary}
 %
 %  \section{The Catalan language}
 %
@@ -144,7 +222,7 @@
 %        |\chaptername|       & Cap\'{\i}tol\\%
 %        |\appendixname|      & Ap\`endix\\%
 %        |\appendixpagename|  & Ap\`endixs\\%
-%        |\appendixtocname|  & Ap\`endixs\\%
+%        |\appendixtocname|   & Ap\`endixs\\%
 %        |\contentsname|      & \'Index\\%
 %        |\listfigurename|    & \'Index de figures\\%
 %        |\listtablename|     & \'Index de taules\\%
