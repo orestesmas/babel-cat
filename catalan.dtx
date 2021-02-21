@@ -81,6 +81,7 @@
 
 % Fonts
 \usepackage{lmodern}
+\usepackage{courier}
 % \usepackage{mathpazo,xcolor}
 
 % \XeTeX logo
@@ -151,11 +152,14 @@
 %
 %  \section{Introducció de text en català}
 %  \subsection{Caràcters accentuats i símbols -- mètode clàssic (obsolet)}
-%    El programa \TeX{} original reconeixia únicament els caràcters ASCII de 7 bits, 
-%    per la qual cosa no era possible la introducció de caràcters accentuats 
-%    i altres símbols directament pel teclat. Per aquest motiu, tant el \TeX{} 
-%    com el \LaTeX{} disposen de seqüències especials per tal d'introduir els
-%    caràcters accentuats. Per exemple, per tal d'introduir la frase:
+%    El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits,
+%    per la qual cosa no era capaç de processar documents que continguessin 
+%    caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema
+%    per textos escrits en anglès excepte en les comptades ocasions en què calia fer ús
+%    d'aquests símbols, principalment a l'hora d'escriure noms i mots estrangers.
+%    Per aquest motiu, tant el \TeX{} com el \LaTeX{} disposen de seqüències especials 
+%    per tal d'introduir els caràcters accentuats emprant únicament caràcters ASCII.
+%    Per exemple, per tal d'introduir la frase:
 %
 %    \begin{center}
 %    \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
@@ -164,25 +168,23 @@
 %    en \TeX/\LaTeX{} calia introduir:
 %    
 %    \begin{verbatim}
-%        A\c{c}\`{o} \'{e}s un lla\"{u}t menorqu\'{\i} de bamb\'{u} fet a m\`{a}
-%        i bene\"{\i}t amb caf\`{e} del flasc\'{o}\end{verbatim}
-%
-%    o bé (un xic més simplificat):
-%    
-%    \begin{verbatim}
-%       A\c c\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
+%       A\c{c}\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
 %       i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
 %    
 %    El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context,
 %    definint certs caràcters com a «actius», cosa que ens estalvia d'escriure
 %    les barres invertides i claudàtors, de manera que per reproduir el text anterior
-%    només calia escriure:
+%    només caldria escriure:
 %    
 %    \begin{verbatim}
-%       A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a i bene"it amb caf`e del flasc'o\end{verbatim}
+%       A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a 
+%       i bene"it amb caf`e del flasc'o\end{verbatim}
 %
 %    La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters
-%     accentuats, així com també al caràcter de la ela geminada, guillemets i altres símbols.
+%     accentuats, així com també als caràcters de l'ela geminada, guillemets i altres símbols\footnote{Pareu
+%     esment en el fet que, quan l'apòstrof és actiu, cal tenir cura d'introduir els mots apostrofats
+%     de manera que no es puguin confondre amb accents. Així, cal escriure \verb|l'\{\}estri| en lloc
+%     de \verb|l'estri|.}.
 %     
 %     \begin{table}[ht]
 %       \centering
@@ -211,44 +213,86 @@
 %
 %    Evidentment, introduir d'aquesta manera els caràcters catalans especials o accentuats resulta
 %    força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició
-%    de diversos motors \TeX{} capaços de treballar amb codificacions de 8 bits i, més endavant, \XeTeX{} i {\LuaTeX{}}
-%    que accepten de forma nativa un fitxer d'entrada codificat en UTF-8. Actualment, per tant, és possible d'escriure
-%    directament els caràcters esmentats tal i com es comenta a la secció següent.
+%    de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits
+%    així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada 
+%    codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats
+%    tal i com es comenta a la secció següent.
 %    
 %  \subsection{Caràcters accentuats i símbols -- mètode modern}
-%    A dia d'avui tots els sistemes operatius moderns suporten l'estàndard \textit{Unicode} i és possible 
+%    A dia d'avui tots els sistemes operatius moderns usen internament l'estàndard \textit{Unicode} i és possible 
 %    d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
-%    de l'ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). 
+%    de l'ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet
+%    d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li 
+%    quina codificació s'ha emprat en desar-los.
+%
+%    El procediment per aconseguir-ho depèn del motor \TeX{} utilitzat:
 %    \begin{enumerate}
 %        \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc}
-%        al preàmbul per tal de poder introduir text
-%        text 
-%        \item Si empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents no cal que feu res més, atès que 
-%        aquests motors treballen amb codificació UTF-8 de forma nativa.
+%        al preàmbul per tal de poder introduir els caràcters accentuats. Com que molt probablement el vostre
+%        sistema operatiu treballarà en codificació UTF-8, haureu d'especificar-la en invocar \texttt{inputenc}:
+%        \begin{center}
+%            |\usepackage[utf8]{inputenc}|
+%          \end{center}
+%        \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents
+%        no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa.
+%        En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8
+%        caldrà indicar quina al motor corresponent. En \LuaLaTeX, per exemple, això es fa invocant 
+%        el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc}
+%        comentat al punt anterior (consulteu, però, la documentació).
 %    \end{enumerate}
 %
 %  \subsection{Altres definicions del paquet \babelcat}
-%    Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix 
-%      \begin{table}[ht]
-%        \centering
-%        \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
-%        \smallskip
-%        \begin{tabular}{lp{7.5cm}}
-%          \toprule
-%          Ordre & Efecte \\
-%          \midrule
-%            |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
-%            \verb#"|# & Desactiva la lligadura a la posició actual. \\
-%            |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
-%            2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
-%          \bottomrule
-%        \end{tabular}
-%      \end{table}
-%    Val a dir que en ca
+%    Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix algunes ordres addicionals,
+%    que es troben llistades a la taula \ref{tbl:altres}.
+%    \begin{table}[ht]
+%      \centering
+%      \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
+%      \smallskip
+%      \begin{tabular}{lp{7.5cm}}
+%        \toprule
+  %        Ordre & Efecte \\
+%        \midrule
+%          |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
+%          \verb#"|# & Desactiva la lligadura a la posició actual. \\
+%          |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
+%          2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
+%        \bottomrule
+%      \end{tabular}
+%    \end{table}
 %
+%  \subsection{El caràcter "<ela geminada">}\label{sec:elageminada}
+%  TODO: Manca desenvolupar aquesta secció
+% 
 %
-%  \subsection{La ela geminada}\label{sec:elageminada}
+%  \section{El mode matemàtic}
+%  Per defecte, el paquet \babelcat{} defineix les versions accentuades dels operadors matemàtics
+%  llistats a la taula \ref{tbl:operadors}. Atès, però, que les normes d'estil de l'IEC recomanen
+%  d'emprar les versions sense accent, el comportament descrit es pot desactivar i tornar a activar 
+%  amb les ordres \verb.\unaccentedoperators. i \verb.\accentedoperators., respectivament.
+%  \begin{table}[ht]
+%    \centering
+%    \caption{Operadors matemàtics redefinits pel paquet \babelcat}
+%    \label{tbl:operadors}
+%    \smallskip
+%    \begin{tabular}{ccc}
+%      \toprule
+%        Operador  & versió per defecte & versió amb \verb.\unaccentedoperators. \\
+%      \midrule
+%        \verb.\mod. & $\mod$ & $\unaccentedoperators \mod$ \\
+%        \verb.\pmod. & $\pmod$ & $\unaccentedoperators \pmod$ \\
+%        \verb.\bmod. & $\bmod$ & $\unaccentedoperators \bmod$ \\
+%        \verb.\lim. & $\lim$ & $\unaccentedoperators \lim$ \\
+%        \verb.\liminf. & $\liminf$ & $\unaccentedoperators \liminf$ \\
+%        \verb.\limsup. & $\limsup$ & $\unaccentedoperators \limsup$ \\
+%        \verb.\max. & $\max$ & $\unaccentedoperators \max$ \\
+%        \verb.\min. & $\min$ & $\unaccentedoperators \min$ \\
+%        \verb.\inf. & $\inf$ & $\unaccentedoperators \inf$ \\
+%      \bottomrule
+%    \end{tabular}
+%  \end{table}
 %
+%     
+%     
 %  \section{Traduccions}
 %
 %  \subsection{Noms de capçaleres}
@@ -293,9 +337,8 @@
 %		 \bottomrule
 %      \end{tabular}
 %    \end{table}
-%
-%  \section{Macros implementades}
 %   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 %
 %  \part{English Summary}
 %
