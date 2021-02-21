@@ -81,10 +81,10 @@
 
 % Fonts
 \usepackage{lmodern}
+\usepackage{mathpazo}
 \usepackage{courier}
-% \usepackage{mathpazo,xcolor}
 
-% \XeTeX logo
+% Additional logos
 \usepackage{metalogo}
 
 \newcommand*\babel{\texttt{Babel}}
@@ -216,10 +216,13 @@
 %    de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits
 %    així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada 
 %    codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats
-%    tal i com es comenta a la secció següent.
+%    tal i com es comenta a la secció \ref{sec:moderntyping}. Tot i que de moment el paquet \babelcat{} manté 
+%    la definició dels acceleradors tradicionals per qüestions de compatibilitat, aquests es consideren obsolets 
+%    i podrien desaparèixer en versions futures, per la qual cosa es recomana intensament l'ús de la codificació
+%    UTF-8 i motors \TeX{} de 8 bits a l'hora de generar i processar documents nous.
 %    
-%  \subsection{Caràcters accentuats i símbols -- mètode modern}
-%    A dia d'avui tots els sistemes operatius moderns usen internament l'estàndard \textit{Unicode} i és possible 
+%  \subsection{Caràcters accentuats i símbols -- mètode modern}\label{sec:moderntyping}
+%    Avui en dia els principals sistemes operatius usen internament l'estàndard \textit{Unicode} i és possible 
 %    d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
 %    de l'ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet
 %    d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li 
@@ -250,7 +253,7 @@
 %      \smallskip
 %      \begin{tabular}{lp{7.5cm}}
 %        \toprule
-  %        Ordre & Efecte \\
+%          Ordre & Efecte \\
 %        \midrule
 %          |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
 %          \verb#"|# & Desactiva la lligadura a la posició actual. \\
@@ -261,7 +264,6 @@
 %    \end{table}
 %
 %  \subsection{El caràcter "<ela geminada">}\label{sec:elageminada}
-%  TODO: Manca desenvolupar aquesta secció
 % 
 %
 %  \section{El mode matemàtic}
@@ -296,16 +298,19 @@
 %  \section{Traduccions}
 %
 %  \subsection{Noms de capçaleres}
-%    Catalan caption names as defined in \babelcat{} can be seen a la 
-%	 taula~\ref{tab:catalan-noms-capcaleres}. They
-%    can be easily customised using Babel 3.9 syntax
-%    |\renewcommand\catalanproofname{Prova}|. The older syntax
-%    |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still works.
+%    El \LaTeX{} i els seus paquets auxiliars defineixen un conjunt de noms anglesos per les
+%    capçaleres més habituals com ara \textit{Chapter}, \textit{Section}, \textit{Table of Contents}, 
+%    etcètera. El paquet \babelcat{} redefineix les macros que els generen de manera que 
+%    el sol fet de carregar-lo al preàmbul farà que totes aquestes capçaleres apareguin
+%    traduïdes al català\footnote{Si com a usuari detecteu alguna capçalera no traduïda, informeu-ne els
+%    mantenidors de \babelcat{} per tal d'incorporar la traducció en versions futures del paquet.}.
 %
-%    \begin{table}[htb]
+%    La taula \ref{tbl:noms-capcaleres} mostra les traduccions definides a la versió actual del paquet.
+%
+%    \begin{table}[ht]
 %      \centering
-%      \caption{Traduccions de capçaleres definides a \babelcat{}}%
-%      \label{tab:catalan-noms-capcaleres}
+%      \caption{Traduccions de capçaleres definides a \babelcat}%
+%      \label{tbl:noms-capcaleres}
 %      \smallskip
 %      \begin{tabular}{cll}%
 %        \toprule
@@ -328,18 +333,19 @@
 %          latex      &  |\partname|            & Part\\%
 %          latex      &  |\enclname|            & Adjunt\\%
 %          latex      &  |\ccname|              & Còpies a\\%
-%          latex      &  |\headtoname|     	    & A\\%
+%          latex      &  |\headtoname|          & A\\%
 %          latex      &  |\pagename|            & Pàgina\\%
 %     amscls, memoir  &  |\seename|             & Vegeu\\%
 %     amscls, memoir  &  |\alsoname|            & Vegeu també\\%
 %          amscls     &  |\proofname|           & Demostració\\%
 %          latex      &  |\glossaryname|        & Glossari\\%
-%		 \bottomrule
+%      \bottomrule
 %      \end{tabular}
 %    \end{table}
 %   
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  \clearpage
 %  \part{English Summary}
 %
 %  \section{The Catalan language}
