@@ -60,11 +60,13 @@
 %<*filedriver>
 \documentclass{ltxdoc}
 \usepackage{iftex}
-\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
 \usepackage[english,catalan]{babel}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks,
@@ -79,7 +81,7 @@
 
 % Fonts
 \usepackage{lmodern}
-\usepackage{mathpazo,xcolor}
+% \usepackage{mathpazo,xcolor}
 
 % \XeTeX logo
 \usepackage{metalogo}
@@ -147,9 +149,109 @@
 %
 %    estableix el català com a llengua principal del document.
 %
-%  \subsection{Traduccions}
+%  \section{Introducció de text en català}
+%  \subsection{Caràcters accentuats i símbols -- mètode clàssic (obsolet)}
+%    El programa \TeX{} original reconeixia únicament els caràcters ASCII de 7 bits, 
+%    per la qual cosa no era possible la introducció de caràcters accentuats 
+%    i altres símbols directament pel teclat. Per aquest motiu, tant el \TeX{} 
+%    com el \LaTeX{} disposen de seqüències especials per tal d'introduir els
+%    caràcters accentuats. Per exemple, per tal d'introduir la frase:
 %
-%  \subsubsection{Noms de capçaleres}
+%    \begin{center}
+%    \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
+%    \end{center}
+%    
+%    en \TeX/\LaTeX{} calia introduir:
+%    
+%    \begin{verbatim}
+%        A\c{c}\`{o} \'{e}s un lla\"{u}t menorqu\'{\i} de bamb\'{u} fet a m\`{a}
+%        i bene\"{\i}t amb caf\`{e} del flasc\'{o}\end{verbatim}
+%
+%    o bé (un xic més simplificat):
+%    
+%    \begin{verbatim}
+%       A\c c\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
+%       i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
+%    
+%    El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context,
+%    definint certs caràcters com a «actius», cosa que ens estalvia d'escriure
+%    les barres invertides i claudàtors, de manera que per reproduir el text anterior
+%    només calia escriure:
+%    
+%    \begin{verbatim}
+%       A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a i bene"it amb caf`e del flasc'o\end{verbatim}
+%
+%    La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters
+%     accentuats, així com també al caràcter de la ela geminada, guillemets i altres símbols.
+%     
+%     \begin{table}[ht]
+%       \centering
+%       \caption{"<Acceleradors"> definits al paquet \babelcat}\label{tbl:acceleradors}
+%       \smallskip
+%       \begin{tabular}{ccp{7.5cm}}
+%         \toprule
+%         Per obtenir & Escriviu & Comentari\\
+%         \midrule
+%           à, è, é, í, ò, ó, ú  &  |`a|, |`e|, |'e|, |'i|, |`o|, |'o|, |'u|  &  \multirow{2}{=}{Accents
+%             greus i aguts. Per tal que aquests acceleradors funcionin, cal invocar el \textit{Babel}
+%             amb les opcions \texttt{activegrave} i \texttt{activeacute}.}\\
+%           À, È, É, Í, Ò, Ò, Ú  &  |`A|, |`E|, |'E|, |'I|, |`O|, |'O|, |'U| & \\
+%             &  &  \\
+%           ï, ü, ç, Ï, Ü, Ç  &  |"i|, |"u|, |"c|, |"I|, |"U|, |"C| & Dièresi i ce trencada.\\
+%         \midrule
+%           \lgem  &  |"l|, |\lgem|, |\l.l| & \multirow{2}{=}{Ela geminada. Aquest caràcter es discuteix
+%             en profunditat a la secció \ref{sec:elageminada}.}\\
+%           \Lgem  &  |"L|, |\Lgem|, |\L.L| & \\
+%         \midrule
+%           "<, ">  &  |"<|, |">| & Cometes baixes o "<guillemets">, tradicionals en la tipografia catalana.\\
+%         \bottomrule
+%       \end{tabular}
+%     \end{table}
+% 
+%
+%    Evidentment, introduir d'aquesta manera els caràcters catalans especials o accentuats resulta
+%    força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició
+%    de diversos motors \TeX{} capaços de treballar amb codificacions de 8 bits i, més endavant, \XeTeX{} i {\LuaTeX{}}
+%    que accepten de forma nativa un fitxer d'entrada codificat en UTF-8. Actualment, per tant, és possible d'escriure
+%    directament els caràcters esmentats tal i com es comenta a la secció següent.
+%    
+%  \subsection{Caràcters accentuats i símbols -- mètode modern}
+%    A dia d'avui tots els sistemes operatius moderns suporten l'estàndard \textit{Unicode} i és possible 
+%    d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
+%    de l'ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). 
+%    \begin{enumerate}
+%        \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc}
+%        al preàmbul per tal de poder introduir text
+%        text 
+%        \item Si empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents no cal que feu res més, atès que 
+%        aquests motors treballen amb codificació UTF-8 de forma nativa.
+%    \end{enumerate}
+%
+%  \subsection{Altres definicions del paquet \babelcat}
+%    Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix 
+%      \begin{table}[ht]
+%        \centering
+%        \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
+%        \smallskip
+%        \begin{tabular}{lp{7.5cm}}
+%          \toprule
+%          Ordre & Efecte \\
+%          \midrule
+%            |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
+%            \verb#"|# & Desactiva la lligadura a la posició actual. \\
+%            |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
+%            2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
+%          \bottomrule
+%        \end{tabular}
+%      \end{table}
+%    Val a dir que en ca
+%
+%
+%  \subsection{La ela geminada}\label{sec:elageminada}
+%
+%  \section{Traduccions}
+%
+%  \subsection{Noms de capçaleres}
 %    Catalan caption names as defined in \babelcat{} can be seen a la 
 %	 taula~\ref{tab:catalan-noms-capcaleres}. They
 %    can be easily customised using Babel 3.9 syntax
@@ -304,7 +406,7 @@
 %    \begin{table}[htb]
 %     \centering
 %     \begin{tabular}{lp{8cm}}
-%      |'e| & acute accented a, allowing hyphenation
+%      |'e| & acute accented e, allowing hyphenation
 %             in the rest of the word. Valid for the following
 %             vowels: e, i, o, u (both lowercase and uppercase).\\
 %      |`a| & grave accented a, allowing hyphenation
