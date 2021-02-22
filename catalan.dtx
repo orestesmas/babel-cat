@@ -58,7 +58,9 @@
 %    (jsanchez@gmv.es) The code for the catalan language has been
 %    removed and now is in this file.
 %<*filedriver>
-\documentclass{ltxdoc}
+\documentclass[a4paper,11pt]{ltxdoc}
+\usepackage[left=50mm,right=45mm,top=30mm,bottom=30mm]{geometry}
+\usepackage[svgnames]{xcolor}
 \usepackage{iftex}
 \ifPDFTeX
     \usepackage[utf8]{inputenc}
@@ -68,11 +70,18 @@
     \usepackage{mathpazo}
     \usepackage{courier}
 \else
+    % Fonts (must be installed to produce the documentation)
     \usepackage{fontspec}
     \setmainfont{Libertinus Serif}
-    \setmonofont{Libertinus Mono}
+    \setsansfont[Scale=MatchLowercase]{Libertinus Sans}
+    \setmonofont[Scale=MatchLowercase]{Libertinus Mono}
 \fi
-\usepackage{microtype}
+\def\PrintMacroName#1{%
+  \strut\MacroFont\color{DodgerBlue}\normalsize\string#1}
+\def\ColorArg{\color{DodgerBlue}}
+\usepackage[expansion=true,protrusion=true]{microtype}
+\usepackage[numbered]{hypdoc}
+\hypersetup{colorlinks,urlcolor=Blue,linkcolor=Blue,unicode}
 \usepackage[english,catalan]{babel}
 \usepackage{amsmath}
 \usepackage{booktabs}
@@ -507,6 +516,9 @@
 % \StopEventually{}
 % \changes{catalan-2.0}{1993/07/11}{Removed code to load
 %    \file{latexhax.com}}
+%
+%  \clearpage
+%  \newgeometry{left=50mm,right=23mm}
 %
 %  \section{The code}
 %    The macro |\LdfInit| takes care of preventing that this file is
@@ -1083,7 +1095,7 @@
 %    delimited arguments. Therefore we define two macros that check if
 %    the next character is a period. If not the ``polish l'' will be
 %    typeset, otherwise a ``ela geminada'' will be typeset and the
-%    next two tokens will be `eaten'.
+%    next two tokens will be ``eaten''.
 % \changes{catalan-2.2o}{2003/09/19}{Postpone the redefinition of
 %    \cs{l} and \cs{L} until begin document to prevent overwriting by
 %    fontenc}
@@ -1102,7 +1114,7 @@
 %  \begin{macro}{\up}
 %
 %    A macro for typesetting things like 1\raise1ex\hbox{\small er} as
-%    proposed by Raymon Seroul\footnote{This macro has been borrowed
+%    proposed by Raymond S\'{e}roul\footnote{This macro has been borrowed
 %    from francais.dtx}.
 % \changes{catalan-2.2b}{1995/06/18}{Added definition of macro
 %    \cs{up}, which can be used to type ordinals}
@@ -1294,6 +1306,8 @@
 %</code>
 %    \end{macrocode}
 %    
+% \restoregeometry
+%
 % \Finale
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
