@@ -284,6 +284,15 @@
 %
 %  \subsection{El caràcter "<ela geminada">}\label{sec:elageminada}
 %  TODO: Manca escriure aquesta secció.
+%  
+%  Ela geminada composada amb les macros
+%  Ca\l.ligrafia Ca\lgem igrafia CA\L.LIGRAFIA CA\Lgem IGRAFIA
+%     
+%  Ela geminada composada amb 3 caràcters
+%  Cal·ligrafia CAL·LIGRAFIA
+%     
+%  Ela geminada composada amb «ldot»
+%  Caŀigrafia CAĿIGRAFIA
 %     
 %  \section{Traduccions}
 %
@@ -1100,13 +1109,14 @@
 %    \cs{l} and \cs{L} until begin document to prevent overwriting by
 %    fontenc}
 %    \begin{macrocode}
-\AtBeginDocument{%
-  \let\cat@lslash\l
-  \let\cat@Lslash\L
-  \DeclareRobustCommand\l{\@ifnextchar.\cat@l\cat@lslash}
-  \DeclareRobustCommand\L{\@ifnextchar.\cat@L\cat@Lslash}}
 \def\cat@l#1#2{\lgem}
 \def\cat@L#1#2{\Lgem}
+\let\cat@lslash\l
+\let\cat@Lslash\L
+\DeclareRobustCommand\l{\@ifnextchar.\cat@l\cat@lslash}
+\DeclareRobustCommand\L{\@ifnextchar.\cat@L\cat@Lslash}
+\DeclareUnicodeCharacter{013F}{\Lgem}
+\DeclareUnicodeCharacter{0140}{\lgem}
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
