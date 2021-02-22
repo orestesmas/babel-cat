@@ -60,8 +60,18 @@
 %<*filedriver>
 \documentclass{ltxdoc}
 \usepackage{iftex}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\ifPDFTeX
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    % Fonts
+    \usepackage{lmodern}
+    \usepackage{mathpazo}
+    \usepackage{courier}
+\else
+    \usepackage{fontspec}
+    \setmainfont{Libertinus Serif}
+    \setmonofont{Libertinus Mono}
+\fi
 \usepackage{microtype}
 \usepackage[english,catalan]{babel}
 \usepackage{amsmath}
@@ -78,11 +88,6 @@
 \setlength{\parskip}{3pt}
 \addtolength{\oddsidemargin}{-4pc}
 \addtolength{\textwidth}{7pc}
-
-% Fonts
-\usepackage{lmodern}
-\usepackage{mathpazo}
-\usepackage{courier}
 
 % Additional logos
 \usepackage{metalogo}
@@ -142,7 +147,7 @@
 %    ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
 %    \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
 %
-%    |      \usepackage[catalan,english]{babel}|
+%    \verb|      \usepackage[catalan,english]{babel}|
 %
 %    activa el suport al català en un document en anglès, mentre que
 %
