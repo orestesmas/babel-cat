@@ -1115,8 +1115,11 @@
 \let\cat@Lslash\L
 \DeclareRobustCommand\l{\@ifnextchar.\cat@l\cat@lslash}
 \DeclareRobustCommand\L{\@ifnextchar.\cat@L\cat@Lslash}
-\DeclareUnicodeCharacter{013F}{\Lgem}
-\DeclareUnicodeCharacter{0140}{\lgem}
+%
+%
+%DeclareUnicodeCharacter no és acceptat per \inputenc amb l'opció [utf8*x*]
+%\DeclareUnicodeCharacter{013F}{\Lgem}
+%\DeclareUnicodeCharacter{0140}{\lgem}
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
