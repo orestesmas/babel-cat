@@ -998,6 +998,29 @@
 %
 %    \begin{macrocode}
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
+\def\cat@volat{%
+  \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
+  \setbox0\hbox{l}\setbox1\hbox{l}\setbox2\hbox{\cat@oldvolat}%
+  \advance\leftllkern by -0.5\wd2%
+  \advance\rightllkern by -0.5\wd2%
+  \advance\leftllkern by 0.2\wd0%
+  \advance\rightllkern by 0.2\wd0%
+  \bbl@allowhyphens\discretionary{-}{}%
+  {\kern\leftllkern\raise\raiselldim\box2%
+  \kern\rightllkern}\bbl@allowhyphens%
+}
+\def\cat@Volat{%
+  \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
+  \setbox0\hbox{L}\setbox1\hbox{L}\setbox2\hbox{\cat@oldvolat}%
+  \advance\leftllkern by -0.5\wd2%
+  \advance\rightllkern by -0.5\wd2%
+  \advance\leftllkern by -0.25\wd0%
+  \advance\rightllkern by 0.2\wd0%
+  \advance\raiselldim by 0.125\ht0%
+  \bbl@allowhyphens\discretionary{-}{}%
+  {\kern\leftllkern\raise\raiselldim\box2%
+  \kern\rightllkern}\bbl@allowhyphens%
+}
 \def\lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname l%
@@ -1013,17 +1036,11 @@
       \rightllkern=-.25\wd0%
       \advance\rightllkern by -\wd1%
       \advance\rightllkern by \wd0%
+      \bbl@allowhyphens\discretionary{l-}{l}%
+      {\hbox{l}\kern\leftllkern\raise\raiselldim\box2%
+      \kern\rightllkern\hbox{l}}\bbl@allowhyphens%
     }
-    {
-      \setbox0\hbox{l}\setbox1\hbox{l}\setbox2\hbox{\textperiodcentered}%
-      \advance\leftllkern by -0.5\wd2%
-      \advance\rightllkern by -0.5\wd2%
-      \advance\leftllkern by 0.2\wd0%
-      \advance\rightllkern by 0.2\wd0%
-    }
-    \bbl@allowhyphens\discretionary{l-}{l}%
-    {\hbox{l}\kern\leftllkern\raise\raiselldim\box2%
-      \kern\rightllkern\hbox{l}}\bbl@allowhyphens
+  l\cat@volat{}l%
   \fi
   }
 \def\Lgem{%
@@ -1042,20 +1059,26 @@
       \divide\rightllkern by 6%
       \advance\rightllkern by -\wd1%
       \advance\rightllkern by \wd0%
+      \bbl@allowhyphens\discretionary{L-}{L}%
+      {\hbox{L}\kern\leftllkern\raise\raiselldim\box2%
+      \kern\rightllkern\hbox{L}}\bbl@allowhyphens%
     }
-    {
-      \setbox0\hbox{L}\setbox1\hbox{L}\setbox2\hbox{\textperiodcentered}%
-      \advance\leftllkern by -0.5\wd2%
-      \advance\rightllkern by -0.5\wd2%
-      \advance\leftllkern by -0.25\wd0%
-      \advance\rightllkern by 0.2\wd0%
-      \advance\raiselldim by 0.125\ht0%
-    }
-    \bbl@allowhyphens\discretionary{L-}{L}%
-    {\hbox{L}\kern\leftllkern\raise\raiselldim\box2%
-      \kern\rightllkern\hbox{L}}\bbl@allowhyphens
+    L\cat@Volat{}L%
   \fi
-  }
+}
+
+\expandafter\let\expandafter\cat@oldvolat
+\csname ?\string\textperiodcentered \endcsname
+\DeclareTextCommand{\textperiodcentered}{?}[1]{%
+  \if#1L%
+    \cat@Volat{}L%
+  \else%
+    \if#1l%
+      \cat@volat{}l%
+    \else%
+      \cat@oldvolat#1%
+    \fi%
+\fi}%
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
