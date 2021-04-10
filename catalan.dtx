@@ -1226,16 +1226,6 @@
 %  \end{macro}
 %  \end{macro}
 %
-% \begin{macro}{\spacedoperators}
-% \begin{macro}{\unspacedoperators}
-%    The macro |\spacedoperators| creates a space in some math 
-%    operators like |\limsup| and |\liminf|, active by default.
-%    The macro |\unspacedoperators| is used to cancel the actions
-%    of |\spacedoperators|.
-%    \begin{macrocode}
-\def\spacedoperators{\let\cat@op@sp\,}
-\def\unspacedoperators{\let\cat@op@sp\@empty}
-\spacedoperators
 \addto\mathcatalan{\cat@operators}
 
 \ifcat@latex\else
@@ -1262,8 +1252,8 @@
       \cat@sdef\pmod##1{\pod{{\operator@font m\cat@op@gr od}%
         \mkern6mu##1}}}%
   \cat@sdef\lim{\mathop{\operator@font l\cat@op@ac im}}
-  \cat@sdef\liminf{\mathop{\operator@font l\cat@op@ac im\cat@op@sp inf}}
-  \cat@sdef\limsup{\mathop{\operator@font l\cat@op@ac im\cat@op@sp sup}}
+  \cat@sdef\liminf{\mathop{\operator@font l\cat@op@ac im\, inf}}
+  \cat@sdef\limsup{\mathop{\operator@font l\cat@op@ac im\, sup}}
   \cat@sdef\max{\mathop{\operator@font m\cat@op@gr ax}}
   \cat@sdef\inf{\mathop{\operator@font \cat@op@ac inf}}
   \cat@sdef\min{\mathop{\operator@font m\cat@op@ac in}}
