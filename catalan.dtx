@@ -338,7 +338,7 @@
 %    Per defecte, el paquet \babelcat{} defineix les versions accentuades dels operadors matemàtics
 %    llistats a la taula \ref{tbl:operadors}. Atès, però, que les normes d'estil de l'IEC recomanen
 %    d'emprar les versions sense accent, el comportament descrit es pot desactivar i tornar a activar 
-%    amb les ordres \verb.\unaccentedoperators. i \verb.\accentedoperators., respectivament.
+%    amb les ordres \verb.\catalanunaccentedoperators. i \verb.\catalanaccentedoperators., respectivament.
 %    \begin{table}[ht]
 %      \centering
 %      \caption{Operadors matemàtics redefinits pel paquet \babelcat}
@@ -346,17 +346,17 @@
 %      \smallskip
 %      \begin{tabular}{ccc}
 %        \toprule
-%          Operador  & versió per defecte & versió amb \verb.\unaccentedoperators. \\
+%          Operador  & versió per defecte & versió amb \verb.\catalanunaccentedoperators. \\
 %        \midrule
-%          \verb.\mod. & $\mod$ & $\unaccentedoperators \mod$ \\
-%          \verb.\pmod. & $\pmod$ & $\unaccentedoperators \pmod$ \\
-%          \verb.\bmod. & $\bmod$ & $\unaccentedoperators \bmod$ \\
-%          \verb.\lim. & $\lim$ & $\unaccentedoperators \lim$ \\
-%          \verb.\liminf. & $\liminf$ & $\unaccentedoperators \liminf$ \\
-%          \verb.\limsup. & $\limsup$ & $\unaccentedoperators \limsup$ \\
-%          \verb.\max. & $\max$ & $\unaccentedoperators \max$ \\
-%          \verb.\min. & $\min$ & $\unaccentedoperators \min$ \\
-%          \verb.\inf. & $\inf$ & $\unaccentedoperators \inf$ \\
+%          \verb.\mod. & $\mod$ & $\catalanunaccentedoperators \mod$ \\
+%          \verb.\pmod. & $\pmod$ & $\catalanunaccentedoperators \pmod$ \\
+%          \verb.\bmod. & $\bmod$ & $\catalanunaccentedoperators \bmod$ \\
+%          \verb.\lim. & $\lim$ & $\catalanunaccentedoperators \lim$ \\
+%          \verb.\liminf. & $\liminf$ & $\catalanunaccentedoperators \liminf$ \\
+%          \verb.\limsup. & $\limsup$ & $\catalanunaccentedoperators \limsup$ \\
+%          \verb.\max. & $\max$ & $\catalanunaccentedoperators \max$ \\
+%          \verb.\min. & $\min$ & $\catalanunaccentedoperators \min$ \\
+%          \verb.\inf. & $\inf$ & $\catalanunaccentedoperators \inf$ \\
 %        \bottomrule
 %      \end{tabular}
 %    \end{table}
@@ -367,6 +367,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  \clearpage
+%  \begin{otherlanguage}{english}
 %  \part{English Summary}
 %
 %  \section{The Catalan language}
@@ -442,7 +443,7 @@
 %
 %    Only the double quote character (|"|) is made active by default. In
 %    Table~\ref{tab:catalan-quote-def} an overview is given of the new meanings
-%    of |"|. Additionally to that, the user can explicitly activate the acute
+%    of |"|. Additionally, the user can explicitly activate the acute
 %    accent or apostrophe (|'|) and/or the grave accent (|`|) characters by
 %    using the \Lopt{activeacute} and \Lopt{activegrave} options. In that case,
 %    the definitions shown in Table~\ref{tab:catalan-quote-opt} also become
@@ -493,8 +494,8 @@
 %
 %    By default, \babelcat{} defines accented versions of the mathematical
 %    operators in Table \ref{tab:catalan-operators}. The behaviour can be
-%    explicitly set using either \verb.\unaccentedoperators. or
-%    \verb.\accentedoperators..
+%    explicitly set using either \verb.\catalanunaccentedoperators. or
+%    \verb.\catalanaccentedoperators..
 %    \begin{table}[htb]
 %     \centering
 %     \begin{tabular}{ll}
@@ -511,6 +512,7 @@
 %     \caption{Math operators redefined by \babelcat{}}
 %     \label{tab:catalan-operators}
 %    \end{table}
+%    \end{otherlanguage}
 %
 %
 % \StopEventually{}
@@ -547,38 +549,25 @@
 \def\cat@sdef#1{\babel@save#1\def#1}
 \def\cat@sDRC#1{\babel@save#1\DeclareRobustCommand*#1}
 
-\@ifundefined{documentclass}
-  {\let\ifcat@latex\iffalse}
-  {\let\ifcat@latex\iftrue}
 %    \end{macrocode}
 %
+%  \begin{macro}{\ifcat@latex}
 %  \begin{macro}{\ifcat@unicode}
-%    We define a new if that is set to true if we are working with a
-%    unicode capable engine.
+%    We define two new ifs that are set to true if we are working with LaTeX and
+%    a unicode capable engine respectively.
 % \changes{catalan-3.0}{2020/10/4}{Added a new ``if'' \cs{cat@unicode} to detect
 %    unicode engines}
 %    \begin{macrocode}
+\@ifundefined{documentclass}
+  {\let\ifcat@latex\iffalse}
+  {\let\ifcat@latex\iftrue}
+
 \@ifundefined{Umathcode}
   {\let\ifcat@unicode\iffalse}
   {\let\ifcat@unicode\iftrue}
 %    \end{macrocode}
 %  \end{macro}
-%
-%    All extras related to math are concentrated in the macro mathcatalan. The
-%    rest are simply added to extrascatalan.
-%
-%    \begin{macrocode}
-\def\extrascatalan{%
-  \mathcatalan
-  }
-\def\noextrascatalan{%
-  \ifx\mathcatalan\@empty\else
-    \nomathcatalan
-  \fi}
-%    \end{macrocode}
-%
-%    The next step consists of defining commands to switch to (and
-%    from) the Catalan language.
+%  \end{macro}
 %
 %  \begin{macro}{\catalanhyphenmins}
 %    This macro is used to store the correct values of the hyphenation
@@ -605,14 +594,14 @@
 % \changes{catalan-2.2p}{2003/11/17}{Inserted translation for
 %    Glossary}
 % \changes{catalan-3.0}{2020/12/26}{Added catalan strings used by the \texttt{appendix} package}
-%  \begin{macro}{\StartBabelCommands}
+%
 %    Babel changed the system it used to localize captions from its version 3.9 on.
 %    The change is made to allow defining strings in several encodings, as xelatex/luatex do.
 %    So we changed the \captionscatalan macro to the new one.
+%
 %    WARNING: Users of Babel prior to version 3.9 should update their \TeX\ distribution
 %    to a newer one.
 % \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} 
-%TODO: quit if Babel is < 3.9?
 %    \begin{macrocode}
 \StartBabelCommands*{catalan}{captions}
   [unicode, fontenc=TU EU1 EU2, charset=utf8]
@@ -667,7 +656,6 @@
 \EndBabelCommands
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 %
 %  \begin{macro}{\datecatalan}
 %    The macro |\datecatalan| redefines the command |\today| to
@@ -710,6 +698,9 @@
 %    needed for the Catalan language.  The macro |\noextrascatalan| is
 %    used to cancel the actions of |\extrascatalan|.
 %
+%    All extras related to math are concentrated in the macro mathcatalan. The
+%    rest are simply added to extrascatalan.
+%
 % \changes{catalan-2.2e}{1995/11/10}{Now give the apostrophe a
 %    lowercase code}
 %    To improve hyphenation we give the grave character (\texttt{'}) a
@@ -721,6 +712,13 @@
 %    to have a non-zero lower case code too. Code taken essentially
 %    from babel-french}
 %    \begin{macrocode}
+\def\extrascatalan{%
+  \mathcatalan
+  }
+\def\noextrascatalan{%
+  \ifx\mathcatalan\@empty\else
+    \nomathcatalan
+  \fi}
 \addto\extrascatalan{%
      \babel@savevariable{\lccode`\'}%
      \lccode`\'=`\'
@@ -747,12 +745,12 @@
 \addto\extrascatalan{\bbl@activate{"}}
 %    \end{macrocode}
 %    Because the grave character is being used in constructs such as
-%    |\catcode``=\active| it needs to have it's original category code%''
+%    |\catcode``=\active| it needs to have its original category code%''
 %    when the auxiliary file is being read. Note that this file is
 %    read twice, once at the beginning of the document; then there is
 %    no problem; but the second time it is read at the end of the
 %    document to check whether any labels changes. It's this second
-%    time round that the actived grave character leads to error
+%    time round that the activated grave character leads to error
 %    messages.
 % \changes{catalan-2.2l}{1999/11/29}{Make sure that the grave accent
 %    has catcode 12 \emph{before} it is made \cs{active}}
@@ -773,7 +771,7 @@
   }{}
 %    \end{macrocode}
 %    Now make sure that the characters that have been turned into
-%    shorthanfd characters expand to `normal' characters outside the
+%    shorthand characters expand to `normal' characters outside the
 %    catalan environment.
 % \changes{catalan-2.2l}{1999/12/16}{Don't forget to deactivate the
 %    shorthands}
@@ -789,10 +787,8 @@
 %    characters is now moved to \file{babel.def}}
 %
 %    Apart from the active characters some other macros get a new
-%    definition. Therefore we store the current ones to be able
-%    to restore them later.
-%    When their current meanings are saved, we can safely redefine
-%    them.
+%    definition. We redefine them using cat@sdef so that their original
+%    meaning is restored when leaving catalan.
 %
 %    We provide new definitions for the accent macros when one or
 %    both of the options \Lopt{activegrave} or \Lopt{activeacute}
@@ -869,27 +865,6 @@
   \fi
 \fi
 %    \end{macrocode}
-%    If the user setup has extended fonts, the Ferguson macros are
-%    required to be defined. We check for their existance and, if
-%    defined, expand to whatever they are defined to. For instance,
-%    |\'a| would check for the existance of a |\@ac@a| macro. It is
-%    assumed to expand to the code of the accented letter.  If it is
-%    not defined, we assume that no extended codes are available and
-%    expand to the original definition but enabling hyphenation beyond
-%    the accent. This is as best as we can do. It is better if you
-%    have extended fonts or ML-\TeX{} because the hyphenation
-%    algorithm can work on the whole word. The following macros are
-%    directly derived from ML-\TeX{}.\footnote{A problem is perceived
-%    here with these macros when used in a multilingual environment
-%    where extended hyphenation patterns are available for some but
-%    not all languages. Assume that no extended patterns exist at some
-%    site for French and that \file{french.sty} would adopt this
-%    scheme too. In that case, \mbox{\texttt{'e}} in French would
-%    produce the combined accented letter, but hyphenation around it
-%    would be suppressed. Both language options would need an
-%    independent method to know whether they have extended patterns
-%    available. The precise impact of this problem and the possible
-%    solutions are under study.}
 %  \end{macro}
 %  \end{macro}
 %
@@ -1013,7 +988,7 @@
 %    its horizontal kerning, since most fonts get it wrong. If this command is
 %    unavailable, we use a plain \TeX definition.
 %
-%    The code used in the plain \TeX definition is a combination of the one
+%    The code used in the plain \TeX{} definition is a combination of the one
 %    proposed by Feruglio and Fuster\footnote{G.~Valiente and R.~Fuster,
 %    Typesetting Catalan Texts with \TeX, \emph{TUGboat} \textbf{14}(3), 1993.}
 %    and the proposal\footnote{G. Valiente, Modern Catalan Typographical
@@ -1229,24 +1204,24 @@
   \expandafter\let\csname cat@op@gr@EU2\endcsname\cat@op@gr@TU
 \fi
 %    \end{macrocode}
-% \begin{macro}{\accentedoperators}
-% \begin{macro}{\unaccentedoperators}
-%    The macro |\accentedoperators| enables the corresponding
+% \begin{macro}{\catalanaccentedoperators}
+% \begin{macro}{\catalanunaccentedoperators}
+%    The macro |\catalanaccentedoperators| enables the corresponding
 %    accented operators, active by default.
-%    The macro |\unaccentedoperators| is used
-%    to cancel the actions of |\accentedoperators|.
+%    The macro |\catalanunaccentedoperators| is used
+%    to cancel the actions of |\catalanaccentedoperators|.
 %    \begin{macrocode}
-\def\accentedoperators{%
+\def\catalanaccentedoperators{%
   \@ifundefined{cat@op@ac@TU}%
     {\let\cat@op@ac\cat@op@ac@base}%
     {\let\cat@op@ac\cat@op@ac@TU}
   \@ifundefined{cat@op@gr@TU}%
     {\let\cat@op@gr\cat@op@gr@base}%
     {\let\cat@op@gr\cat@op@gr@TU}}
-\def\unaccentedoperators{%
+\def\catalanunaccentedoperators{%
   \def\cat@op@ac##1{##1}
   \def\cat@op@gr##1{##1}}
-\accentedoperators
+\catalanaccentedoperators
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
