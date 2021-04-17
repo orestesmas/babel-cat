@@ -258,7 +258,7 @@
 %        \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents
 %        no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa.
 %        En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8
-%        caldrà indicar quina al motor corresponent. En \LuaLaTeX, per exemple, això es fa invocant 
+%        caldrà indicar quina al motor corresponent. En \LuaLaTeX{}, per exemple, això es fa invocant
 %        el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc}
 %        comentat al punt anterior (consulteu, però, la documentació).
 %    \end{enumerate}
@@ -441,9 +441,13 @@
 %    the characters directly, and that this is enabled by default since
 %    \texttt{TexLive 2018}.
 %
-%    Only the double quote character (|"|) is made active by default. In
+%    The double quote character (|"|) is made active by default. In
 %    Table~\ref{tab:catalan-quote-def} an overview is given of the new meanings
-%    of |"|. Additionally, the user can explicitly activate the acute
+%    of |"|. In unicode capable engines (\XeTeX{}, \LuaTeX{}), the
+%    interpunct character (·) is also made active to improve the spacing of
+%    the geminated l. See section \ref{sec:geminated_l_english}.
+%
+%    Additionally, the user can explicitly activate the acute
 %    accent or apostrophe (|'|) and/or the grave accent (|`|) characters by
 %    using the \Lopt{activeacute} and \Lopt{activegrave} options. In that case,
 %    the definitions shown in Table~\ref{tab:catalan-quote-opt} also become
@@ -468,7 +472,11 @@
 %      |">| & French right double quotes (similar to $>>$).\\
 %      |"-| & explicit hyphen sign, allowing hyphenation
 %               in the rest of the word.\\
-%      \verb="|= & disable ligature at this position.
+%      \verb="|= & disable ligature at this position.\\
+%      |·|l & only in unicode capable engines. See Section
+%      \ref{sec:geminated_l_english}.\\
+%      |·|L & only in unicode capable engines. See Section
+%      \ref{sec:geminated_l_english}.
 %     \end{tabular}
 %     \caption{Shorthands provided by \babelcat{}}
 %     \label{tab:catalan-quote-def}
@@ -489,6 +497,34 @@
 %       \Lopt{activegrave})}
 %     \label{tab:catalan-quote-opt}
 %    \end{table}
+%
+%  \subsection{Geminated l (l·l)}
+%    \label{sec:geminated_l_english}
+%    By default, most fonts produce a geminated l with incorrect
+%    spacing around the interpunct (·), adding too much space between
+%    l and l. To mitigate this, \babelcat{} adjusts the kerning around
+%    the interpunct. In most cases, this should be transparent to
+%    the user, since it is done automatically. This is achieved with
+%    different strategies depending on the context:
+%    \begin{itemize}
+%        \item When \babelcat{} is loaded in a Unicode capable engine,
+%        it defines the shorthands |·|l and |·|L, which render an
+%        interpunct with adjusted kerning followed by the
+%        corresponding l.
+%        \item When \babelcat{} is loaded in an engine that does not
+%        work in Unicode (for example, when compiling with pdf\TeX{}),
+%        the engine does not work internally with |·| as a character.
+%        Therefore, it cannot be made active, and the previous
+%        solution does not work. However, if working with \LaTeX{},
+%        the package redefines the LICR (\LaTeX{} Internal Character
+%        Representation) object \verb|\textperiodcentered| to adjust
+%        the kerning of the interpunct.
+%    \end{itemize}
+%    In case the kerning adjusment does not work automatically (for
+%    example, when using plain \TeX), and for the sake of backwards
+%    compatibility, \babelcat{} provides the commands \verb.\lgem.,
+%    \verb.\Lgem., \verb|\l.l| and \verb|\L.L|, as you can see in
+%    table \ref{tab:catalan-macros}.
 %
 %  \subsection{Operators}
 %
@@ -554,7 +590,7 @@
 %  \begin{macro}{\ifcat@latex}
 %  \begin{macro}{\ifcat@unicode}
 %    We define two new ifs that are set to true if we are working with LaTeX and
-%    a unicode capable engine respectively.
+%    a Unicode capable engine respectively.
 % \changes{catalan-3.0}{2020/10/4}{Added a new ``if'' \cs{cat@unicode} to detect
 %    unicode engines}
 %    \begin{macrocode}
@@ -739,10 +775,16 @@
 %    characters optional}
 % \changes{catalan-2.2e}{1995/08/17}{Need to split up the
 %    \cs{@ifpackagewith} statements}
+% \changes{catalan-3.0}{2021/04/16}{Add interpunct (``punt volat'') as
+%    active character in unicode engines.}
 %    \begin{macrocode}
 \addto\extrascatalan{\languageshorthands{catalan}}
 \initiate@active@char{"}
 \addto\extrascatalan{\bbl@activate{"}}
+\ifcat@unicode
+\initiate@active@char{·}
+\addto\extrascatalan{\bbl@activate{·}}
+\fi
 %    \end{macrocode}
 %    Because the grave character is being used in constructs such as
 %    |\catcode``=\active| it needs to have its original category code%''
@@ -781,6 +823,9 @@
   \addto\noextrascatalan{\bbl@deactivate{`}}}{}
 \@ifpackagewith{babel}{activeacute}{%
   \addto\noextrascatalan{\bbl@deactivate{'}}}{}
+\ifcat@unicode
+  \addto\noextrascatalan{\bbl@deactivate{·}}
+\fi
 %    \end{macrocode}
 %
 % \changes{catalan-2.2a}{1995/03/11}{All the code for handling active
@@ -870,9 +915,12 @@
 %
 % \changes{catalan-2.2a}{1995/03/14}{All the code to deal with active
 %    characters is now in \file{babel.def}} 
+% \changes{catalan-3.0}{2021/04/16}{Add shorthands for entering ``ela
+%    geminada'' directly in unicode engines.}
 %
 %    Now we can define our shorthands: the diaeresis and ``ela
-%    geminada'' support,
+%    geminada'' support. We only add the interpunct as a shorthand in
+%    the case of a unicode engine.
 %    \begin{macrocode}
 \declare@shorthand{catalan}{"i}{\textormath{\"i}{\ddot\imath}}
 \declare@shorthand{catalan}{"l}{\lgem{}}
@@ -880,6 +928,10 @@
 \declare@shorthand{catalan}{"I}{\textormath{\"I}{\ddot I}}
 \declare@shorthand{catalan}{"L}{\Lgem{}}
 \declare@shorthand{catalan}{"U}{\textormath{\"U}{\ddot U}}
+\ifcat@unicode
+  \declare@shorthand{catalan}{·l}{\cat@volat{}l}%
+  \declare@shorthand{catalan}{·L}{\cat@Volat{}L}%
+\fi
 %    \end{macrocode}
 %    cedille,
 % \changes{catalan-2.2c}{1995/07/08}{cedile now produced by double
@@ -968,33 +1020,15 @@
 %    \end{macrocode}
 %  \end{macro}
 %
-%  \begin{macro}{\lgem}
-%  \begin{macro}{\Lgem}
-% \changes{catalan-2.2b}{1995/06/18}{Added support for typing the
-%    catalan ``ela geminada'' with the macros \cs{lgem} and \cs{Lgem}}
-% \changes{catalan-2.2f}{1996/09/20}{Added a check for math mode as
-%    the use of \cs{lgem} and \cs{Lgem} in math mode is not sensible.}
-% \changes{catalan-3.0}{2020/10/31}{Use ``\textperiodcentered'' when available to
-%    produce the middle dot. This allows both searching and copy and paste, and
-%    gives somewhat better results than the plain macro.}
+%  \begin{macro}{\cat@volat}
+%  \begin{macro}{\cat@Volat}
+% \changes{catalan-3.0}{2021/04/16}{Separate lgem definition from the interpunct
+%    (``punt volat'') definition. Define cat@volat as the interpunct with some
+%    kerning adjustments.}
 %
-%    Here we define a macro for typing the catalan ``ela geminada''
-%    (geminated l). The macros |\lgem| and |\Lgem| have been chosen
-%    for its lowercase and uppercase representation,
-%    respectively\footnote{The macro names \cs{ll} and \cs{LL} were
-%    not taken because of the fact that \cs{ll} is already used in
-%    mathematical mode.}. If available we use the command
-%    \verb|\textperiodcentered| to output the middle dot, but we still adjust
-%    its horizontal kerning, since most fonts get it wrong. If this command is
-%    unavailable, we use a plain \TeX definition.
-%
-%    The code used in the plain \TeX{} definition is a combination of the one
-%    proposed by Feruglio and Fuster\footnote{G.~Valiente and R.~Fuster,
-%    Typesetting Catalan Texts with \TeX, \emph{TUGboat} \textbf{14}(3), 1993.}
-%    and the proposal\footnote{G. Valiente, Modern Catalan Typographical
-%    Conventions, \emph{TUGboat} \textbf{16}(3), 1995.} from Valiente presented
-%    at the \TeX\ Users Group Annual Meeting in 1995. This last proposal was not
-%    fully implemented due to its limitation to CM fonts.
+%    The macros \verb.\cat@volat. and \verb.\cat@Volat. print the interpunct
+%    with adjusted kerning. The first adjusts the kerning for the lower case
+%    geminated l and the second one for the upper case one.
 %
 %    \begin{macrocode}
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
@@ -1016,11 +1050,63 @@
   \advance\rightllkern by -0.5\wd2%
   \advance\leftllkern by -0.25\wd0%
   \advance\rightllkern by 0.2\wd0%
-  \advance\raiselldim by 0.125\ht0%
+  \advance\raiselldim by 0.1\ht0%
   \bbl@allowhyphens\discretionary{-}{}%
   {\kern\leftllkern\raise\raiselldim\box2%
   \kern\rightllkern}\bbl@allowhyphens%
 }
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+% \changes{catalan-3.0}{2020/04/16}{Redefine ``\textperiodcentered'' when
+%    possible to allow entering ``ela geminada'' directly in non-unicode
+%    engines.}
+%
+%    If possible, we redefine \verb.\textperiodcentered. to adjust its
+%    kerning. This way, a user can enter directly the geminated l and
+%    obtain better results than the ones obtained by default. Note
+%    that this solution does not cover the unicode capable engines,
+%    since it only redefines the LICR. For the latter case, we also
+%    define appropriate shorthands.
+%
+%    \begin{macrocode}
+\@ifundefined{textperiodcentered}{}{
+  \expandafter\let\expandafter\cat@oldvolat
+  \csname ?\string\textperiodcentered \endcsname
+  \DeclareTextCommand{\textperiodcentered}{?}{%
+    \@ifnextchar{l}{\cat@volat{}}{%
+      \@ifnextchar{L}{\cat@Volat{}}{%
+      \cat@oldvolat}%
+    }%
+  }%
+}
+%    \end{macrocode}
+%  \begin{macro}{\lgem}
+%  \begin{macro}{\Lgem}
+% \changes{catalan-2.2b}{1995/06/18}{Added support for typing the
+%    catalan ``ela geminada'' with the macros \cs{lgem} and \cs{Lgem}}
+% \changes{catalan-2.2f}{1996/09/20}{Added a check for math mode as
+%    the use of \cs{lgem} and \cs{Lgem} in math mode is not sensible.}
+% \changes{catalan-3.0}{2020/10/31}{Use ``\textperiodcentered'' when available to
+%    produce the middle dot. This allows both searching and copy and paste, and
+%    gives somewhat better results than the plain macro.}
+%
+%    Here we define a macro for typing the catalan ``ela geminada''
+%    (geminated l). If available we use the command
+%    \verb|\textperiodcentered| to output the middle dot, but we still
+%    adjust its horizontal kerning, since most fonts get it wrong. If
+%    this command is unavailable, we use a plain \TeX definition.
+%
+%    The code used in the plain \TeX{} definition is a combination of
+%    the one proposed by Feruglio and Fuster\footnote{G.~Valiente and
+%    R.~Fuster, Typesetting Catalan Texts with \TeX, \emph{TUGboat}
+%    \textbf{14}(3), 1993.} and the proposal\footnote{G. Valiente,
+%    Modern Catalan Typographical Conventions, \emph{TUGboat}
+%    \textbf{16}(3), 1995.} from Valiente presented at the \TeX\ Users
+%    Group Annual Meeting in 1995. This last proposal was not fully
+%    implemented due to its limitation to CM fonts.
+%
+%    \begin{macrocode}
 \def\lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname l%
@@ -1039,10 +1125,9 @@
       \bbl@allowhyphens\discretionary{l-}{l}%
       {\hbox{l}\kern\leftllkern\raise\raiselldim\box2%
       \kern\rightllkern\hbox{l}}\bbl@allowhyphens%
-    }
-  l\cat@volat{}l%
+    }{l\cat@volat{}l}%
   \fi
-  }
+}
 \def\Lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname L%
@@ -1062,23 +1147,9 @@
       \bbl@allowhyphens\discretionary{L-}{L}%
       {\hbox{L}\kern\leftllkern\raise\raiselldim\box2%
       \kern\rightllkern\hbox{L}}\bbl@allowhyphens%
-    }
-    L\cat@Volat{}L%
+    }{L\cat@Volat{}L}%
   \fi
 }
-
-\expandafter\let\expandafter\cat@oldvolat
-\csname ?\string\textperiodcentered \endcsname
-\DeclareTextCommand{\textperiodcentered}{?}[1]{%
-  \if#1L%
-    \cat@Volat{}L%
-  \else%
-    \if#1l%
-      \cat@volat{}l%
-    \else%
-      \cat@oldvolat#1%
-    \fi%
-\fi}%
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
@@ -1087,13 +1158,12 @@
 %  \begin{macro}{\L.L}
 % \changes{catalan-2.2e}{1996/06/26}{Added redefinition of \cs{l} and
 %    \cs{L}}
-%    It seems to be the most natural way of entering the ``ela
-%    geminada'' to use the sequences |\l.l| and |\L.L|. These are not
-%    really macro's by themselves but the macros |\l| and |\L| with
-%    delimited arguments. Therefore we define two macros that check if
-%    the next character is a period. If not the ``polish l'' will be
-%    typeset, otherwise a ``ela geminada'' will be typeset and the
-%    next two tokens will be ``eaten''.
+%    We define the sequences |\l.l| and |\L.L|. These are not really
+%    macro's by themselves but the macros |\l| and |\L| with delimited
+%    arguments. Therefore we define two macros that check if the next
+%    character is a period. If not the ``polish l'' will be typeset,
+%    otherwise a ``ela geminada'' will be typeset and the next two
+%    tokens will be ``eaten''.
 % \changes{catalan-2.2o}{2003/09/19}{Postpone the redefinition of
 %    \cs{l} and \cs{L} until begin document to prevent overwriting by
 %    fontenc}
@@ -1185,8 +1255,9 @@
 \fi
 %    \end{macrocode}
 %
-%    As math mode doesn't have accented characters, we need to specifically
-%    define and add the accented characters using unicode.
+%    As math mode doesn't have accented characters, we need to
+%    specifically define and add the accented characters using
+%    unicode.
 %
 %    \begin{macrocode}
 \def\cat@op@ac@base#1{\acute{\if i#1\dotlessi\else#1\fi}}
