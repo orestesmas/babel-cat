@@ -173,12 +173,13 @@
 %
 %    activa el suport al català en un document en anglès, mentre que
 %
-%    |      \usepackage[english,catalan]{babel}|
+%    \verb|      \usepackage[english,catalan]{babel}|
 %
-%    estableix el català com a llengua principal del document.
+%    estableix el català com a llengua principal del document, amb l'anglès com a llengua 
+%    auxiliar.
 %
 %  \section{Introducció de text en català}
-%  \subsection{Caràcters accentuats i símbols -- mètode clàssic (obsolet)}
+%  \subsection{Caràcters accentuats i símbols -- mètode clàssic (actualment obsolet)}
 %    El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits,
 %    per la qual cosa no era capaç de processar documents que continguessin 
 %    caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema
@@ -292,7 +293,8 @@
 %
 %  \subsection{El caràcter "<ela geminada">}\label{sec:elageminada}
 %  TODO: Manca escriure aquesta secció.
-%     
+%  
+%  
 %  \section{Traduccions}
 %
 %  \subsection{Noms de capçaleres}
@@ -1112,14 +1114,18 @@
 %    produce the middle dot. This allows both searching and copy and paste, and
 %    gives somewhat better results than the plain macro.}
 %
-%    Here we define a macro for typing the catalan ``ela geminada''
-%    (geminated l). If available we use the command
-%    \verb|\textperiodcentered| to output the middle dot, but we still
-%    adjust its horizontal kerning, since most fonts get it wrong. If
-%    this command is unavailable, we use a plain \TeX definition.
+%    Here we define two macros for typesetting the catalan ``ela geminada''
+%    (geminated l). The sequences |\lgem| and |\Lgem| have been chosen
+%    for its lowercase and uppercase representation,
+%    respectively\footnote{The macro names \cs{ll} and \cs{LL} were
+%    not chosen because \cs{ll} is already used in
+%    mathematical mode.}. If available we use the command
+%    \verb|\textperiodcentered| to output the middle dot, but we still adjust
+%    its horizontal kerning, since most fonts get it wrong. If this command is
+%    unavailable, we use a plain \TeX{} definition.
 %
 %    The code used in the plain \TeX{} definition is a combination of
-%    the one proposed by Feruglio and Fuster\footnote{G.~Valiente and
+%    the one proposed by Valiente and Fuster\footnote{G.~Valiente and
 %    R.~Fuster, Typesetting Catalan Texts with \TeX, \emph{TUGboat}
 %    \textbf{14}(3), 1993.} and the proposal\footnote{G. Valiente,
 %    Modern Catalan Typographical Conventions, \emph{TUGboat}
