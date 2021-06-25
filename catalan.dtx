@@ -59,7 +59,10 @@
 %    removed and now is in this file.
 %<*filedriver>
 \documentclass[a4paper,10pt]{ltxdoc}
+
+% General document setup
 \usepackage[left=45mm,right=40mm,top=30mm,bottom=30mm]{geometry}
+
 \usepackage[svgnames]{xcolor}
 \usepackage{iftex}
 \ifPDFTeX
@@ -76,6 +79,7 @@
     \setsansfont[Scale=MatchLowercase]{Libertinus Sans}
     \setmonofont[Scale=MatchLowercase]{Libertinus Mono}
 \fi
+% Redefinition of the macro that prints the macro names into the left margin
 \def\PrintMacroName#1{%
   \strut\MacroFont\color{DodgerBlue}\normalsize\string#1}
 \def\ColorArg{\color{DodgerBlue}}
@@ -115,6 +119,7 @@
 \def\fileversion{3.0}
 
 \begin{document}
+  \RecordChanges  % To generate changelog (glossary) entries
   \title{Estil \textsf{catalan} per al sistema Babel\footnote{Aquest
       paquet és actualment a la versió \fileversion{} amb data del primer d'octubre
       de 2020. La present còpia del manual fou generada el~\filedate.}}
