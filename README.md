@@ -35,9 +35,13 @@ distribution, do the following:
 * Run «`pdflatex catalan.dtx`» (or your preferred LaTeX build system). The first `pdflatex` run scans the document and gathers the changelog information, which is typeset by the subsequent `makeindex`. 
 
 * Then for creating the index you need to invoke makeindex as follows:
-    `makeindex -s gind.ist -o catalan.ind catalan.idx`
-* and for creating the change-history you need to invoke makeindex as follows:
-    `makeindex -s gglo.ist -o catalan.gls catalan.glo`
+
+    ```makeindex -s gind.ist -o catalan.ind catalan.idx```
+
+* And for creating the change-history you need to invoke makeindex as follows:
+
+    ```makeindex -s gglo.ist -o catalan.gls catalan.glo```
+    
 * Then rebuild the source again. This second run integrates the changelog into the main document.
 
 ## Documentation
