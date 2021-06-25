@@ -98,6 +98,7 @@
 \setlength{\parskip}{3pt}
 \addtolength{\oddsidemargin}{-4pc}
 \addtolength{\textwidth}{7pc}
+\PageIndex 
 
 % Additional logos
 \usepackage{metalogo}
@@ -107,11 +108,16 @@
 \newcommand*\Lopt[1]{\textsf{#1}}
 \newcommand*\file[1]{\texttt{#1}}
 
+% Version Info
+\def\filename{catalan.dtx}
+\def\filedate{\today}
+\def\fileversion{3.0}
+
 
 \begin{document}
   \title{Estil \textsf{catalan} per al sistema Babel\footnote{Aquest
-      paquet és actualment a la versió 3.0 amb data del primer d'octubre
-      de 2020. La present còpia del manual fou generada el~\today.}}
+      paquet és actualment a la versió \fileversion{} amb data del primer d'octubre
+      de 2020. La present còpia del manual fou generada el~\filedate.}}
   \author{%
     Miquel Ortega\footnote{Mantenidor principal, 2020 en endavant} \and
     Orestes Mas\footnote{Mantenidor, 2020 en endavant} \and
@@ -133,458 +139,446 @@
   \tableofcontents
 
   \clearpage
-  \DocInput{catalan.dtx}
+  
+\part{Documentació en català}
+
+ \section{Càrrega del paquet}
+   Per tal d'activar el suport al català amb \babel, especifiqueu l'opció \textbf{catalan}, 
+   ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
+   \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
+
+   \verb|      \usepackage[catalan,english]{babel}|
+
+   activa el suport al català en un document en anglès, mentre que
+
+   \verb|      \usepackage[english,catalan]{babel}|
+
+   estableix el català com a llengua principal del document, amb l'anglès com a llengua 
+   auxiliar.
+
+ \section{Introducció de text en català}
+ \subsection{Caràcters accentuats i símbols -- mètode clàssic (actualment obsolet)}
+   El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits,
+   per la qual cosa no era capaç de processar documents que continguessin 
+   caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema
+   per textos escrits en anglès excepte en les comptades ocasions en què calia fer ús
+   d'aquests símbols, principalment a l'hora d'escriure noms i mots estrangers.
+   Per aquest motiu, tant el \TeX{} com el \LaTeX{} disposen de seqüències especials 
+   per tal d'introduir els caràcters accentuats emprant únicament caràcters ASCII.
+   Per exemple, per tal d'introduir la frase:
+
+   \begin{center}
+   \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
+   \end{center}
+   
+   en \TeX/\LaTeX{} calia introduir:
+   
+   \begin{verbatim}
+      A\c{c}\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
+      i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
+   
+   El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context,
+   definint certs caràcters com a «actius», cosa que ens estalvia d'escriure
+   les barres invertides i claudàtors, de manera que per reproduir el text anterior
+   només caldria escriure:
+   
+   \begin{verbatim}
+      A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a 
+      i bene"it amb caf`e del flasc'o\end{verbatim}
+
+   La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters
+    accentuats, així com també als caràcters de la ela geminada, guillemets i altres símbols\footnote{Pareu
+    esment en el fet que, quan l'apòstrof és actiu, cal tenir cura d'introduir els mots apostrofats
+    de manera que no es puguin confondre amb accents. Així, cal escriure \verb|l'\{\}estri| en lloc
+    de \verb|l'estri|.}.
+
+   Evidentment, introduir d'aquesta manera els caràcters catalans especials o accentuats resulta
+   força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició
+   de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits
+   així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada 
+   codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats
+   tal i com es comenta a la secció \ref{sec:moderntyping}. Tot i que de moment el paquet \babelcat{} manté 
+   la definició dels acceleradors tradicionals per qüestions de compatibilitat, aquests es consideren obsolets 
+   i podrien desaparèixer en versions futures, per la qual cosa es recomana intensament l'ús de la codificació
+   UTF-8 i motors \TeX{} de 8 bits a l'hora de generar i processar documents nous.
+   \clearpage
+
+    \begin{table}[ht]
+      \centering
+      \caption{"<Acceleradors"> definits al paquet \babelcat}\label{tbl:acceleradors}
+      \smallskip
+      \begin{tabular}{ccp{7.5cm}}
+        \toprule
+        Per obtenir & Escriviu & Comentari\\
+        \midrule
+          à, è, é, í, ò, ó, ú  &  |`a|, |`e|, |'e|, |'i|, |`o|, |'o|, |'u|  &  \multirow{2}{=}{Accents
+            greus i aguts. Per tal que aquests acceleradors funcionin, cal invocar el \textit{Babel}
+            amb les opcions \texttt{activegrave} i \texttt{activeacute}.}\\
+          À, È, É, Í, Ò, Ò, Ú  &  |`A|, |`E|, |'E|, |'I|, |`O|, |'O|, |'U| & \\
+            &  &  \\
+          ï, ü, ç, Ï, Ü, Ç  &  |"i|, |"u|, |"c|, |"I|, |"U|, |"C| & Dièresi i ce trencada.\\
+        \midrule
+          \lgem  &  |"l|, |\lgem|, |\l.l|, |·l|\footnotemark & \multirow{2}{=}{Ela geminada. Aquest dígraf es discuteix
+            en profunditat a la secció \ref{sec:elageminada}.}\\
+          \Lgem  &  |"L|, |\Lgem|, |\L.L|, |·L|\footnotemark[\value{footnote}] & \\
+        \midrule
+          "<, ">  &  |"<|, |">| & Cometes baixes o "<guillemets">, tradicionals en la tipografia catalana.\\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+    \footnotetext{Només en motors Unicode}
+   
+ \subsection{Caràcters accentuats i símbols -- mètode modern}\label{sec:moderntyping}
+   Avui en dia els principals sistemes operatius usen internament l'estàndard \textit{Unicode} i és possible 
+   d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
+   de la ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet
+   d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li 
+   quina codificació s'ha emprat en desar-los.
+
+   El procediment per aconseguir-ho depèn del motor \TeX{} utilitzat:
+   \begin{enumerate}
+       \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc}
+       al preàmbul per tal de poder introduir els caràcters accentuats. Com que molt probablement el vostre
+       sistema operatiu treballarà en codificació UTF-8, haureu d'especificar-la en invocar \texttt{inputenc}:
+       \begin{center}
+           |\usepackage[utf8]{inputenc}|
+         \end{center}
+       \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents
+       no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa.
+       En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8
+       caldrà indicar quina al motor corresponent. En \LuaLaTeX{}, per exemple, això es fa invocant
+       el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc}
+       comentat al punt anterior (consulteu, però, la documentació).
+   \end{enumerate}
+
+ \subsection{Altres definicions del paquet \babelcat}
+   Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix algunes ordres addicionals,
+   que es troben llistades a la taula \ref{tbl:altres}.
+   \begin{table}[ht]
+     \centering
+     \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
+     \smallskip
+     \begin{tabular}{lp{7.5cm}}
+       \toprule
+         Ordre & Efecte \\
+       \midrule
+         |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
+         \verb#"|# & Desactiva la lligadura a la posició actual. \\
+         |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
+         2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
+       \bottomrule
+     \end{tabular}
+   \end{table}
+
+ \subsection{La "<ela geminada">}\label{sec:elageminada}
+ al·lot / ai·iot / ai·lot / al·iot \\
+ AL·LOT / AI·IOT / AI·LOT / AL·IOT   
+ \section{Traduccions}
+
+ \subsection{Noms de capçaleres}
+   El \LaTeX{} i els seus paquets auxiliars defineixen un conjunt de noms anglesos per les
+   capçaleres més habituals com ara \textit{Chapter}, \textit{Section}, \textit{Table of Contents}, 
+   etcètera. El paquet \babelcat{} redefineix les macros que els generen de manera que 
+   el sol fet de carregar-lo al preàmbul farà que totes aquestes capçaleres apareguin
+   traduïdes al català\footnote{Si com a usuari detecteu alguna capçalera no traduïda, informeu-ne els
+   mantenidors de \babelcat{} per tal d'incorporar la traducció en versions futures del paquet.}.
+
+   La taula \ref{tbl:noms-capcaleres} mostra les traduccions definides a la versió actual del paquet.
+
+   \begin{table}[ht]
+     \centering
+     \caption{Traduccions de capçaleres definides a \babelcat}%
+     \label{tbl:noms-capcaleres}
+     \smallskip
+     \begin{tabular}{cll}%
+       \toprule
+         Definit a  &  Nom de macro           & Traducció\\%
+       \midrule
+         babel      &  |\prefacename|         & Pròleg\\%
+         latex      &  |\refname|             & Referències\\%
+         latex      &  |\abstractname|        & Resum\\%
+         latex      &  |\bibname|             & Bibliografia\\%
+         latex      &  |\chaptername|         & Capítol\\%
+         latex      &  |\appendixname|        & Apèndix\\%
+         appendix   &  |\appendixpagename|    & Apèndixs\\%
+         appendix   &  |\appendixtocname|     & Apèndixs\\%
+         latex      &  |\contentsname|        & Índex\\%
+         latex      &  |\listfigurename|      & Índex de figures\\%
+         latex      &  |\listtablename|       & Índex de taules\\%
+         latex      &  |\indexname|           & Índex alfabètic\\%
+         latex      &  |\figurename|          & Figura\\%
+         latex      &  |\tablename|           & Taula\\%
+         latex      &  |\partname|            & Part\\%
+         latex      &  |\enclname|            & Adjunt\\%
+         latex      &  |\ccname|              & Còpies a\\%
+         latex      &  |\headtoname|          & A\\%
+         latex      &  |\pagename|            & Pàgina\\%
+    amscls, memoir  &  |\seename|             & Vegeu\\%
+    amscls, memoir  &  |\alsoname|            & Vegeu també\\%
+         amscls     &  |\proofname|           & Demostració\\%
+         latex      &  |\glossaryname|        & Glossari\\%
+     \bottomrule
+     \end{tabular}
+   \end{table}
+
+
+ \subsection{Catalanitzacions en mode matemàtic}
+   Per defecte, el paquet \babelcat{} defineix les versions accentuades dels operadors matemàtics
+   llistats a la taula \ref{tbl:operadors}. Atès, però, que les normes d'estil de l'IEC
+   recomanen d'emprar les versions sense accent, el comportament descrit es pot desactivar
+   i tornar a activar amb les ordres \verb.\nocatalanoperators. i \verb.\catalanoperators.,
+   respectivament.
+   \begin{table}[ht]
+     \centering
+     \caption{Operadors matemàtics redefinits pel paquet \babelcat}
+     \label{tbl:operadors}
+     \smallskip
+     \begin{tabular}{ccc}
+       \toprule
+         Operador  & versió per defecte & versió amb \verb.\nocatalanoperators. \\
+       \midrule
+         \verb.\mod. & $\mod$ & $\nocatalanoperators \mod$ \\
+         \verb.\pmod. & $\pmod$ & $\nocatalanoperators \pmod$ \\
+         \verb.\bmod. & $\bmod$ & $\nocatalanoperators \bmod$ \\
+         \verb.\lim. & $\lim$ & $\nocatalanoperators \lim$ \\
+         \verb.\liminf. & $\liminf$ & $\nocatalanoperators \liminf$ \\
+         \verb.\limsup. & $\limsup$ & $\nocatalanoperators \limsup$ \\
+         \verb.\max. & $\max$ & $\nocatalanoperators \max$ \\
+         \verb.\min. & $\min$ & $\nocatalanoperators \min$ \\
+         \verb.\inf. & $\inf$ & $\nocatalanoperators \inf$ \\
+       \bottomrule
+     \end{tabular}
+   \end{table}
+    
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \clearpage
+
+\begin{otherlanguage}{english}
+\part{English Summary}
+
+ \section{The Catalan language}
+   The file \file{\filename}\footnote{The file described in this
+   section has version number \fileversion{} and was last revised on
+   \filedate.}  defines all language-specific macros for the
+   Catalan language.
+
+ \subsection{Translations}
+
+ \subsubsection{Caption names}
+   Catalan caption names as defined in \babelcat{} can be seen in
+   Table~\ref{tab:catalan-caption-names}. They can be easily
+   customised using Babel 3.9 syntax
+   |\renewcommand\catalanproofname{Prova}|. The older syntax
+   |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still
+   works.
+
+   \begin{table}[htb]
+     \centering
+     \begin{tabular}{ll}%
+       |\prefacename|       & Pr\`oleg\\%
+       |\refname|           & Refer\`encies\\%
+       |\abstractname|      & Resum\\%
+       |\bibname|           & Bibliografia\\%
+       |\chaptername|       & Cap\'{\i}tol\\%
+       |\appendixname|      & Ap\`endix\\%
+       |\appendixpagename|  & Ap\`endixs\\%
+       |\appendixtocname|   & Ap\`endixs\\%
+       |\contentsname|      & \'Index\\%
+       |\listfigurename|    & \'Index de figures\\%
+       |\listtablename|     & \'Index de taules\\%
+       |\indexname|         & \'Index alfab\`etic\\%
+       |\figurename|        & Figura\\%
+       |\tablename|         & Taula\\%
+       |\partname|          & Part\\%
+       |\enclname|          & Adjunt\\%
+       |\ccname|            & C\`opies a\\%
+       |\headtoname|     	  & A\\%
+       |\pagename|          & P\`agina\\%
+       |\seename|           & Vegeu\\%
+       |\alsoname|          & Vegeu tamb\'e\\%
+       |\proofname|         & Demostraci\'o\\%
+       |\glossaryname|      & Glossari\\%
+     \end{tabular}
+     \caption{Caption names as defined in \babelcat{}}%
+     \label{tab:catalan-caption-names}
+   \end{table}
+ \subsection{Commands}
+   The commands specified in Table \ref{tab:catalan-macros} are provided by
+   \babelcat{} to ease typesetting.
+   \begin{table}[htb]
+     \centering
+     \begin{tabular}{lp{8cm}}%
+     |\-| & like the usual |\-|, but allowing hyphenation
+              in the rest of the word. \\
+     |\l.l|   & geminated-l digraph (similar to
+              l$\cdot$l). |\L.L| produces the uppercase version.\\
+     |\lgem|  & geminated-l digraph (similar to
+              l$\cdot$l). |\Lgem| produces the uppercase version.\\
+     |\up| & Macro to help typing raised ordinals, like {1\raise
+              1ex\hbox{\small er}}. Takes one argument.\\
+     \end{tabular}
+     \caption{Commands provided by \babelcat{}}%
+     \label{tab:catalan-macros}
+   \end{table}
+
+ \subsection{Shorthands}
+
+   \babelcat{} also provides a set of shorthands to ease typing
+   accents and other special characters. Note that using \emph{utf8}
+   input encoding one can type the characters directly, and that
+   this is enabled by default since \texttt{TexLive 2018}.
+
+   The double quote character (|"|) is made active by default. In
+   Table~\ref{tab:catalan-quote-def} an overview is given of the new
+   meanings of |"|. In unicode capable engines (\XeTeX{},
+   \LuaTeX{}), the interpunct character (·) is also made active to
+   improve the spacing of the geminated l. See section
+   \ref{sec:geminated_l_english}.
+
+   Additionally, the user can explicitly activate the acute accent
+   or apostrophe (|'|) and/or the grave accent (|`|) characters by
+   using the \Lopt{activeacute} and \Lopt{activegrave} options. In
+   that case, the definitions shown in
+   Table~\ref{tab:catalan-quote-opt} also become
+   available\footnote{Please note that if the acute accent character
+   is active, it is necessary to take special care of coding
+   apostrophes in a way which cannot be confounded with accents.
+   Therefore, it is necessary to type \texttt{l'\{\}estri} instead
+   of \texttt{l'estri}.}. These active accent characters behave
+   according to their original definitions if not followed by one of
+   the characters indicated in the aforementioned table.
+
+   \begin{table}[htb]
+    \centering
+    \begin{tabular}{lp{8cm}}
+     |"i| & i with diaeresis, allowing hyphenation
+            in the rest of the word. Valid for the following vowels:
+              i, u (both lowercase and uppercase).\\
+     |"c| & c-cedilla (\c{c}). Valid for both uppercase and
+              lowercase c.\\
+     |"l| & geminated-l digraph (similar to
+              l$\cdot$l). Valid for both uppercase and lowercase l.\\
+     |"<| & French left double quotes (similar to $<<$).\\
+     |">| & French right double quotes (similar to $>>$).\\
+     |"-| & explicit hyphen sign, allowing hyphenation
+              in the rest of the word.\\
+     \verb="|= & disable ligature at this position.\\
+     |·|l & only in unicode capable engines. See Section
+     \ref{sec:geminated_l_english}.\\
+     |·|L & only in unicode capable engines. See Section
+     \ref{sec:geminated_l_english}.
+    \end{tabular}
+    \caption{Shorthands provided by \babelcat{}}
+    \label{tab:catalan-quote-def}
+   \end{table}
+
+   \begin{table}[htb]
+    \centering
+    \begin{tabular}{lp{8cm}}
+     |'e| & acute accented e, allowing hyphenation
+            in the rest of the word. Valid for the following
+            vowels: e, i, o, u (both lowercase and uppercase).\\
+     |`a| & grave accented a, allowing hyphenation
+            in the rest of the word. Valid for the following
+            vowels: a, e, o (both lowercase and uppercase).
+    \end{tabular}
+    \caption{Extra shorthands provided by \babelcat{}
+      (activated only when using the options \Lopt{activeacute} and
+      \Lopt{activegrave})}
+    \label{tab:catalan-quote-opt}
+   \end{table}
+
+ \subsection{Geminated l (l·l)}
+   \label{sec:geminated_l_english}
+   By default, most fonts produce a geminated l with incorrect
+   spacing around the interpunct (·), adding too much space between
+   l and l. To mitigate this, \babelcat{} adjusts the kerning around
+   the interpunct. In most cases, this should be transparent to
+   the user, since it is done automatically. This is achieved with
+   different strategies depending on the context:
+   \begin{itemize}
+       \item When \babelcat{} is loaded in a Unicode capable engine,
+       it defines the shorthands |·|l and |·|L, which render an
+       interpunct with adjusted kerning followed by the
+       corresponding l.
+       \item When \babelcat{} is loaded in an engine that does not
+       work in Unicode (for example, when compiling with pdf\TeX{}),
+       the engine does not work internally with |·| as a character.
+       Therefore, it cannot be made active, and the previous
+       solution does not work. However, if working with \LaTeX{},
+       the package redefines the LICR (\LaTeX{} Internal Character
+       Representation) object \verb|\textperiodcentered| to adjust
+       the kerning of the interpunct.
+   \end{itemize}
+   In case the kerning adjusment does not work automatically (for
+   example, when using plain \TeX), and for the sake of backwards
+   compatibility, \babelcat{} provides the commands \verb.\lgem.,
+   \verb.\Lgem., \verb|\l.l| and \verb|\L.L|, as you can see in
+   table \ref{tab:catalan-macros}.
+
+ \subsection{Operators}
+
+   By default, \babelcat{} defines accented versions of the
+   mathematical operators in Table \ref{tab:catalan-operators}. The
+   behaviour can be explicitly set using either
+   \verb.\nocatalanoperators. or
+   \verb.\catalanoperators..
+   \begin{table}[htb]
+    \centering
+    \begin{otherlanguage}{catalan}
+      \begin{tabular}{ll}
+       \verb.\mod. & $\mod$\\
+       \verb.\pmod. & $\pmod$\\
+       \verb.\bmod. & $\bmod$\\
+       \verb.\lim. & $\lim$\\
+       \verb.\liminf. & $\liminf$\\
+       \verb.\limsup. & $\limsup$\\
+       \verb.\max. & $\max$\\
+       \verb.\min. & $\min$\\
+       \verb.\inf. & $\inf$
+      \end{tabular}
+    \end{otherlanguage}
+    \caption{Math operators redefined by \babelcat{}}
+    \label{tab:catalan-operators}
+   \end{table}
+\end{otherlanguage}
+\clearpage
+\newgeometry{left=50mm,right=23mm,top=30mm,bottom=30mm}
+\part{Appendices}
+\DocInput{catalan.dtx}
 \end{document}
 %</filedriver>
 %\fi
 %
-% \GetFileInfo{catalan.dtx}
+% \StopEventually{}
 %
-% \changes{catalan-2.0b}{1993/09/23}{Incorporated the changes from
-%    \file{spanish.sty}}
+% \changes{catalan-2.0}{1993/07/11}{Removed code to load \file{latexhax.com}}
+% \changes{catalan-2.0b}{1993/09/23}{Incorporated the changes from \file{spanish.sty}}
 % \changes{catalan-2.1}{1994/02/27}{Update for \LaTeXe}
 % \changes{catalan-2.1d}{1994/06/26}{Removed the use of \cs{filedate}
 %    and moved identification after the loading of \file{babel.def}}
-% \changes{catalan-2.2b}{1995/07/04}{Made the activation of the grave
-%    and acute accents optional}
-% \changes{catalan-2.2c}{1995/07/08}{Removed the use of the tilde for
-%    catalan}
+% \changes{catalan-2.2b}{1995/07/04}{Made the activation of the grave and acute accents optional}
+% \changes{catalan-2.2c}{1995/07/08}{Removed the use of the tilde for catalan}
 % \changes{catalan-2.2f}{1996/07/13}{Replaced \cs{undefined} with
-%    \cs{@undefined} and \cs{empty} with \cs{@empty} for consistency
-%    with \LaTeX}
-% \changes{catalan-2.2g}{1996/10/10}{Moved the definition of
-%    \cs{atcatcode} right to the beginning.}
-% \changes{catalan-2.2k}{1999/05/05}{A wrong \cs{changes} entry made
-%    typesetting impossible}
+%    \cs{@undefined} and \cs{empty} with \cs{@empty} for consistency with \LaTeX}
+% \changes{catalan-2.2g}{1996/10/10}{Moved the definition of \cs{atcatcode} right to the beginning.}
+% \changes{catalan-2.2k}{1999/05/05}{A wrong \cs{changes} entry made typesetting impossible}
 % \changes{catalan-3.0}{2020/09/01}{New maintainers. Start rework funded by IEC.}
 % \changes{catalan-3.0}{2020/09/01}{Created git repo to host collaborative development}
 % \changes{catalan-3.0}{2020/10/13}{Add regression tests using \texttt{l3build}}
 % \changes{catalan-3.0}{2020/12/26}{Added catalan strings used by the 'appendix' package}
 % \changes{catalan-3.0}{2021/03/01}{Revamped documentation. Added section in catalan.}
 %
-%  \part{Documentació en català}
-%
-%  \section{Càrrega del paquet}
-%    Per tal d'activar el suport al català amb \babel, especifiqueu l'opció \textbf{catalan}, 
-%    ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
-%    \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
-%
-%    \verb|      \usepackage[catalan,english]{babel}|
-%
-%    activa el suport al català en un document en anglès, mentre que
-%
-%    \verb|      \usepackage[english,catalan]{babel}|
-%
-%    estableix el català com a llengua principal del document, amb l'anglès com a llengua 
-%    auxiliar.
-%
-%  \section{Introducció de text en català}
-%  \subsection{Caràcters accentuats i símbols -- mètode clàssic (actualment obsolet)}
-%    El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits,
-%    per la qual cosa no era capaç de processar documents que continguessin 
-%    caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema
-%    per textos escrits en anglès excepte en les comptades ocasions en què calia fer ús
-%    d'aquests símbols, principalment a l'hora d'escriure noms i mots estrangers.
-%    Per aquest motiu, tant el \TeX{} com el \LaTeX{} disposen de seqüències especials 
-%    per tal d'introduir els caràcters accentuats emprant únicament caràcters ASCII.
-%    Per exemple, per tal d'introduir la frase:
-%
-%    \begin{center}
-%    \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
-%    \end{center}
-%    
-%    en \TeX/\LaTeX{} calia introduir:
-%    
-%    \begin{verbatim}
-%       A\c{c}\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
-%       i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
-%    
-%    El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context,
-%    definint certs caràcters com a «actius», cosa que ens estalvia d'escriure
-%    les barres invertides i claudàtors, de manera que per reproduir el text anterior
-%    només caldria escriure:
-%    
-%    \begin{verbatim}
-%       A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a 
-%       i bene"it amb caf`e del flasc'o\end{verbatim}
-%
-%    La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters
-%     accentuats, així com també als caràcters de la ela geminada, guillemets i altres símbols\footnote{Pareu
-%     esment en el fet que, quan l'apòstrof és actiu, cal tenir cura d'introduir els mots apostrofats
-%     de manera que no es puguin confondre amb accents. Així, cal escriure \verb|l'\{\}estri| en lloc
-%     de \verb|l'estri|.}.
-%     
-%     \begin{table}[ht]
-%       \centering
-%       \caption{"<Acceleradors"> definits al paquet \babelcat}\label{tbl:acceleradors}
-%       \smallskip
-%       \begin{tabular}{ccp{7.5cm}}
-%         \toprule
-%         Per obtenir & Escriviu & Comentari\\
-%         \midrule
-%           à, è, é, í, ò, ó, ú  &  |`a|, |`e|, |'e|, |'i|, |`o|, |'o|, |'u|  &  \multirow{2}{=}{Accents
-%             greus i aguts. Per tal que aquests acceleradors funcionin, cal invocar el \textit{Babel}
-%             amb les opcions \texttt{activegrave} i \texttt{activeacute}.}\\
-%           À, È, É, Í, Ò, Ò, Ú  &  |`A|, |`E|, |'E|, |'I|, |`O|, |'O|, |'U| & \\
-%             &  &  \\
-%           ï, ü, ç, Ï, Ü, Ç  &  |"i|, |"u|, |"c|, |"I|, |"U|, |"C| & Dièresi i ce trencada.\\
-%         \midrule
-%           \lgem  &  |"l|, |\lgem|, |\l.l| & \multirow{2}{=}{Ela geminada. Aquest dígraf es discuteix
-%             en profunditat a la secció \ref{sec:elageminada}.}\\
-%           \Lgem  &  |"L|, |\Lgem|, |\L.L| & \\
-%         \midrule
-%           "<, ">  &  |"<|, |">| & Cometes baixes o "<guillemets">, tradicionals en la tipografia catalana.\\
-%         \bottomrule
-%       \end{tabular}
-%     \end{table}
-% 
-%
-%    Evidentment, introduir d'aquesta manera els caràcters catalans especials o accentuats resulta
-%    força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició
-%    de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits
-%    així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada 
-%    codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats
-%    tal i com es comenta a la secció \ref{sec:moderntyping}. Tot i que de moment el paquet \babelcat{} manté 
-%    la definició dels acceleradors tradicionals per qüestions de compatibilitat, aquests es consideren obsolets 
-%    i podrien desaparèixer en versions futures, per la qual cosa es recomana intensament l'ús de la codificació
-%    UTF-8 i motors \TeX{} de 8 bits a l'hora de generar i processar documents nous.
-%    
-%  \subsection{Caràcters accentuats i símbols -- mètode modern}\label{sec:moderntyping}
-%    Avui en dia els principals sistemes operatius usen internament l'estàndard \textit{Unicode} i és possible 
-%    d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
-%    de la ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet
-%    d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li 
-%    quina codificació s'ha emprat en desar-los.
-%
-%    El procediment per aconseguir-ho depèn del motor \TeX{} utilitzat:
-%    \begin{enumerate}
-%        \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc}
-%        al preàmbul per tal de poder introduir els caràcters accentuats. Com que molt probablement el vostre
-%        sistema operatiu treballarà en codificació UTF-8, haureu d'especificar-la en invocar \texttt{inputenc}:
-%        \begin{center}
-%            |\usepackage[utf8]{inputenc}|
-%          \end{center}
-%        \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents
-%        no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa.
-%        En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8
-%        caldrà indicar quina al motor corresponent. En \LuaLaTeX{}, per exemple, això es fa invocant
-%        el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc}
-%        comentat al punt anterior (consulteu, però, la documentació).
-%    \end{enumerate}
-%
-%  \subsection{Altres definicions del paquet \babelcat}
-%    Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix algunes ordres addicionals,
-%    que es troben llistades a la taula \ref{tbl:altres}.
-%    \begin{table}[ht]
-%      \centering
-%      \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
-%      \smallskip
-%      \begin{tabular}{lp{7.5cm}}
-%        \toprule
-%          Ordre & Efecte \\
-%        \midrule
-%          |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
-%          \verb#"|# & Desactiva la lligadura a la posició actual. \\
-%          |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
-%          2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
-%        \bottomrule
-%      \end{tabular}
-%    \end{table}
-%
-%  \subsection{La "<ela geminada">}\label{sec:elageminada}
-%  Des de la seva introducció, el 1913, per l'IEC a proposta d'Antoni M. Alcover 
-%     
-%  \section{Traduccions}
-%
-%  \subsection{Noms de capçaleres}
-%    El \LaTeX{} i els seus paquets auxiliars defineixen un conjunt de noms anglesos per les
-%    capçaleres més habituals com ara \textit{Chapter}, \textit{Section}, \textit{Table of Contents}, 
-%    etcètera. El paquet \babelcat{} redefineix les macros que els generen de manera que 
-%    el sol fet de carregar-lo al preàmbul farà que totes aquestes capçaleres apareguin
-%    traduïdes al català\footnote{Si com a usuari detecteu alguna capçalera no traduïda, informeu-ne els
-%    mantenidors de \babelcat{} per tal d'incorporar la traducció en versions futures del paquet.}.
-%
-%    La taula \ref{tbl:noms-capcaleres} mostra les traduccions definides a la versió actual del paquet.
-%
-%    \begin{table}[ht]
-%      \centering
-%      \caption{Traduccions de capçaleres definides a \babelcat}%
-%      \label{tbl:noms-capcaleres}
-%      \smallskip
-%      \begin{tabular}{cll}%
-%        \toprule
-%          Definit a  &  Nom de macro           & Traducció\\%
-%        \midrule
-%          babel      &  |\prefacename|         & Pròleg\\%
-%          latex      &  |\refname|             & Referències\\%
-%          latex      &  |\abstractname|        & Resum\\%
-%          latex      &  |\bibname|             & Bibliografia\\%
-%          latex      &  |\chaptername|         & Capítol\\%
-%          latex      &  |\appendixname|        & Apèndix\\%
-%          appendix   &  |\appendixpagename|    & Apèndixs\\%
-%          appendix   &  |\appendixtocname|     & Apèndixs\\%
-%          latex      &  |\contentsname|        & Índex\\%
-%          latex      &  |\listfigurename|      & Índex de figures\\%
-%          latex      &  |\listtablename|       & Índex de taules\\%
-%          latex      &  |\indexname|           & Índex alfabètic\\%
-%          latex      &  |\figurename|          & Figura\\%
-%          latex      &  |\tablename|           & Taula\\%
-%          latex      &  |\partname|            & Part\\%
-%          latex      &  |\enclname|            & Adjunt\\%
-%          latex      &  |\ccname|              & Còpies a\\%
-%          latex      &  |\headtoname|          & A\\%
-%          latex      &  |\pagename|            & Pàgina\\%
-%     amscls, memoir  &  |\seename|             & Vegeu\\%
-%     amscls, memoir  &  |\alsoname|            & Vegeu també\\%
-%          amscls     &  |\proofname|           & Demostració\\%
-%          latex      &  |\glossaryname|        & Glossari\\%
-%      \bottomrule
-%      \end{tabular}
-%    \end{table}
-%
-%
-%  \subsection{Catalanitzacions en mode matemàtic}
-%    Per defecte, el paquet \babelcat{} defineix les versions
-%    accentuades dels operadors matemàtics llistats a la taula
-%    \ref{tbl:operadors}. Atès, però, que les normes d'estil de l'IEC
-%    recomanen d'emprar les versions sense accent, el comportament
-%    descrit es pot desactivar i tornar a activar amb les ordres
-%    \verb.\nocatalanoperators. i \verb.\catalanoperators.,
-%    respectivament.
-%    \begin{table}[ht]
-%      \centering
-%      \caption{Operadors matemàtics redefinits pel paquet \babelcat}
-%      \label{tbl:operadors}
-%      \smallskip
-%      \begin{tabular}{ccc}
-%        \toprule
-%          Operador  & versió per defecte & versió amb \verb.\nocatalanoperators. \\
-%        \midrule
-%          \verb.\mod. & $\mod$ & $\nocatalanoperators \mod$ \\
-%          \verb.\pmod. & $\pmod$ & $\nocatalanoperators \pmod$ \\
-%          \verb.\bmod. & $\bmod$ & $\nocatalanoperators \bmod$ \\
-%          \verb.\lim. & $\lim$ & $\nocatalanoperators \lim$ \\
-%          \verb.\liminf. & $\liminf$ & $\nocatalanoperators \liminf$ \\
-%          \verb.\limsup. & $\limsup$ & $\nocatalanoperators \limsup$ \\
-%          \verb.\max. & $\max$ & $\nocatalanoperators \max$ \\
-%          \verb.\min. & $\min$ & $\nocatalanoperators \min$ \\
-%          \verb.\inf. & $\inf$ & $\nocatalanoperators \inf$ \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{table}
-%     
-%   
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  \clearpage
-%  \begin{otherlanguage}{english}
-%  \part{English Summary}
-%
-%  \section{The Catalan language}
-%    The file \file{\filename}\footnote{The file described in this
-%    section has version number \fileversion\ and was last revised on
-%    \filedate.}  defines all language-specific macros for the
-%    Catalan language.
-%
-%  \subsection{Translations}
-%
-%  \subsubsection{Caption names}
-%    Catalan caption names as defined in \babelcat{} can be seen in
-%    Table~\ref{tab:catalan-caption-names}. They can be easily
-%    customised using Babel 3.9 syntax
-%    |\renewcommand\catalanproofname{Prova}|. The older syntax
-%    |\addto\captionscatalan{\renewcommand\proofname{Prova}}| still
-%    works.
-%
-%    \begin{table}[htb]
-%      \centering
-%      \begin{tabular}{ll}%
-%        |\prefacename|       & Pr\`oleg\\%
-%        |\refname|           & Refer\`encies\\%
-%        |\abstractname|      & Resum\\%
-%        |\bibname|           & Bibliografia\\%
-%        |\chaptername|       & Cap\'{\i}tol\\%
-%        |\appendixname|      & Ap\`endix\\%
-%        |\appendixpagename|  & Ap\`endixs\\%
-%        |\appendixtocname|   & Ap\`endixs\\%
-%        |\contentsname|      & \'Index\\%
-%        |\listfigurename|    & \'Index de figures\\%
-%        |\listtablename|     & \'Index de taules\\%
-%        |\indexname|         & \'Index alfab\`etic\\%
-%        |\figurename|        & Figura\\%
-%        |\tablename|         & Taula\\%
-%        |\partname|          & Part\\%
-%        |\enclname|          & Adjunt\\%
-%        |\ccname|            & C\`opies a\\%
-%        |\headtoname|     	  & A\\%
-%        |\pagename|          & P\`agina\\%
-%        |\seename|           & Vegeu\\%
-%        |\alsoname|          & Vegeu tamb\'e\\%
-%        |\proofname|         & Demostraci\'o\\%
-%        |\glossaryname|      & Glossari\\%
-%      \end{tabular}
-%      \caption{Caption names as defined in \babelcat{}}%
-%      \label{tab:catalan-caption-names}
-%    \end{table}
-%  \subsection{Commands}
-%    The commands specified in Table \ref{tab:catalan-macros} are provided by
-%    \babelcat{} to ease typesetting.
-%    \begin{table}[htb]
-%      \centering
-%      \begin{tabular}{lp{8cm}}%
-%      |\-| & like the usual |\-|, but allowing hyphenation
-%               in the rest of the word. \\
-%      |\l.l|   & geminated-l digraph (similar to
-%               l$\cdot$l). |\L.L| produces the uppercase version.\\
-%      |\lgem|  & geminated-l digraph (similar to
-%               l$\cdot$l). |\Lgem| produces the uppercase version.\\
-%      |\up| & Macro to help typing raised ordinals, like {1\raise
-%               1ex\hbox{\small er}}. Takes one argument.\\
-%      \end{tabular}
-%      \caption{Commands provided by \babelcat{}}%
-%      \label{tab:catalan-macros}
-%    \end{table}
-%
-%  \subsection{Shorthands}
-%
-%    \babelcat{} also provides a set of shorthands to ease typing
-%    accents and other special characters. Note that using \emph{utf8}
-%    input encoding one can type the characters directly, and that
-%    this is enabled by default since \texttt{TexLive 2018}.
-%
-%    The double quote character (|"|) is made active by default. In
-%    Table~\ref{tab:catalan-quote-def} an overview is given of the new
-%    meanings of |"|. In unicode capable engines (\XeTeX{},
-%    \LuaTeX{}), the interpunct character (·) is also made active to
-%    improve the spacing of the geminated l. See section
-%    \ref{sec:geminated_l_english}.
-%
-%    Additionally, the user can explicitly activate the acute accent
-%    or apostrophe (|'|) and/or the grave accent (|`|) characters by
-%    using the \Lopt{activeacute} and \Lopt{activegrave} options. In
-%    that case, the definitions shown in
-%    Table~\ref{tab:catalan-quote-opt} also become
-%    available\footnote{Please note that if the acute accent character
-%    is active, it is necessary to take special care of coding
-%    apostrophes in a way which cannot be confounded with accents.
-%    Therefore, it is necessary to type \texttt{l'\{\}estri} instead
-%    of \texttt{l'estri}.}. These active accent characters behave
-%    according to their original definitions if not followed by one of
-%    the characters indicated in the aforementioned table.
-%
-%    \begin{table}[htb]
-%     \centering
-%     \begin{tabular}{lp{8cm}}
-%      |"i| & i with diaeresis, allowing hyphenation
-%             in the rest of the word. Valid for the following vowels:
-%               i, u (both lowercase and uppercase).\\
-%      |"c| & c-cedilla (\c{c}). Valid for both uppercase and
-%               lowercase c.\\
-%      |"l| & geminated-l digraph (similar to
-%               l$\cdot$l). Valid for both uppercase and lowercase l.\\
-%      |"<| & French left double quotes (similar to $<<$).\\
-%      |">| & French right double quotes (similar to $>>$).\\
-%      |"-| & explicit hyphen sign, allowing hyphenation
-%               in the rest of the word.\\
-%      \verb="|= & disable ligature at this position.\\
-%      |·|l & only in unicode capable engines. See Section
-%      \ref{sec:geminated_l_english}.\\
-%      |·|L & only in unicode capable engines. See Section
-%      \ref{sec:geminated_l_english}.
-%     \end{tabular}
-%     \caption{Shorthands provided by \babelcat{}}
-%     \label{tab:catalan-quote-def}
-%    \end{table}
-%
-%    \begin{table}[htb]
-%     \centering
-%     \begin{tabular}{lp{8cm}}
-%      |'e| & acute accented e, allowing hyphenation
-%             in the rest of the word. Valid for the following
-%             vowels: e, i, o, u (both lowercase and uppercase).\\
-%      |`a| & grave accented a, allowing hyphenation
-%             in the rest of the word. Valid for the following
-%             vowels: a, e, o (both lowercase and uppercase).
-%     \end{tabular}
-%     \caption{Extra shorthands provided by \babelcat{}
-%       (activated only when using the options \Lopt{activeacute} and
-%       \Lopt{activegrave})}
-%     \label{tab:catalan-quote-opt}
-%    \end{table}
-%
-%  \subsection{Geminated l (l·l)}
-%    \label{sec:geminated_l_english}
-%    By default, most fonts produce a geminated l with incorrect
-%    spacing around the interpunct (·), adding too much space between
-%    l and l. To mitigate this, \babelcat{} adjusts the kerning around
-%    the interpunct. In most cases, this should be transparent to
-%    the user, since it is done automatically. This is achieved with
-%    different strategies depending on the context:
-%    \begin{itemize}
-%        \item When \babelcat{} is loaded in a Unicode capable engine,
-%        it defines the shorthands |·|l and |·|L, which render an
-%        interpunct with adjusted kerning followed by the
-%        corresponding l.
-%        \item When \babelcat{} is loaded in an engine that does not
-%        work in Unicode (for example, when compiling with pdf\TeX{}),
-%        the engine does not work internally with |·| as a character.
-%        Therefore, it cannot be made active, and the previous
-%        solution does not work. However, if working with \LaTeX{},
-%        the package redefines the LICR (\LaTeX{} Internal Character
-%        Representation) object \verb|\textperiodcentered| to adjust
-%        the kerning of the interpunct.
-%    \end{itemize}
-%    In case the kerning adjusment does not work automatically (for
-%    example, when using plain \TeX), and for the sake of backwards
-%    compatibility, \babelcat{} provides the commands \verb.\lgem.,
-%    \verb.\Lgem., \verb|\l.l| and \verb|\L.L|, as you can see in
-%    table \ref{tab:catalan-macros}.
-%
-%  \subsection{Operators}
-%
-%    By default, \babelcat{} defines accented versions of the
-%    mathematical operators in Table \ref{tab:catalan-operators}. The
-%    behaviour can be explicitly set using either
-%    \verb.\nocatalanoperators. or
-%    \verb.\catalanoperators..
-%    \begin{table}[htb]
-%     \centering
-%     \begin{otherlanguage}{catalan}
-%       \begin{tabular}{ll}
-%        \verb.\mod. & $\mod$\\
-%        \verb.\pmod. & $\pmod$\\
-%        \verb.\bmod. & $\bmod$\\
-%        \verb.\lim. & $\lim$\\
-%        \verb.\liminf. & $\liminf$\\
-%        \verb.\limsup. & $\limsup$\\
-%        \verb.\max. & $\max$\\
-%        \verb.\min. & $\min$\\
-%        \verb.\inf. & $\inf$
-%       \end{tabular}
-%     \end{otherlanguage}
-%     \caption{Math operators redefined by \babelcat{}}
-%     \label{tab:catalan-operators}
-%    \end{table}
-%    \end{otherlanguage}
-%
-%
-% \StopEventually{}
-% \changes{catalan-2.0}{1993/07/11}{Removed code to load
-%    \file{latexhax.com}}
-%
-%  \clearpage
-%  \newgeometry{left=50mm,right=23mm}
-%
 %  \section{The code}
-%    The macro |\LdfInit| takes care of preventing that this file is
-%    loaded more than once, checking the category code of the
-%    \texttt{@} sign, etc.
-% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{LdfInit} to perform
-%    initial checks} 
-%    \begin{macrocode}
+%    The macro |\LdfInit| takes care of preventing that this file is loaded more than once, 
+%    checking the category code of the \texttt{@} sign, etc.
+% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{LdfInit} to perform initial checks} 
 %<*code>
+%    \begin{macrocode}
 \LdfInit{catalan}\captionscatalan
 %    \end{macrocode}
 %
@@ -593,8 +587,8 @@
 %    case we have to make it known.  So we check for the existence of
 %    |\l@catalan| to see whether we have to do something here.
 %
-% \changes{catalan-2.1d}{1994/06/26}{Now use \cs{@nopatterns} to
-%    produce the warning}
+% \changes{catalan-2.1d}{1994/06/26}{Now use \cs{@nopatterns} to produce the warning}
+%
 %    \begin{macrocode}
 \ifx\l@catalan\@undefined
   \@nopatterns{Catalan}
@@ -603,15 +597,15 @@
 
 \def\cat@sdef#1{\babel@save#1\def#1}
 \def\cat@sDRC#1{\babel@save#1\DeclareRobustCommand*#1}
-
 %    \end{macrocode}
 %
 %  \begin{macro}{\ifcat@latex}
 %  \begin{macro}{\ifcat@unicode}
+% \changes{catalan-3.0}{2020/10/4}{Added a new ``if'' \cs{cat@unicode} to detect unicode engines}
+%
 %    We define two new ifs that are set to true if we are working with
 %    LaTeX and a Unicode capable engine respectively.
-% \changes{catalan-3.0}{2020/10/4}{Added a new ``if'' \cs{cat@unicode} to detect
-%    unicode engines}
+%
 %    \begin{macrocode}
 \@ifundefined{documentclass}
   {\let\ifcat@latex\iffalse}
@@ -635,21 +629,18 @@
 %  \end{macro}
 %
 %  \begin{macro}{\captionscatalan}
-%    The macro |\captionscatalan| defines all strings used in the four
-%    standard documentclasses provided with \LaTeX.
-% \changes{catalan-1.1}{1993/07/11}{\cs{headpagename} should be
-%    \cs{pagename}}
+%    The macro |\captionscatalan| defines all strings used in the four standard 
+%    documentclasses provided with \LaTeX.
+% \changes{catalan-1.1}{1993/07/11}{\cs{headpagename} should be \cs{pagename}}
 % \changes{catalan-2.0}{1993/07/11}{Added some names}
 % \changes{catalan-2.1d}{1994/11/09}{Added a few missing translations}
-% \changes{catalan-2.2b}{1995/07/03}{Added \cs{proofname} for
-%    AMS-\LaTeX}
+% \changes{catalan-2.2b}{1995/07/03}{Added \cs{proofname} for AMS-\LaTeX}
 % \changes{catalan-2.2d}{1995/07/10}{added translation of Proof}
 % \changes{catalan-2.2d}{1995/11/15}{Translations revised}
 % \changes{catalan-2.2m}{2000/09/19}{Added \cs{glossaryname}}
-% \changes{catalan-2.2p}{2003/11/17}{Inserted translation for
-%    Glossary}
-% \changes{catalan-3.0}{2020/12/26}{Added catalan strings used by the
-%    \texttt{appendix} package}
+% \changes{catalan-2.2p}{2003/11/17}{Inserted translation for Glossary}
+% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} 
+% \changes{catalan-3.0}{2020/12/26}{Added catalan strings used by the \texttt{appendix} package}
 %
 %    Babel changed the system it used to localize captions from its
 %    version 3.9 on. The change is made to allow defining strings in
@@ -658,7 +649,7 @@
 %
 %    WARNING: Users of Babel prior to version 3.9 should update their
 %    \TeX\ distribution to a newer one.
-% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates} 
+%
 %    \begin{macrocode}
 \StartBabelCommands*{catalan}{captions}
   [unicode, fontenc=TU EU1 EU2, charset=utf8]
@@ -721,11 +712,10 @@
 %    example: E.~Coromina, \emph{El 9 Nou: Manual de redacci\'o i
 %    estil}, Ed.~Eumo, Vic, 1993}.
 % \changes{catalan-2.2b}{1995/06/18}{Month names in lowercase}
-% \changes{catalan-2.2i}{1997/10/01}{Use \cs{edef} to define \cs{today}
-%    to save memory}
+% \changes{catalan-2.2i}{1997/10/01}{Use \cs{edef} to define \cs{today} to save memory}
 % \changes{catalan-2.2i}{1998/03/28}{use \cs{def} instead of \cs{edef}}
-% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions
-%    and dates}
+% \changes{catalan-3.0}{2020/09/23}{Use Babel 3.9 syntax for captions and dates}
+%
 %    \begin{macrocode}
 \StartBabelCommands*{catalan}{date}
       [unicode, fontenc=TU EU1 EU2, charset=utf8]
@@ -759,8 +749,7 @@
 %    All extras related to math are concentrated in the macro
 %    mathcatalan. The rest are simply added to extrascatalan.
 %
-% \changes{catalan-2.2e}{1995/11/10}{Now give the apostrophe a
-%    lowercase code}
+% \changes{catalan-2.2e}{1995/11/10}{Now give the apostrophe a lowercase code}
 %    To improve hyphenation we give the grave character (\texttt{'}) a
 %    non-zero lower case code; when we do that \TeX\ will find more
 %    breakpoints in words that contain this character in its r\^ole as
@@ -769,21 +758,24 @@
 %    lowercase code of the apostrophe, and set the unicode apostrophe
 %    to have a non-zero lower case code too. Code taken essentially
 %    from babel-french}
+%
 %    \begin{macrocode}
 \def\extrascatalan{%
   \mathcatalan
   }
+
 \def\noextrascatalan{%
   \ifx\mathcatalan\@empty\else
     \nomathcatalan
   \fi}
+
 \addto\extrascatalan{%
-     \babel@savevariable{\lccode`\'}%
-     \lccode`\'=`\'
-     \ifcat@unicode
-       \babel@savevariable{\lccode"2019}%
-       \lccode"2019="2019%
-     \fi
+  \babel@savevariable{\lccode`\'}%
+  \lccode`\'=`\'
+  \ifcat@unicode
+    \babel@savevariable{\lccode"2019}%
+    \lccode"2019="2019%
+  \fi
 }
 %    \end{macrocode}
 %
@@ -793,19 +785,21 @@
 %    character when the options \Lopt{activegrave} and/or
 %    \Lopt{activeacute} are specified.
 %
-% \changes{catalan-2.2b}{1995/07/07}{Make activating the accent
-%    characters optional}
-% \changes{catalan-2.2e}{1995/08/17}{Need to split up the
-%    \cs{@ifpackagewith} statements}
-% \changes{catalan-3.0}{2021/04/16}{Add interpunct (``punt volat'') as
-%    active character in unicode engines.}
+% \changes{catalan-2.2b}{1995/07/07}{Make activating the accent characters optional}
+% \changes{catalan-2.2e}{1995/08/17}{Need to split up the \cs{@ifpackagewith} statements}
+% \changes{catalan-3.0}{2021/04/16}{Add interpunct (``punt volat'') as active character 
+%    in unicode engines.}
+%
 %    \begin{macrocode}
 \addto\extrascatalan{\languageshorthands{catalan}}
+
 \initiate@active@char{"}
+
 \addto\extrascatalan{\bbl@activate{"}}
+
 \ifcat@unicode
-\initiate@active@char{·}
-\addto\extrascatalan{\bbl@activate{·}}
+  \initiate@active@char{·}
+  \addto\extrascatalan{\bbl@activate{·}}
 \fi
 %    \end{macrocode}
 %    Because the grave character is being used in constructs such as
@@ -818,27 +812,32 @@
 %    messages.
 % \changes{catalan-2.2l}{1999/11/29}{Make sure that the grave accent
 %    has catcode 12 \emph{before} it is made \cs{active}}
+%
 %    \begin{macrocode}
 \@ifpackagewith{babel}{activegrave}{%
   \AtBeginDocument{%
     \if@filesw\immediate\write\@auxout{\catcode096=12}\fi}
   \initiate@active@char{`}%
   }{}
+
 \@ifpackagewith{babel}{activegrave}{%
   \addto\extrascatalan{\bbl@activate{`}}%
   }{}
+
 \@ifpackagewith{babel}{activeacute}{%
   \initiate@active@char{'}%
   }{}
+
 \@ifpackagewith{babel}{activeacute}{%
   \addto\extrascatalan{\bbl@activate{'}}%
   }{}
 %    \end{macrocode}
+%
 %    Now make sure that the characters that have been turned into
 %    shorthand characters expand to `normal' characters outside the
 %    catalan environment.
-% \changes{catalan-2.2l}{1999/12/16}{Don't forget to deactivate the
-%    shorthands}
+% \changes{catalan-2.2l}{1999/12/16}{Don't forget to deactivate the shorthands}
+%
 %    \begin{macrocode}
 \addto\noextrascatalan{\bbl@deactivate{"}}
 \@ifpackagewith{babel}{activegrave}{%
@@ -866,11 +865,12 @@
 % \changes{catalan-3.0}{2020/10/04}{Remove diaeresis because babel already
 %    handles it. Set accents with better hyphenation even if
 %    activeacute or activegrave are not set}
+%
 %    \begin{macrocode}
 \addto\extrascatalan{%
   \cat@sdef\`{\protect\cat@grave}
   \cat@sdef\'{\protect\cat@acute}
-}%
+}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -881,8 +881,7 @@
 %    and~\ref{tab:catalan-quote-opt}.
 %
 %  \begin{macro}{\cat@oldacute}
-% \changes{catalan-2.1d}{1994/06/26}{Renamed from \cs{acute} as that
-%    is a \cs{mathaccent}}
+% \changes{catalan-2.1d}{1994/06/26}{Renamed from \cs{acute} as that is a \cs{mathaccent}}
 %  \begin{macro}{\cat@oldgrave}
 % \changes{catalan-3.0}{2020/10/04}{Renamed from \cs{textacute},
 %    \cs{textgrave}, to \cs{cat@oldacute}, \cs{cat@oldgrave}.}
@@ -893,6 +892,7 @@
 %    that in the definition of other macros. We do likewise for |\`|.
 %    \begin{macrocode}
 \let\cat@oldgrave\`
+
 \let\cat@oldacute\'
 %    \end{macrocode}
 %  \end{macro}
@@ -943,6 +943,7 @@
 %    Now we can define our shorthands: the diaeresis and ``ela
 %    geminada'' support. We only add the interpunct as a shorthand in
 %    the case of a unicode engine.
+%
 %    \begin{macrocode}
 \declare@shorthand{catalan}{"i}{\textormath{\"i}{\ddot\imath}}
 \declare@shorthand{catalan}{"l}{\lgem{}}
@@ -950,30 +951,35 @@
 \declare@shorthand{catalan}{"I}{\textormath{\"I}{\ddot I}}
 \declare@shorthand{catalan}{"L}{\Lgem{}}
 \declare@shorthand{catalan}{"U}{\textormath{\"U}{\ddot U}}
+
 \ifcat@unicode
   \declare@shorthand{catalan}{·l}{\cat@volat{}l}%
   \declare@shorthand{catalan}{·L}{\cat@Volat{}L}%
 \fi
 %    \end{macrocode}
+%
 %    cedille,
-% \changes{catalan-2.2c}{1995/07/08}{cedile now produced by double
-%    quote shorthand}
+% \changes{catalan-2.2c}{1995/07/08}{cedile now produced by double quote shorthand}
+%
 %    \begin{macrocode}
 \declare@shorthand{catalan}{"c}{\textormath{\c c}{^{\prime} c}}
 \declare@shorthand{catalan}{"C}{\textormath{\c C}{^{\prime} C}}
 %    \end{macrocode}
+%
 %    `french' quote characters,
 % \changes{catalan-2.2c}{1995/07/08}{Added shorthands for guillemets}
-% \changes{catalan-2.2i}{1997/04/03}{Removed empty groups after
-%    guillemot characters} 
+% \changes{catalan-2.2i}{1997/04/03}{Removed empty groups after guillemot characters}
+%
 %    \begin{macrocode}
 \declare@shorthand{catalan}{"<}{%
   \textormath{\guillemotleft}{\mbox{\guillemotleft}}}
 \declare@shorthand{catalan}{">}{%
   \textormath{\guillemotright}{\mbox{\guillemotright}}}
 %    \end{macrocode}
+%
 %     grave accents,
 % \changes{catalan-2.2e}{1996/03/05}{Added `{}` as an extra shorthand}
+%
 %    \begin{macrocode}
 \@ifpackagewith{babel}{activegrave}{%
   \declare@shorthand{catalan}{`a}{\textormath{\cat@grave a}{\grave a}}
@@ -985,12 +991,12 @@
   \declare@shorthand{catalan}{``}{\textquotedblleft}%''
   }{}
 %    \end{macrocode}
+%
 %     acute accents,
-% \changes{catalan-2.2b}{1995/07/03}{Changed mathmode definition of
-%    acute shorthands to expand to a single prime followed by the next
-%    character in the input}
-% \changes{catalan-2.2e}{1995/09/05}{Added vertical bar as argument to
-%    active acute}
+% \changes{catalan-2.2b}{1995/07/03}{Changed mathmode definition of acute shorthands to expand 
+%    to a single prime followed by the next character in the input}
+% \changes{catalan-2.2e}{1995/09/05}{Added vertical bar as argument to active acute}
+%
 %    \begin{macrocode}
 \@ifpackagewith{babel}{activeacute}{%
   \declare@shorthand{catalan}{'a}{\textormath{\cat@acute a}{^{\prime} a}}
@@ -1006,15 +1012,18 @@
   \declare@shorthand{catalan}{'|}{%
     \textormath{\csname normal@char\string'\endcsname}{^{\prime}}}
 %    \end{macrocode}
-%         the acute accent,
-% \changes{catalan-2.2c}{1995/07/08}{Added '{}' as an extra shorthand,
-%    removed 'n as a shorthand}
+%
+%    the acute accent,
+% \changes{catalan-2.2c}{1995/07/08}{Added '{}' as an extra shorthand, removed 'n as a shorthand}
+%
 %    \begin{macrocode}
-  \declare@shorthand{catalan}{''}{%
-    \textormath{\textquotedblright}{\sp\bgroup\prim@s'}}
-  }{}
+\declare@shorthand{catalan}{''}{%
+  \textormath{\textquotedblright}{\sp\bgroup\prim@s'}}
+}{}
 %    \end{macrocode}
+%
 %    and finally, some support definitions
+%
 %    \begin{macrocode}
 \declare@shorthand{catalan}{"-}{\nobreak-\bbl@allowhyphens}
 \declare@shorthand{catalan}{"|}{%
@@ -1054,6 +1063,7 @@
 %
 %    \begin{macrocode}
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
+
 \def\cat@volat{%
   \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
   \setbox0\hbox{l}\setbox1\hbox{l}\setbox2\hbox{\cat@oldvolat}%
@@ -1065,6 +1075,7 @@
   {\kern\leftllkern\raise\raiselldim\box2%
   \kern\rightllkern}\bbl@allowhyphens%
 }
+
 \def\cat@Volat{%
   \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
   \setbox0\hbox{L}\setbox1\hbox{L}\setbox2\hbox{\cat@oldvolat}%
@@ -1080,6 +1091,7 @@
 %    \end{macrocode}
 %  \end{macro}
 %  \end{macro}
+%
 % \changes{catalan-3.0}{2020/04/16}{Redefine ``\textperiodcentered'' when
 %    possible to allow entering ``ela geminada'' directly in non-unicode
 %    engines.}
@@ -1103,6 +1115,7 @@
   }%
 }
 %    \end{macrocode}
+%
 %  \begin{macro}{\lgem}
 %  \begin{macro}{\Lgem}
 % \changes{catalan-2.2b}{1995/06/18}{Added support for typing the
@@ -1154,6 +1167,7 @@
     }{l\cat@volat{}l}%
   \fi
 }
+
 \def\Lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname L%
@@ -1184,21 +1198,23 @@
 %  \begin{macro}{\L.L}
 % \changes{catalan-2.2e}{1996/06/26}{Added redefinition of \cs{l} and
 %    \cs{L}}
+% \changes{catalan-2.2o}{2003/09/19}{Postpone the redefinition of
+%    \cs{l} and \cs{L} until begin document to prevent overwriting by fontenc}
+%
 %    We define the sequences |\l.l| and |\L.L|. These are not really
 %    macro's by themselves but the macros |\l| and |\L| with delimited
 %    arguments. Therefore we define two macros that check if the next
 %    character is a period. If not the ``polish l'' will be typeset,
 %    otherwise a ``ela geminada'' will be typeset and the next two
 %    tokens will be ``eaten''.
-% \changes{catalan-2.2o}{2003/09/19}{Postpone the redefinition of
-%    \cs{l} and \cs{L} until begin document to prevent overwriting by
-%    fontenc}
+%
 %    \begin{macrocode}
 \AtBeginDocument{%
   \let\cat@lslash\l
   \let\cat@Lslash\L
   \DeclareRobustCommand\l{\@ifnextchar.\cat@l\cat@lslash}
   \DeclareRobustCommand\L{\@ifnextchar.\cat@L\cat@Lslash}}
+
 \def\cat@l#1#2{\lgem}
 \def\cat@L#1#2{\Lgem}
 %    \end{macrocode}
@@ -1210,10 +1226,10 @@
 %    A macro for typesetting things like 1\raise1ex\hbox{\small er} as
 %    proposed by Raymond S\'{e}roul\footnote{This macro has been borrowed
 %    from francais.dtx}.
-% \changes{catalan-2.2b}{1995/06/18}{Added definition of macro
-%    \cs{up}, which can be used to type ordinals}
-% \changes{catalan-2.2e}{1996/02/29}{Now use \cs{textsuperscript} and
-%    make \cs{up} robust}
+% \changes{catalan-2.2b}{1995/06/18}{Added definition of macro \cs{up}, 
+%    which can be used to type ordinals}
+% \changes{catalan-2.2e}{1996/02/29}{Now use \cs{textsuperscript} and make \cs{up} robust}
+%
 %    \begin{macrocode}
 \DeclareRobustCommand*{\up}[1]{\textsuperscript{#1}}
 %    \end{macrocode}
@@ -1288,6 +1304,7 @@
 %    \begin{macrocode}
 \def\cat@op@ac@base#1{\acute{\if i#1\dotlessi\else#1\fi}}
 \def\cat@op@gr@base#1{\grave{\if i#1\dotlessi\else#1\fi}}
+
 \ifx\Umathchar\@undefined\else
   \def\cat@ac@TU@e{"00E9}\def\cat@ac@TU@E{"00C9}%
   \def\cat@ac@TU@i{"00ED}\def\cat@ac@TU@I{"00CD}%
@@ -1324,12 +1341,14 @@
   \expandafter\let\csname cat@op@gr@EU2\endcsname\cat@op@gr@TU
 \fi
 %    \end{macrocode}
+%
 % \begin{macro}{\catalanoperators}
 % \begin{macro}{\nocatalanoperators}
 %    The macro |\catalanoperators| enables the corresponding
 %    accented operators, active by default.
 %    The macro |\nocatalanoperators| is used
 %    to cancel the actions of |\catalanoperators|.
+%
 %    \begin{macrocode}
 \def\catalanoperators{%
   \@ifundefined{cat@op@ac@TU}%
@@ -1338,9 +1357,11 @@
   \@ifundefined{cat@op@gr@TU}%
     {\let\cat@op@gr\cat@op@gr@base}%
     {\let\cat@op@gr\cat@op@gr@TU}}
+
 \def\nocatalanoperators{%
   \def\cat@op@ac##1{##1}
   \def\cat@op@gr##1{##1}}
+
 \catalanoperators
 %    \end{macrocode}
 %  \end{macro}
@@ -1383,16 +1404,17 @@
 %    configuration file, setting the main language to be switched on
 %    at |\begin{document}| and resetting the category code of
 %    \texttt{@} to its original value.
-% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{ldf@finish} to wrap
-%    up} 
+% \changes{catalan-2.2g}{1996/11/02}{Now use \cs{ldf@finish} to wrap up}
+%
 %    \begin{macrocode}
 \ldf@finish{catalan}
-%</code>
 %    \end{macrocode}
-%    
-% \restoregeometry
 %
-% \Finale
+% \Finale 
+% \clearpage
+% \PrintIndex
+% \PrintChanges
+%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
