@@ -30,7 +30,15 @@ distribution, do the following:
 * Run «`latex catalan.ins`» to generate the language definition file «`catalan.ldf`», which is the one actually used by babel.
 * Copy the file catalan.ldf to a location where TeX can find them (default location: $TEXMF/tex/generic/babel-catalan/).
 * Rebuild the database (mktexlsr or so).
-* Run «`pdflatex catalan.dtx`» (or your preferred LaTeX build system) **twice** with `makeindex -s gglo.ist -o catalan.gls catalan.glo` in between to generate the package documentation. The first `pdflatex` run scans the document and gathers the changelog information, which is typeset by the subsequent `makeindex`. Then the second `pdflatex` run integrates the changelog into the main document.
+
+## Index and Changelog creation
+* Run «`pdflatex catalan.dtx`» (or your preferred LaTeX build system). The first `pdflatex` run scans the document and gathers the changelog information, which is typeset by the subsequent `makeindex`. 
+
+* Then for creating the index you need to invoke makeindex as follows:
+    `makeindex -s gind.ist -o catalan.ind catalan.idx`
+* and for creating the change-history you need to invoke makeindex as follows:
+    `makeindex -s gglo.ist -o catalan.gls catalan.glo`
+* Then rebuild the source again. This second run integrates the changelog into the main document.
 
 ## Documentation
 
