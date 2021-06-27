@@ -62,41 +62,7 @@
 
 % General document setup
 \usepackage[left=45mm,right=40mm,top=30mm,bottom=30mm]{geometry}
-
-\usepackage[svgnames]{xcolor}
-\usepackage{iftex}
-\ifPDFTeX
-%     \usepackage[utf8]{inputenc}
-    \usepackage[T1]{fontenc}
-    % Fonts
-    \usepackage{lmodern}
-    \usepackage{mathpazo}
-    \usepackage{courier}
-\else
-    % Fonts (must be installed to produce the documentation)
-    \usepackage{fontspec}
-    \setmainfont{Libertinus Serif}
-    \setsansfont[Scale=MatchLowercase]{Libertinus Sans}
-    \setmonofont[Scale=MatchLowercase]{Libertinus Mono}
-\fi
-% Redefinition of the macro that prints the macro names into the left margin
-\def\PrintMacroName#1{%
-  \strut\MacroFont\color{DodgerBlue}\normalsize\string#1}
-\def\ColorArg{\color{DodgerBlue}}
-
-\usepackage[expansion=true,protrusion=true]{microtype}
-\usepackage[numbered]{hypdoc}
-\hypersetup{colorlinks,urlcolor=Blue,linkcolor=Blue,unicode}
 \usepackage[english,catalan]{babel}
-\usepackage{amsmath}
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{hyperref}
-\hypersetup{
-  unicode=true,
-	colorlinks,
-	linkcolor=blue
-}
 
 % Page setup
 \setlength{\parindent}{0em}
@@ -105,9 +71,51 @@
 \addtolength{\textwidth}{7pc}
 \PageIndex 
 
+% Font setup
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[utf8]{inputenc}  % Loaded by default
+    \usepackage[T1]{fontenc}
+    % Fonts
+    \usepackage{libertinus}
+    \usepackage{tipa}
+    % Fake geminated L and l
+    \DeclareUnicodeCharacter{013F}{L\hspace{-2pt}\raisebox{0.8pt}{\textperiodcentered}}
+    \DeclareUnicodeCharacter{0140}{l\hspace{-1pt}\raisebox{0.8pt}{\textperiodcentered}\hspace{-1pt}}
+\else
+    % Fonts (must be installed to produce the documentation)
+    \usepackage{fontspec}
+    \setmainfont{Libertinus Serif}
+    \setsansfont[Scale=MatchLowercase]{Libertinus Sans}
+    \setmonofont[Scale=MatchLowercase]{Libertinus Mono}
+\fi
+\usepackage[expansion=true,protrusion=true]{microtype}
+% Redefinition of the macro that prints the macro names into the left margin
+\def\PrintMacroName#1{%
+  \strut\MacroFont\color{DodgerBlue}\normalsize\string#1}
+\def\ColorArg{\color{DodgerBlue}}
+
+% Utilities
+\usepackage[numbered]{hypdoc}
+\usepackage{graphicx}
+\graphicspath{{./}{images/}}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage[svgnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{hyperref}
+\hypersetup{
+  unicode=true,
+	colorlinks,
+	linkcolor=blue
+}
+
 % Additional logos
 \usepackage{metalogo}
 
+% Custom commands
 \newcommand*\babel{\texttt{Babel}}
 \newcommand*\babelcat{\texttt{babel-catalan}}
 \newcommand*\Lopt[1]{\textsf{#1}}
@@ -124,21 +132,16 @@
       paquet és actualment a la versió \fileversion{} amb data del primer d'octubre
       de 2020. La present còpia del manual fou generada el~\filedate.}}
   \author{%
-    Miquel Ortega\footnote{Mantenidor principal, 2020 en endavant} \and
-    Orestes Mas\footnote{Mantenidor, 2020 en endavant} \and
-    Gonçal Badenes\footnote{Autor original del paquet i mantenidor des de 1991}%
+    Miquel Ortega\footnote{Mantenidor principal, 2020 en endavant.} \and
+    Orestes Mas\footnote{Mantenidor, 2020 en endavant.} \and
+    Gonçal Badenes\footnote{Autor original del paquet i mantenidor des de 1991.}%
   }
   \date{\today}
   \maketitle
 
-  \babelcat{} és un paquet opcional que proporciona suport a
-  l'escriptura en llengua catalana a través del sistema \babel. Està
-  dissenyat per funcionar correctament amb els motors pdf\TeX,
-  \XeTeX{} i Lua\TeX. Suporta els formats \texttt{Plain} i \LaTeX.
+  \babelcat{} és un paquet opcional que proporciona suport a l'escriptura en llengua catalana a través del sistema \babel. Està dissenyat per funcionar correctament amb els motors pdf\TeX, \XeTeX{} i Lua\TeX. Suporta els formats \texttt{Plain} i \LaTeX.
 
-  El present document conté la guia d'ús de \babelcat: com s'ha
-  d'emprar, quines \textit{macros} i acceleradors posa a disposició de
-  l'usuari, el codi font del paquet i un històric de canvis. El
+  El present document conté la guia d'ús de \babelcat: com s'ha d'emprar, quines \textit{macros} i acceleradors posa a disposició de l'usuari, el codi font del paquet i un històric de canvis. El
   document ha estat generat a partir del fitxer \file{catalan.dtx}.
 
   \tableofcontents
@@ -147,137 +150,142 @@
   
 \part{Documentació en català}
 
- \section{Càrrega del paquet}
-   Per tal d'activar el suport al català amb \babel, especifiqueu l'opció \textbf{catalan}, 
-   ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
-   \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
+  \section{Càrrega del paquet}
+    Per tal d'activar el suport al català amb \babel, especifiqueu l'opció \textbf{catalan}, 
+    ja sia com a opció global o bé com a opció del paquet \babel. Pareu esment en que és la
+    \textit{darrera} opció de llengua la que determina la llengua del document, per exemple:
 
-   \verb|      \usepackage[catalan,english]{babel}|
+    \verb|      \usepackage[catalan,english]{babel}|
 
-   activa el suport al català en un document en anglès, mentre que
+    activa el suport al català en un document en anglès, mentre que
 
-   \verb|      \usepackage[english,catalan]{babel}|
+    \verb|      \usepackage[english,catalan]{babel}|
 
-   estableix el català com a llengua principal del document, amb l'anglès com a llengua 
-   auxiliar.
+    estableix el català com a llengua principal del document, amb l'anglès com a llengua 
+    auxiliar.
 
- \section{Introducció de text en català}
- \subsection{Caràcters accentuats i símbols -- mètode clàssic (actualment obsolet)}
-   El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits,
-   per la qual cosa no era capaç de processar documents que continguessin 
-   caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema
-   per textos escrits en anglès excepte en les comptades ocasions en què calia fer ús
-   d'aquests símbols, principalment a l'hora d'escriure noms i mots estrangers.
-   Per aquest motiu, tant el \TeX{} com el \LaTeX{} disposen de seqüències especials 
-   per tal d'introduir els caràcters accentuats emprant únicament caràcters ASCII.
-   Per exemple, per tal d'introduir la frase:
+  \section{Introducció de text en català}
+    \subsection{Caràcters accentuats i símbols -- mètode clàssic (actualment obsolet)}
+      El programa \TeX{} original (1978-1982) reconeixia únicament els caràcters ASCII de 7 bits, per la qual cosa no era capaç de processar documents que continguessin caràcters accentuats i altres símbols. Tanmateix, aquest fet no resultava un problema per textos escrits en anglès excepte en les comptades ocasions en què calia fer ús d'aquests símbols, principalment a l'hora d'escriure noms i mots estrangers. Per aquest motiu, tant el \TeX{} com el \LaTeX{} disposen de seqüències especials per tal d'introduir els caràcters accentuats emprant únicament caràcters ASCII. Per exemple, per tal d'introduir la frase:
 
-   \begin{center}
-   \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
-   \end{center}
+      \begin{center}
+      \textit{Açò és un llaüt menorquí de bambú fet a mà i beneït amb cafè del flascó}
+      \end{center}
+      
+      en \TeX/\LaTeX{} calia introduir:
+      
+      \begin{verbatim}
+          A\c{c}\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
+          i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
+      
+      El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context, definint certs caràcters com a «actius», cosa que ens estalvia d'escriure les barres invertides i claudàtors, de manera que per reproduir el text anterior només caldria escriure:
    
-   en \TeX/\LaTeX{} calia introduir:
-   
-   \begin{verbatim}
-      A\c{c}\`o \'es un lla\"ut menorqu\'{\i} de bamb\'u fet a m\`a
-      i bene\"{\i}t amb caf\`e del flasc\'o\end{verbatim}
-   
-   El paquet \babelcat{} fa les coses una mica més simples i ràpides en aquest context,
-   definint certs caràcters com a «actius», cosa que ens estalvia d'escriure
-   les barres invertides i claudàtors, de manera que per reproduir el text anterior
-   només caldria escriure:
-   
-   \begin{verbatim}
-      A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a 
-      i bene"it amb caf`e del flasc'o\end{verbatim}
+      \begin{verbatim}
+          A"c`o 'es un lla"ut menorqu'i de bamb'u fet a m`a 
+          i bene"it amb caf`e del flasc'o\end{verbatim}
 
-   La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters
-    accentuats, així com també als caràcters de la ela geminada, guillemets i altres símbols\footnote{Pareu
-    esment en el fet que, quan l'apòstrof és actiu, cal tenir cura d'introduir els mots apostrofats
-    de manera que no es puguin confondre amb accents. Així, cal escriure \verb|l'\{\}estri| en lloc
-    de \verb|l'estri|.}.
+      La taula \ref{tbl:acceleradors} llista les combinacions que cal emprar per accedir a aquests caràcters accentuats, així com també als caràcters de la ela geminada, guillemets i altres símbols\footnote{Pareu esment en el fet que, quan l'apòstrof és actiu, cal tenir cura d'introduir els mots apostrofats de manera que no es puguin confondre amb accents. Així, cal escriure \verb|l'\{\}estri| en lloc de \verb|l'estri|.}.
 
-   Evidentment, introduir d'aquesta manera els caràcters catalans especials o accentuats resulta
-   força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició
-   de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits
-   així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada 
-   codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats
-   tal i com es comenta a la secció \ref{sec:moderntyping}. Tot i que de moment el paquet \babelcat{} manté 
-   la definició dels acceleradors tradicionals per qüestions de compatibilitat, aquests es consideren obsolets 
-   i podrien desaparèixer en versions futures, per la qual cosa es recomana intensament l'ús de la codificació
-   UTF-8 i motors \TeX{} de 8 bits a l'hora de generar i processar documents nous.
-   \clearpage
+      Evidentment, introduir d'aquesta Manera els caràcters catalans especials o accentuats resulta força enutjós. Per això aquesta metodologia va caure ràpidament en desús a partir de 1990 amb l'aparició de la versió 3 de \TeX{} (\TeX90) i diverses variants capaces de treballar amb codificacions de 8 bits així com, més endavant, \XeTeX{} i {\LuaTeX{}} que accepten de forma nativa un fitxer d'entrada codificat en UTF-8. Actualment, per tant, és possible d'escriure directament els caràcters esmentats tal i com es comenta a la secció \ref{sec:moderntyping}. Tot i que de moment el paquet \babelcat{} manté la definició dels acceleradors tradicionals per qüestions de compatibilitat, aquests es consideren obsolets i podrien desaparèixer en versions futures, per la qual cosa es recomana intensament l'ús de la codificació UTF-8 i motors \TeX{} de 8 bits a l'hora de generar i processar documents nous.
+      
+      \clearpage
 
+      \begin{table}[ht]
+        \centering
+        \caption{"<Acceleradors"> definits al paquet \babelcat}\label{tbl:acceleradors}
+        \smallskip
+        \begin{tabular}{ccp{7.5cm}}
+          \toprule
+          Per obtenir & Escriviu & Comentari\\
+          \midrule
+            à, è, é, í, ò, ó, ú  &  |`a|, |`e|, |'e|, |'i|, |`o|, |'o|, |'u|  &  \multirow{2}{=}{Accents greus i aguts. Per tal que aquests acceleradors funcionin, cal invocar el \textit{Babel} amb les opcions \texttt{activegrave} i \texttt{activeacute}.}\\
+            À, È, É, Í, Ò, Ò, Ú  &  |`A|, |`E|, |'E|, |'I|, |`O|, |'O|, |'U| & \\
+              &  &  \\
+            ï, ü, ç, Ï, Ü, Ç  &  |"i|, |"u|, |"c|, |"I|, |"U|, |"C| & Dièresi i ce trencada.\\
+          \midrule
+            \lgem  &  |"l|, |\lgem|, |\l.l|, |·l|\footnotemark & \multirow{2}{=}{Ela geminada. Aquest dígraf es discuteix
+              en profunditat a la secció \ref{sec:elageminada}.}\\
+            \Lgem  &  |"L|, |\Lgem|, |\L.L|, |·L|\footnotemark[\value{footnote}] & \\
+          \midrule
+            "<, ">  &  |"<|, |">| & Cometes baixes o "<guillemets">, tradicionals en la tipografia catalana.\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      \footnotetext{Només en motors Unicode}
+   
+  \subsection{Caràcters accentuats i símbols -- mètode modern}\label{sec:moderntyping}
+    Avui en dia els principals sistemes operatius usen internament l'estàndard \textit{Unicode} i és possible d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable de la ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li quina codificació s'ha emprat en desar-los.
+
+    El procediment per aconseguir-ho depèn del motor \TeX{} utilitzat:
+    \begin{enumerate}
+      \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc} al preàmbul per tal de poder introduir els caràcters accentuats. Com que molt probablement el vostre sistema operatiu treballarà en codificació UTF-8, haureu d'especificar-la en invocar \texttt{inputenc}:
+      \begin{center}
+        |\usepackage[utf8]{inputenc}|
+      \end{center}
+      
+      \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa. En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8 caldrà indicar quina al motor corresponent. En \LuaLaTeX{}, per exemple, això es fa invocant el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc} comentat al punt anterior (consulteu, però, la documentació).
+    \end{enumerate}
+
+  \subsection{Altres definicions del paquet \babelcat}
+    Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix algunes ordres addicionals, que es troben llistades a la taula \ref{tbl:altres}.
     \begin{table}[ht]
       \centering
-      \caption{"<Acceleradors"> definits al paquet \babelcat}\label{tbl:acceleradors}
+      \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
       \smallskip
-      \begin{tabular}{ccp{7.5cm}}
+      \begin{tabular}{lp{7.5cm}}
         \toprule
-        Per obtenir & Escriviu & Comentari\\
+          Ordre & Efecte \\
         \midrule
-          à, è, é, í, ò, ó, ú  &  |`a|, |`e|, |'e|, |'i|, |`o|, |'o|, |'u|  &  \multirow{2}{=}{Accents
-            greus i aguts. Per tal que aquests acceleradors funcionin, cal invocar el \textit{Babel}
-            amb les opcions \texttt{activegrave} i \texttt{activeacute}.}\\
-          À, È, É, Í, Ò, Ò, Ú  &  |`A|, |`E|, |'E|, |'I|, |`O|, |'O|, |'U| & \\
-            &  &  \\
-          ï, ü, ç, Ï, Ü, Ç  &  |"i|, |"u|, |"c|, |"I|, |"U|, |"C| & Dièresi i ce trencada.\\
-        \midrule
-          \lgem  &  |"l|, |\lgem|, |\l.l|, |·l|\footnotemark & \multirow{2}{=}{Ela geminada. Aquest dígraf es discuteix
-            en profunditat a la secció \ref{sec:elageminada}.}\\
-          \Lgem  &  |"L|, |\Lgem|, |\L.L|, |·L|\footnotemark[\value{footnote}] & \\
-        \midrule
-          "<, ">  &  |"<|, |">| & Cometes baixes o "<guillemets">, tradicionals en la tipografia catalana.\\
+          |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
+          \verb#"|# & Desactiva la lligadura a la posició actual. \\
+          |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r}, 2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
         \bottomrule
       \end{tabular}
     \end{table}
-    \footnotetext{Només en motors Unicode}
-   
- \subsection{Caràcters accentuats i símbols -- mètode modern}\label{sec:moderntyping}
-   Avui en dia els principals sistemes operatius usen internament l'estàndard \textit{Unicode} i és possible 
-   d'introduir directament pel teclat els caràcters de la taula \ref{tbl:acceleradors}, amb l'excepció probable 
-   de la ela geminada, que no té un codi específic associat (vegeu la secció \ref{sec:elageminada}). Això permet
-   d'incorporar aquests caràcters directament als fitxers d'entrada del \TeX, però caldrà indicar-li 
-   quina codificació s'ha emprat en desar-los.
 
-   El procediment per aconseguir-ho depèn del motor \TeX{} utilitzat:
-   \begin{enumerate}
-       \item Si compileu els vostres documents amb \LaTeX/pdf\LaTeX, podeu  emprar el paquet \texttt{inputenc}
-       al preàmbul per tal de poder introduir els caràcters accentuats. Com que molt probablement el vostre
-       sistema operatiu treballarà en codificació UTF-8, haureu d'especificar-la en invocar \texttt{inputenc}:
-       \begin{center}
-           |\usepackage[utf8]{inputenc}|
-         \end{center}
-       \item Si esteu en un sistema UTF-8 i empreu \XeLaTeX{} o \LuaLaTeX{} per compilar els documents
-       no caldrà que feu res més, atès que aquests motors treballen amb codificació UTF-8 de forma nativa.
-       En el cas --rar-- que tingueu el document d'entrada en una codificació diferent a UTF-8
-       caldrà indicar quina al motor corresponent. En \LuaLaTeX{}, per exemple, això es fa invocant
-       el paquet \texttt{luainputenc} de forma semblant a l'ús d'\texttt{inputenc}
-       comentat al punt anterior (consulteu, però, la documentació).
-   \end{enumerate}
+  \subsection{La "<ela geminada">}\label{sec:elageminada}
+  \subsubsection{Consideracions tipogràfiques}
+    La ela geminada fou introduïda l'any 1913 per les \textit{Normes Ortogràfiques} de l'IEC per tal de representar en la llengua escrita el so de la ela doble o ela prolongada, atès que el dígraf «\textit{ll}», que era la manera tradicional de representar-lo en català antic i en llatí, havia passat progressivament a emprar-se per escriure el fonema lateral palatal \ifPDFTeX\textipa{/L/}\else/ʎ/\fi, de manera que calgué cercar una manera de diferenciar aquests
+    dos sons a la llengua escrita per tal d'evitar confusions.
+    
+    Així, es convingué d'escriure la ela prolongada «intercalant un punt alçat entre dues \textit{l}». Segons Pompeu Fabra, les dues l que representen una ela geminada han d'anar ben juntes, gairebé tant com les dues eles que componen la ll. Això creà un símbol d'ús exclusiu en el català escrit cosa que, unida a d'altres factors, féu que l'adaptació d'aquest símbol a les noves tecnologies fos confusa i desigual, amb conflictes associats que van molt més enllà de les qüestions estètica i tipogràfica: des de disfuncions d’indexació i cerca, a problemes d’identificació que poden ser causa de processos legals.
+    
+  \subsubsection{Composició de la ela geminada amb el teclat de l'ordinador}
+    Avui en dia la pràctica totalitat dels sistemes operatius empren internament la codificació de caràcters \textit{Unicode}. Para\l.lelament, qualsevol teclat adaptat a la llengua catalana inclourà una manera simple d'accedir al caràcter del «punt volat» (·), per la qual cosa la manera correcta d'introduir la ela geminada als nostres documents és emprant la seqüència de tres caràcters%
+    \footnote{En un teclat QWERTY espanyol caldrà polsar quatre tecles: «L», («Majúscules» + «3») i «L»}
+    
+    IMPORTANT: Atès que l'estàndard Unicode defineix defineix una «mitja ela geminada» consistent en una ela seguida d'un punt volat (caràcters U+0139 i U+0140), temps enrere es va proposar d'introduir l'ela geminada usant aquests caràcters seguits per una ela normal: Ŀ + L = ĿL, ŀ + l = ŀl. Aquesta solució, tot i que produeix uns resultats estèticament plaents, avui en dia està \textbf{totalment desaconsellada} atès que provoca més problemes que no en resol.
+    
+  \subsubsection{La ela geminada en \LaTeX}
+    Quan componem la ela geminada amb la seqüència «L» + «·» + «L», la majoria de tipus de lletra produeixen una ela geminada amb un espaiat excessiu entre les dues eles. Per tal de mitigar el problema, \babelcat{} ajusta l'interlletrat al voltant del punt volat. Això s'assoleix aplicant diferents estratègies segons el context:
+    
+   \begin{itemize}
+     \item Quan el \babelcat{} s'executa en un motor Unicode, com ara \XeTeX{} o \LuaTeX, defineix les dreceres «|·|l» i «|·|L», les quals produeixen un punt volat amb l'interlletrat ajustat, seguit de la ela corresponent.
+       
+     \item Quan el \babelcat{} s'executa en un motor que no treballa en Unicode, com ara pdf\TeX{}, la tècnica anterior no funciona ja que el motor no treballa internament amb el punt volat com a caràcter i, en conseqüència, no es pot definir el punt volat com a caràcter «actiu» i la drecera anterior no es pot implementar. Tanmateix, si l'usuari utilitza el \LaTeX, el paquet redefineix l'objecte LICR (\LaTeX{} Internal Character Representation) anomenat \verb|\textperiodcentered| per tal d'ajustar l'interlletrat del punt volat.
+   \end{itemize}
+   En el cas que l'ajustament de l'interlletrat no funcioni de manera automàtica (per exemple si utilitzem el \TeX{} simple), i en interès de la retrocompatibilitat, el \babelcat{} ofereix les ordres \verb.\lgem., \verb.\Lgem., \verb|\l.l| i \verb|\L.L|, tal com s'ha especificat a la
+   taula \ref{tbl:acceleradors}.
 
- \subsection{Altres definicions del paquet \babelcat}
-   Per tal de facilitar l'escriptura de documents, el paquet \babelcat{} defineix algunes ordres addicionals,
-   que es troben llistades a la taula \ref{tbl:altres}.
-   \begin{table}[ht]
-     \centering
-     \caption{Altres ordres definides al paquet \babelcat}\label{tbl:altres}
-     \smallskip
-     \begin{tabular}{lp{7.5cm}}
-       \toprule
-         Ordre & Efecte \\
-       \midrule
-         |"-|  & Guionet explícit, que permet el trencament a la resta del mot. \\
-         \verb#"|# & Desactiva la lligadura a la posició actual. \\
-         |\up| & Macro que ajuda a introduir caràcters de tipus ordinals amb lletres volades, com ara 1.\up{r},
-         2.\up{es}, 9.\up{a}, 8.\up{ns}. Demana un argument.\\
-       \bottomrule
-     \end{tabular}
-   \end{table}
+    \begin{table}[ht]
+      \centering
+      \caption{Aspecte de la ela geminada impresa en diversos tipus de lletra lliures usant el paquet \babelcat{} sota un motor \LuaTeX. La columna ressaltada en color correspon al mètode \textbf{desaconsellat} d'introduir la ela geminada, emprant el caràcter \textit{Unicode} «Latin Small (Capital) Letter L with Middle Dot», U+0140 (U+0139).}\label{tbl:lgem-luatex}
+      \vspace{5pt}
+      \includegraphics{lgem-luatex.pdf}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{Aspecte de la ela geminada impresa en diversos tipus de lletra lliures usant el paquet \babelcat{} sota un motor pdf\TeX. Noteu que amb aquest motor el mètode recomanat (\foreignlanguage{english}{l + · + l}´) produeix un espaiat massa gran, que esdevé clarament erroni en el tipus \textit{Latin Modern}.}\label{tbl:lgem-pdftex}
+      \vspace{5pt}
+      \includegraphics{lgem-pdftex.pdf}
+    \end{table}
 
- \subsection{La "<ela geminada">}\label{sec:elageminada}
- TO-DO
+    Les taules \ref{tbl:lgem-luatex} i \ref{tbl:lgem-pdftex} ofereixen una visió més completa dels resultats que s'obtenen emprant els mètodes descrits. La primera d'elles (taula \ref{tbl:lgem-luatex}) mostra les diferents eles geminades minúscules i majúscules que s'obtenen compilant un document \LaTeX{} amb un motor Unicode (\LuaTeX{} en aquest cas) i utilitzant diversos tipus de lletra de lliure disposició. S'observa que les macros \texttt{\textbackslash lgem}, \texttt{\textbackslash l.l} i la seqüència «L» + «·» + «L» produeixen resultats idèntics.
+    
+    A la segona taula es mostren els mateixos resultats però en aquest cas compilant el document amb un motor no-Unicode com el pdf\LaTeX. Podem veure com en aquest cas l'espaiat entre els caràcters que componen la ela geminada és excessiu en general, i en alguns tipus de lletra concrets com ara la Latin Modern és del tot inadmissible.
  
+ \FloatBarrier
  \section{Traduccions}
 
  \subsection{Noms de capçaleres}
@@ -285,8 +293,7 @@
    capçaleres més habituals com ara \textit{Chapter}, \textit{Section}, \textit{Table of Contents}, 
    etcètera. El paquet \babelcat{} redefineix les macros que els generen de manera que 
    el sol fet de carregar-lo al preàmbul farà que totes aquestes capçaleres apareguin
-   traduïdes al català\footnote{Si com a usuari detecteu alguna capçalera no traduïda, informeu-ne els
-   mantenidors de \babelcat{} per tal d'incorporar la traducció en versions futures del paquet.}.
+   traduïdes al català\footnote{Si com a usuari detecteu alguna capçalera no traduïda, informeu-ne els mantenidors de \babelcat{} per tal d'incorporar la traducció en versions futures del paquet.}.
 
    La taula \ref{tbl:noms-capcaleres} mostra les traduccions definides a la versió actual del paquet.
 

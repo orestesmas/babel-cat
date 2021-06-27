@@ -2,7 +2,8 @@ module = "babel-catalan"
 
 typesetfiles = {"catalan.dtx"}
 -- typesetexe   = "lualatex"
-docfiles     = {"README.md"}
+docfiles     = {"README.md","images/lgem-luatex.pdf","images/lgem-pdftex.pdf"}
+cleanfiles   = {"*.log", "*.zip", "*.aux", "*.glo", "*.gls", "*.hd", "*.idx", "*.ilg", "*.ind", "*.out", "*.toc",}
 unpackfiles  = {"catalan.ins"}
 installfiles = {"catalan.ldf"}
 sourcefiles  = {"catalan.dtx","catalan.ins"}
