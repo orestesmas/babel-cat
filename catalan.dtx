@@ -69,7 +69,6 @@
 \setlength{\parskip}{3pt}
 \addtolength{\oddsidemargin}{-4pc}
 \addtolength{\textwidth}{7pc}
-\PageIndex 
 
 % Font setup
 \usepackage{iftex}
@@ -96,7 +95,10 @@
 \def\ColorArg{\color{DodgerBlue}}
 
 % Utilities
-\usepackage[numbered]{hypdoc}
+\usepackage[numbered]{hypdoc}  % Add hyperlink features to doc package
+\PageIndex                     % Start collecting index info from macros
+\RecordChanges                 % Start collecting changelog info from macros
+\CodelineIndex                 % Controls if Index links are to page No. (default) or code line No.
 \usepackage{graphicx}
 \graphicspath{{./}{images/}}
 \usepackage{amsmath}
@@ -109,7 +111,7 @@
 \hypersetup{
   unicode=true,
 	colorlinks,
-	linkcolor=blue
+	linkcolor=red,
 }
 
 % Additional logos
@@ -127,7 +129,6 @@
 \def\fileversion{3.0}
 
 \begin{document}
-  \RecordChanges  % To generate changelog (glossary) entries
   \title{Estil \textsf{catalan} per al sistema Babel\footnote{Aquest
       paquet és actualment a la versió \fileversion{} amb data del primer d'octubre
       de 2020. La present còpia del manual fou generada el~\filedate.}}
